@@ -1,9 +1,12 @@
 # R-Think Runtime — TRACKER
 
+**Tracker Created At:** Historical exact time not recorded
+**Last Updated At:** 2026-07-17T00:08:00+07:00
 **Project:** R-Think Runtime
 **Controlled Blueprint:** RTHINK-BP-001 v1.0
 **Owner:** Hendri RH — Bro Kraken
 **Architecture Guardian:** Bro CG
+**Active Timezone:** Asia/Jakarta (UTC+7)
 
 ---
 
@@ -12,11 +15,13 @@
 | Field | Value |
 |-------|-------|
 | Repository Path | `D:\upwork\cg_os\r_think` |
+| GitHub Repository | https://github.com/kraken-backend/r-think_framework |
 | Operating System | Windows 10 (NT 10.0.26200.0) |
 | Node.js | v22.23.1 |
 | npm | 10.9.8 |
-| Git | Initialized (no commits yet) |
-| Branch | master |
+| Git | Initialized, 2 commits on `main` |
+| Branch | main |
+| Remote | origin → https://github.com/kraken-backend/r-think_framework.git |
 
 ---
 
@@ -49,7 +54,7 @@
 | Mission ID | RTHINK-RT-001-R1 |
 | Parent | RTHINK-RT-001 |
 | Level | L2 — Significant |
-| Status | READY FOR GUARDIAN REVIEW |
+| Status | PARTIAL — GOVERNANCE EVIDENCE INCOMPLETE / REVISION_REQUIRED |
 | Executor | opencode (big-pickle) |
 | Created | 2026-07-16T23:25:43+07:00 |
 | Report | `docs/reports/260716_2335_RTHINK-RT-001-R1_Formal-Contract-Evidence-and-Governance-Correction.md` |
@@ -66,6 +71,48 @@
 8. Fixed parity test closure bug over uninitialized `let` vars
 9. Updated License Gate with ajv/ajv-formats
 10. Updated README.md (test counts, fixture counts, filenames, license list)
+
+### RTHINK-GIT-001 — Initial Repository Publication and Factual Baseline Preservation
+
+| Field | Value |
+|-------|-------|
+| Mission ID | RTHINK-GIT-001 |
+| Title | Initial Repository Publication and Factual Baseline Preservation |
+| Level | L2 — Significant / External Publication |
+| Status | PUBLISHED — READY FOR GUARDIAN VERIFICATION |
+| Executor | OpenCode Local |
+| Start | 2026-07-17T00:15:00+07:00 |
+| Finish | 2026-07-17T00:08:00+07:00 (approx) |
+| Authority | Authorized by Human Architect (Bro Kraken) |
+| Position Before | No Git history; all files untracked |
+| Objective | First controlled GitHub publication preserving factual baseline |
+| Remote Repository | https://github.com/kraken-backend/r-think_framework |
+| Branch | main |
+| Git Identity | kraken-backend / aolbackend8@gmail.com (repository-local) |
+| Remote Preflight | EMPTY (no existing refs) |
+| Secret Audit | CLEAN |
+| Pre-push Validation | ALL PASS (typecheck, 65/65 tests, build, audit 0 vuln) |
+| .gitignore Update | Removed blanket `raw/` and `docs/` exclusion; added selective temp exclusions |
+| Initial Commit | `d01061cd41abaf7a282186f603e640192e726119` |
+| Initial Push | SUCCESS (`* [new branch] main -> main`) |
+| Remote main HEAD | `d01061cd41abaf7a282186f603e640192e726119` |
+| Files Created | 1 (`.gitignore` updated) |
+| Files Updated | 1 (`.gitignore`) |
+| Files Renamed | NONE |
+| Files Deleted | NONE |
+| Files Excluded | `node_modules/`, `raw/blueprint_extracted/`, `raw/blueprint.zip`, `raw/blueprint_text.txt` |
+| Local HEAD | `d01061cd41abaf7a282186f603e640192e726119` |
+| Remote main HEAD | `d01061cd41abaf7a282186f603e640192e726119` |
+| Hash Reconciliation | MATCH |
+| Evidence Finalization | PENDING (this update) |
+| Report | `docs/reports/260717_0005_RTHINK-GIT-001_Initial-Repository-Publication.md` |
+| Executor Recommendation | PUBLISHED — READY FOR GUARDIAN VERIFICATION |
+| Position After | Published to GitHub; R1 remains PARTIAL; no R2 or RT-002 |
+| Pending Guardian Verification | YES |
+
+**Immediate Next Mission:** NOT AUTHORIZED
+
+**Candidate Only:** RTHINK-RT-001-R2 — Tracker, Report, and Acceptance Evidence Completion
 
 ---
 
@@ -123,6 +170,7 @@ None identified.
 ## Pending Guardian Review
 
 - RTHINK-RT-001-R1: All 12 Guardian findings addressed. Awaiting review and acceptance.
+- RTHINK-GIT-001: Publication complete. Awaiting Guardian verification.
 
 ---
 
@@ -132,6 +180,8 @@ None identified.
 
 RTHINK-RT-002 has not been authorized. Wait for Guardian review of RTHINK-RT-001-R1.
 
+**Candidate only:** RTHINK-RT-001-R2 — Tracker, Report, and Acceptance Evidence Completion
+
 ---
 
 ## Risks
@@ -140,6 +190,7 @@ RTHINK-RT-002 has not been authorized. Wait for Guardian review of RTHINK-RT-001
 |------|--------|
 | vitest security | Resolved (pinned to 3.2.7) |
 | ajv ReDoS (GHSA-2g4f-4pwh-qvx6) | Resolved (ajv 8.20.0) |
+| Large binary (flow diagram) | Documented — 12.5MB PNG |
 
 ---
 
@@ -150,6 +201,7 @@ RTHINK-RT-002 has not been authorized. Wait for Guardian review of RTHINK-RT-001
 - **RT-001-R1 Report:** `docs/reports/260716_2335_RTHINK-RT-001-R1_Formal-Contract-Evidence-and-Governance-Correction.md`
 - **Evidence Manifest:** `docs/evidence/RTHINK-RT-001-R1_EVIDENCE-MANIFEST.md`
 - **License Gate:** `docs/decisions/RTHINK-RT-001_LICENSE-GATE.md`
+- **GIT-001 Report:** `docs/reports/260717_0005_RTHINK-GIT-001_Initial-Repository-Publication.md`
 
 ---
 
