@@ -1,3 +1,7 @@
+/* R-Think Runtime
+ * Copyright (C) 2026 Hendri RH
+ * SPDX-License-Identifier: AGPL-3.0-only */
+
 // R-Think Runtime — Contract Validation Helpers
 // Blueprint Reference: RTHINK-BP-001 §7.2, §19
 

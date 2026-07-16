@@ -1,3 +1,7 @@
+/* R-Think Runtime
+ * Copyright (C) 2026 Hendri RH
+ * SPDX-License-Identifier: AGPL-3.0-only */
+
 // R-Think Runtime — Canonical Types
 // Blueprint Reference: RTHINK-BP-001 Sections 7, 7.1, 7.2, 11, 12, Appendix A
 

@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+title: R-Think Runtime
+message: "If you use this software, please cite it using the metadata from this file."
+type: software
+authors:
+  - family-names: RH
+    given-names: Hendri
+    alias: Bro Kraken
+license: AGPL-3.0-only
+repository-code: "https://github.com/kraken-backend/r-think_framework"
+url: "https://github.com/kraken-backend/r-think_framework"
+version: "0.1.0"
+date-released: "2026-07-17"
+keywords:
+  - cognitive-reasoning
+  - evidence-governed
+  - runtime
+  - protocol
+  - state-machine
+preferred-citation:
+  type: software
+  title: "R-Think Runtime: Cognitive Reasoning Algorithm, Protocol, and Evidence-Governed Execution System"
+  authors:
+    - family-names: RH
+      given-names: Hendri
+      alias: Bro Kraken
+  year: 2026
+  url: "https://github.com/kraken-backend/r-think_framework"
+notes: "Framework concept originated from the Iqra/Perhatikan principle. Origin reference: Alvarendra Mahdi Hendrianto (Rendra), 27 August 2021."

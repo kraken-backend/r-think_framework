@@ -1,0 +1,74 @@
+# NOTICE
+
+**Project:** R-Think Runtime
+**R-Think™**
+
+Copyright (C) 2026 Hendri RH
+
+## Creator and Owner
+
+**Hendri RH — Bro Kraken**
+Framework Creator, Human Architect, and Final Authority
+
+## Origin Reference
+
+**Alvarendra Mahdi Hendrianto (Rendra)**
+27 August 2021
+
+The R-Think framework concept originated from the Iqra/Perhatikan principle —
+the discipline of observing reality before making decisions.
+
+## Architecture Partner
+
+**Bro CG**
+Architecture Guardian
+
+## Software License
+
+Source code, schemas, validators, runtime code, tests, and fixtures are licensed
+under the **GNU Affero General Public License v3.0 only** (AGPL-3.0-only).
+
+See `LICENSE` for the complete license text.
+
+## Documentation License
+
+Framework documentation, blueprint text, diagrams, and written explanations are
+licensed under **Creative Commons Attribution-ShareAlike 4.0 International**
+(CC-BY-SA-4.0).
+
+See `DOCUMENTATION-LICENSE.md` for details.
+
+## Trademark Reservation
+
+R-Think, R-Think™, the R-Think logo, and official certification claims are
+**not** granted under AGPL or CC-BY-SA. Trademark rights are reserved
+separately.
+
+See `TRADEMARKS.md` for the trademark policy.
+
+## Third-Party Dependencies
+
+Third-party dependencies remain under their respective licenses:
+
+| Package | License |
+|---------|---------|
+| zod | MIT |
+| ajv | MIT |
+| ajv-formats | MIT |
+| typescript | Apache-2.0 |
+| vitest | MIT |
+| @types/node | MIT |
+
+This project's licensing does not alter third-party license terms.
+
+## Legal Limitations
+
+- Copyright protects concrete expression, not abstract ideas or methods
+- No DJKI copyright, trademark, or patent registration is claimed as completed
+- No patent rights are claimed as registered
+- Professional IP counsel is recommended before formal filing or commercial
+  enforcement
+
+---
+
+*This NOTICE is part of the R-Think IP foundation established by RTHINK-IP-001.*

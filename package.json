@@ -3,8 +3,16 @@
   "version": "0.1.0",
   "description": "R-Think Runtime — Cognitive Reasoning Algorithm, Protocol, Runtime, and Evidence-Governed Execution System",
   "type": "module",
-  "license": "UNLICENSED",
+  "license": "AGPL-3.0-only",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kraken-backend/r-think_framework.git"
+  },
+  "homepage": "https://github.com/kraken-backend/r-think_framework#readme",
+  "bugs": {
+    "url": "https://github.com/kraken-backend/r-think_framework/issues"
+  },
   "engines": {
     "node": ">=18.0.0"
   },

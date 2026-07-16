@@ -1,3 +1,7 @@
+/* R-Think Runtime
+ * Copyright (C) 2026 Hendri RH
+ * SPDX-License-Identifier: AGPL-3.0-only */
+
 // R-Think Runtime — Public API
 // Blueprint Reference: RTHINK-BP-001
 

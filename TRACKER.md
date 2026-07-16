@@ -1,7 +1,7 @@
 # R-Think Runtime — TRACKER
 
 **Tracker Created At:** Historical exact time not recorded
-**Last Updated At:** 2026-07-17T00:08:00+07:00
+**Last Updated At:** 2026-07-17T00:32:22+07:00
 **Project:** R-Think Runtime
 **Controlled Blueprint:** RTHINK-BP-001 v1.0
 **Owner:** Hendri RH — Bro Kraken
@@ -114,6 +114,40 @@
 
 **Candidate Only:** RTHINK-RT-001-R2 — Tracker, Report, and Acceptance Evidence Completion
 
+### RTHINK-IP-001 — Licensing, Attribution, Trademark, and Brand Foundation
+
+| Field | Value |
+|-------|-------|
+| Mission ID | RTHINK-IP-001 |
+| Title | Intellectual Property Foundation — Licensing, Attribution, Trademark, and Brand |
+| Level | L2 — Significant |
+| Status | COMPLETE — PENDING GUARDIAN AND HUMAN ARCHITECT ACCEPTANCE |
+| Executor | OpenCode Local |
+| Start | 2026-07-17T00:26:18+07:00 |
+| Finish | 2026-07-17T00:32:22+07:00 |
+| Authority | Authorized by Human Architect (Bro Kraken) |
+| Report | `docs/reports/260717_0032_RTHINK-IP-001_Licensing-Attribution-Trademark-and-Brand-Foundation.md` |
+
+**Deliverables:**
+1. `LICENSE` — AGPL-3.0 full license text
+2. `DOCUMENTATION-LICENSE.md` — CC-BY-SA-4.0 documentation license
+3. `NOTICE` — Copyright, attribution, third-party obligations
+4. `AUTHORS.md` — 4 roles documented
+5. `TRADEMARKS.md` — ™ reservation policy
+6. `CITATION.cff` — CFF v1.2.0, version 0.1.0
+7. `docs/governance/RTHINK-IP-PROVENANCE.md` — IP provenance record
+8. `docs/brand/RTHINK-BRAND-ASSET-INVENTORY.md` — Brand asset inventory with SHA-256
+9. `docs/decisions/RTHINK-IP-001_LICENSE-ARCHITECTURE.md` — ADR for dual-license architecture
+10. `package.json` updated — license AGPL-3.0-only, repository metadata added
+11. 6 source files — SPDX headers added
+12. `README.md` — Logo, license sections, brand assets, citation block added
+
+**Position After:** IP foundation established; NOT committed or pushed; pending Guardian review
+
+**Immediate Next Mission:** NOT AUTHORIZED
+
+**Candidate Only:** RTHINK-RT-001-R2 — Tracker, Report, and Acceptance Evidence Completion
+
 ---
 
 ## Current Artifacts
@@ -171,6 +205,7 @@ None identified.
 
 - RTHINK-RT-001-R1: All 12 Guardian findings addressed. Awaiting review and acceptance.
 - RTHINK-GIT-001: Publication complete. Awaiting Guardian verification.
+- RTHINK-IP-001: IP foundation complete. Awaiting Guardian and Human Architect acceptance.
 
 ---
 
@@ -202,6 +237,10 @@ RTHINK-RT-002 has not been authorized. Wait for Guardian review of RTHINK-RT-001
 - **Evidence Manifest:** `docs/evidence/RTHINK-RT-001-R1_EVIDENCE-MANIFEST.md`
 - **License Gate:** `docs/decisions/RTHINK-RT-001_LICENSE-GATE.md`
 - **GIT-001 Report:** `docs/reports/260717_0005_RTHINK-GIT-001_Initial-Repository-Publication.md`
+- **IP-001 Report:** `docs/reports/260717_0032_RTHINK-IP-001_Licensing-Attribution-Trademark-and-Brand-Foundation.md`
+- **IP-001 Provenance:** `docs/governance/RTHINK-IP-PROVENANCE.md`
+- **IP-001 Brand Inventory:** `docs/brand/RTHINK-BRAND-ASSET-INVENTORY.md`
+- **IP-001 License ADR:** `docs/decisions/RTHINK-IP-001_LICENSE-ARCHITECTURE.md`
 
 ---
 

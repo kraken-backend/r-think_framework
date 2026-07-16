@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/pictures/logo.png" alt="R-Think Logo" width="200">
+</p>
+
 # R-Think Runtime
 
 > **Cognitive Reasoning Algorithm, Protocol, Runtime, and Evidence-Governed Execution System**
@@ -461,17 +465,69 @@ Scopes: contracts, schemas, tests, fixtures, docs
 
 ---
 
+## Brand & Intellectual Property
+
+| Asset | Location |
+|-------|----------|
+| Primary logo | [docs/pictures/logo.png](docs/pictures/logo.png) |
+| Favicon assets | [docs/pictures/favicon_io/](docs/pictures/favicon_io/) |
+| Flow diagram | [docs/pictures/rthink_flow.png](docs/pictures/rthink_flow.png) |
+| Brand asset inventory | [docs/brand/RTHINK-BRAND-ASSET-INVENTORY.md](docs/brand/RTHINK-BRAND-ASSET-INVENTORY.md) |
+| Trademark policy | [TRADEMARKS.md](TRADEMARKS.md) |
+| IP provenance | [docs/governance/RTHINK-IP-PROVENANCE.md](docs/governance/RTHINK-IP-PROVENANCE.md) |
+
+---
+
 ## License
 
-Private — UNLICENSED
+### Software
+
+Source code, schemas, validators, tests, and fixtures are licensed under the
+**GNU Affero General Public License v3.0 only** (AGPL-3.0-only).
+
+See [LICENSE](LICENSE) for the full license text.
+
+### Documentation
+
+Framework documentation, blueprint text, diagrams, and written explanations are
+licensed under **Creative Commons Attribution-ShareAlike 4.0 International**
+(CC-BY-SA-4.0).
+
+See [DOCUMENTATION-LICENSE.md](DOCUMENTATION-LICENSE.md) for details.
+
+### Trademark
+
+The R-Think name, R-Think™ wordmark, and R-Think logo are **not** granted
+under any open license. Trademark rights are reserved separately.
+
+See [TRADEMARKS.md](TRADEMARKS.md) for the trademark policy.
+
+### Third-Party Dependencies
 
 All direct dependencies are open-source:
+
 - **zod** 3.25.67 — MIT
 - **ajv** 8.20.0 — MIT
 - **ajv-formats** 3.0.1 — MIT
 - **typescript** 5.8.3 — Apache-2.0
 - **vitest** 3.2.7 — MIT
 - **@types/node** 22.15.31 — MIT
+
+See [NOTICE](NOTICE) for complete attribution.
+
+### Citation
+
+```bibtex
+@software{rh2026rthink,
+  author = {Hendri RH},
+  title = {R-Think Runtime},
+  year = {2026},
+  url = {https://github.com/kraken-backend/r-think_framework},
+  license = {AGPL-3.0-only}
+}
+```
+
+Or use [CITATION.cff](CITATION.cff) directly.
 
 ---
 

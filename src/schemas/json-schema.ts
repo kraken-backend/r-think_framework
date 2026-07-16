@@ -1,3 +1,7 @@
+/* R-Think Runtime
+ * Copyright (C) 2026 Hendri RH
+ * SPDX-License-Identifier: AGPL-3.0-only */
+
 // R-Think Runtime — JSON Schema Definitions
 // Blueprint Reference: RTHINK-BP-001 §7, §7.2, §8, §12, Appendix A, Appendix B
 
