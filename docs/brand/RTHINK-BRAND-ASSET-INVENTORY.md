@@ -1,8 +1,9 @@
 # RTHINK-BRAND-ASSET-INVENTORY — Brand Asset Record
 
-**Mission:** RTHINK-IP-001
+**Mission:** RTHINK-IP-001 / RTHINK-IP-001-R1
 **Status:** PENDING GUARDIAN AND HUMAN ARCHITECT ACCEPTANCE
 **Created:** 2026-07-17
+**Corrected:** 2026-07-17 (R1: canonical root placement)
 
 ---
 

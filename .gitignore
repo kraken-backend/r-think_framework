@@ -16,3 +16,7 @@ Thumbs.db
 raw/blueprint_extracted/
 raw/blueprint.zip
 raw/blueprint_text.txt
+
+# Folder need to hide for local development
+docs/reports/
+raw/

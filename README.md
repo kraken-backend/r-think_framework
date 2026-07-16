@@ -303,57 +303,80 @@ Expected output: 65/65 tests passing, zero type errors, clean build.
 
 ```
 r_think/
-├── package.json              # Project config, scripts, dependencies
-├── tsconfig.json             # TypeScript strict configuration
-├── vitest.config.ts          # Test runner configuration
-├── README.md                 # This file
-├── TRACKER.md                # Living project tracker
+├── LICENSE                     # AGPL-3.0-only (full official text)
+├── DOCUMENTATION-LICENSE.md    # CC-BY-SA-4.0 documentation license
+├── NOTICE                      # Copyright, attribution, third-party obligations
+├── AUTHORS.md                  # Contributor roles and attribution
+├── TRADEMARKS.md               # R-Think™ trademark reservation policy
+├── CITATION.cff                # Academic citation metadata (CFF v1.2.0)
+├── package.json                # Project config, scripts, dependencies
+├── tsconfig.json               # TypeScript strict configuration
+├── vitest.config.ts            # Test runner configuration
+├── README.md                   # This file
+├── TRACKER.md                  # Living project tracker
 │
-├── raw/                      # Source documents (blueprint)
+├── raw/                        # Source documents (blueprint)
 │   └── R-Think_Runtime_Master_Blueprint_v1.0.docx
 │
 ├── src/
-│   ├── index.ts              # Public API exports
+│   ├── index.ts                # Public API exports
 │   ├── contracts/
-│   │   ├── types.ts          # Canonical enums and type definitions
-│   │   └── index.ts          # TypeScript interfaces (Mission, RTP, Artifact, Transition)
+│   │   ├── types.ts            # Canonical enums and type definitions
+│   │   └── index.ts            # TypeScript interfaces (Mission, RTP, Artifact, Transition)
 │   └── schemas/
-│       ├── index.ts          # Zod runtime validators
-│       ├── json-schema.ts    # JSON Schema definitions
-│       └── validation.ts     # DERIVED policy validators
+│       ├── index.ts            # Zod runtime validators
+│       ├── json-schema.ts      # JSON Schema definitions
+│       └── validation.ts       # DERIVED policy validators
 │
 ├── tests/
 │   ├── contracts/
 │   │   ├── rthink-rt-001.test.ts     # Zod validation tests (25 tests)
 │   │   └── json-schema.test.ts       # JSON Schema tests (40 tests, ajv)
 │   └── fixtures/
-│       ├── valid/             # Valid protocol fixtures
-│       └── invalid/           # Invalid protocol fixtures (rejection test data)
+│       ├── valid/               # Valid protocol fixtures
+│       └── invalid/             # Invalid protocol fixtures (rejection test data)
 │
 └── docs/
     ├── pictures/
-    │   └── rthink_flow.png    # R-Think flow diagram
-    ├── blueprint/             # Blueprint reference copies
-    ├── decisions/             # Architecture Decision Records (ADRs)
-    │   └── RTHINK-RT-001_LICENSE-GATE.md
-    └── reports/               # All mission reports
-        ├── 260716_2258_RTHINK-RT-001_Repository-Baseline-and-Formal-Contracts.md
-        └── RTHINK-RT-001_Repository-Baseline-and-Formal-Contracts.md
+    │   ├── logo.png             # R-Think primary logo
+    │   ├── rthink_flow.png      # R-Think flow diagram
+    │   └── favicon_io/          # Favicon assets (7 files)
+    ├── brand/
+    │   └── RTHINK-BRAND-ASSET-INVENTORY.md
+    ├── governance/
+    │   └── RTHINK-IP-PROVENANCE.md
+    ├── decisions/
+    │   ├── RTHINK-RT-001_LICENSE-GATE.md
+    │   └── RTHINK-IP-001_LICENSE-ARCHITECTURE.md
+    ├── evidence/
+    │   └── RTHINK-RT-001-R1_EVIDENCE-MANIFEST.md
+    └── reports/                 # All mission reports (preserved)
 ```
 
 ---
 
 ## Current Status
 
-### Mission: RTHINK-RT-001 — Repository Baseline, Formal Contracts, Protocol Schema Foundation
+| Mission | Level | Status |
+|---------|-------|--------|
+| RTHINK-RT-001 | L2 | SUPERSEDED BY CORRECTION PROCESS |
+| RTHINK-RT-001-R1 | L2 | PARTIAL — GOVERNANCE EVIDENCE INCOMPLETE / REVISION_REQUIRED |
+| RTHINK-GIT-001 | L2 | PUBLISHED — GUARDIAN VERIFICATION INCOMPLETE |
+| RTHINK-IP-001 | L3 | REVISION_REQUIRED |
+| RTHINK-IP-001-R1 | L3 | READY FOR GUARDIAN AND HUMAN ARCHITECT REVIEW |
+| RTHINK-RT-001-R2 | — | NOT AUTHORIZED |
+| RTHINK-RT-002 | — | NOT AUTHORIZED |
+| NPM PUBLICATION | — | NOT AUTHORIZED |
+
+### RTHINK-RT-001 — Implemented
 
 | Artifact | Status |
 |----------|--------|
-| Repository baseline | Established |
+| Repository baseline | IMPLEMENTED — ACCEPTANCE PENDING |
 | TypeScript + Node.js workspace | Working |
-| Canonical enums (states, decisions, message types, risk levels, roles, artifact types) | Implemented |
-| Zod validators (4 schemas) | Implemented, tested |
-| JSON Schema definitions (4 schemas) | Implemented, tested |
+| Canonical enums (8) | IMPLEMENTED — ACCEPTANCE PENDING |
+| Zod validators (4 schemas) | IMPLEMENTED — ACCEPTANCE PENDING |
+| JSON Schema definitions (4 schemas) | IMPLEMENTED — ACCEPTANCE PENDING |
 | Valid fixtures (5) | Passing |
 | Invalid fixtures (14) | Rejected correctly |
 | Contract tests (65) | All passing |
@@ -361,13 +384,11 @@ r_think/
 | TypeScript strict typecheck | Passing |
 | Build | Passing |
 
-**Status:** READY FOR GUARDIAN REVIEW
-
 ---
 
 ## Roadmap
 
-### Phase 1: Formal Specification ✅ *(RTHINK-RT-001)*
+### Phase 1: Formal Specification *(RTHINK-RT-001 — IMPLEMENTED, ACCEPTANCE PENDING)*
 - [x] Repository baseline
 - [x] Canonical types and enums
 - [x] JSON Schemas + Zod validators

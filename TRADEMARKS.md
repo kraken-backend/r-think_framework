@@ -10,6 +10,10 @@ The following are claimed project identifiers:
 - **R-Think** — project and framework name
 - **R-Think™** — public wordmark
 
+The R-Think name and logo are excluded from the software and documentation
+license grants and are governed separately by this Brand and Trademark Usage
+Policy. No completed government trademark registration is claimed.
+
 The ™ symbol does **not** represent completed government trademark registration.
 No DJKI (Direktorat Jenderal Kekayaan Intelektual) registration is claimed as
 completed.

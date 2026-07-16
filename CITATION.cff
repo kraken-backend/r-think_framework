@@ -10,7 +10,6 @@ license: AGPL-3.0-only
 repository-code: "https://github.com/kraken-backend/r-think_framework"
 url: "https://github.com/kraken-backend/r-think_framework"
 version: "0.1.0"
-date-released: "2026-07-17"
 keywords:
   - cognitive-reasoning
   - evidence-governed

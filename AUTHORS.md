@@ -28,13 +28,12 @@ This file records the individuals and roles involved in the R-Think project.
 - Reviews and approves material transitions, corrections, and governance
   decisions
 
-## Engineering Executor
+## Engineering Executor Tooling
 
 **OpenCode Local**
 
-- Executor tooling used for implementation tasks
-- Identified as executor tooling only — not legal author, owner, or copyright
-  holder
+- Used as executor tooling under Human Architect direction
+- No separate legal authorship or ownership claim is made for the tool
 - All work produced under executor role is controlled by the Human Architect
 
 ---

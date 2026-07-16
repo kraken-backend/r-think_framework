@@ -1,8 +1,9 @@
 # RTHINK-IP-001 — License Architecture Decision Record
 
-**Mission:** RTHINK-IP-001
+**Mission:** RTHINK-IP-001 / RTHINK-IP-001-R1
 **Status:** PENDING GUARDIAN AND HUMAN ARCHITECT ACCEPTANCE
 **Created:** 2026-07-17
+**Corrected:** 2026-07-17 (R1: canonical root placement, official AGPL)
 
 ---
 
@@ -102,7 +103,7 @@ Adopt a **dual-license architecture** with separate trademark reservation:
 
 ## References
 
-- `LICENSE` — AGPL-3.0 full text
+- `LICENSE` — Official AGPL-3.0 full text (downloaded from gnu.org)
 - `DOCUMENTATION-LICENSE.md` — CC-BY-SA-4.0 full terms
 - `TRADEMARKS.md` — Trademark reservation policy
 - `NOTICE` — Copyright and attribution notice

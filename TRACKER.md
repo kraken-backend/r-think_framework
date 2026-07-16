@@ -1,7 +1,7 @@
 # R-Think Runtime — TRACKER
 
 **Tracker Created At:** Historical exact time not recorded
-**Last Updated At:** 2026-07-17T00:32:22+07:00
+**Last Updated At:** 2026-07-17T00:56:20+07:00
 **Project:** R-Think Runtime
 **Controlled Blueprint:** RTHINK-BP-001 v1.0
 **Owner:** Hendri RH — Bro Kraken
@@ -129,20 +129,61 @@
 | Report | `docs/reports/260717_0032_RTHINK-IP-001_Licensing-Attribution-Trademark-and-Brand-Foundation.md` |
 
 **Deliverables:**
-1. `LICENSE` — AGPL-3.0 full license text
-2. `DOCUMENTATION-LICENSE.md` — CC-BY-SA-4.0 documentation license
-3. `NOTICE` — Copyright, attribution, third-party obligations
-4. `AUTHORS.md` — 4 roles documented
-5. `TRADEMARKS.md` — ™ reservation policy
-6. `CITATION.cff` — CFF v1.2.0, version 0.1.0
+1. `license/LICENSE` — AGPL-3.0 full license text
+2. `license/DOCUMENTATION-LICENSE.md` — CC-BY-SA-4.0 documentation license
+3. `license/NOTICE` — Copyright, attribution, third-party obligations
+4. `license/AUTHORS.md` — 4 roles documented
+5. `license/TRADEMARKS.md` — ™ reservation policy
+6. `license/CITATION.cff` — CFF v1.2.0, version 0.1.0
 7. `docs/governance/RTHINK-IP-PROVENANCE.md` — IP provenance record
 8. `docs/brand/RTHINK-BRAND-ASSET-INVENTORY.md` — Brand asset inventory with SHA-256
 9. `docs/decisions/RTHINK-IP-001_LICENSE-ARCHITECTURE.md` — ADR for dual-license architecture
 10. `package.json` updated — license AGPL-3.0-only, repository metadata added
 11. 6 source files — SPDX headers added
-12. `README.md` — Logo, license sections, brand assets, citation block added
+12. `README.md` — Logo, license sections with `license/` paths, brand assets, citation block
+13. License assets organized in `license/` directory (6 files)
 
-**Position After:** IP foundation established; NOT committed or pushed; pending Guardian review
+**Position After:** IP foundation established; license assets in `license/` directory; NOT committed or pushed; pending Guardian review
+
+**Immediate Next Mission:** NOT AUTHORIZED
+
+**Candidate Only:** RTHINK-RT-001-R2 — Tracker, Report, and Acceptance Evidence Completion
+
+### RTHINK-IP-001-R1 — Canonical License Placement, Full Legal Text, Citation, and Governance Correction
+
+| Field | Value |
+|-------|-------|
+| Mission ID | RTHINK-IP-001-R1 |
+| Parent | RTHINK-IP-001 |
+| Title | Canonical License Placement, Full Legal Text, Citation, and Governance Correction |
+| Level | L3 — Critical / Legal, Identity, and Public Project Impact |
+| Status | READY FOR GUARDIAN AND HUMAN ARCHITECT REVIEW |
+| Executor | OpenCode Local |
+| Start | 2026-07-17T00:51:33+07:00 |
+| Finish | 2026-07-17T00:56:20+07:00 |
+| Authority | Authorized by Human Architect (Bro Kraken) |
+| Position Before | IP-001 incomplete LICENSE (preamble only), files in license/ subdirectory, unsupported date-released, wrong mission level, self-approved COMPLETE |
+| Objective | Correct licensing, placement, citation, report, README, and tracker defects |
+| Allowed Scope | Inspect, retrieve official AGPL, move files, correct links/status, update docs |
+| Non-Scope | Runtime changes, doctrine changes, commit, push, npm publish, self-approval |
+| Bounded Network | Only https://www.gnu.org/licenses/agpl-3.0.txt |
+| Guardian Findings | 15 findings received and addressed |
+| Files Created | LICENSE (official AGPLv3 from gnu.org), DOCUMENTATION-LICENSE.md, NOTICE, AUTHORS.md, TRADEMARKS.md, CITATION.cff (all at root) |
+| Files Updated | README.md, TRACKER.md, provenance, brand inventory, license ADR |
+| Files Moved | 5 files from license/ to root; license/ directory removed |
+| Files Deleted | NONE |
+| Official AGPL | https://www.gnu.org/licenses/agpl-3.0.txt |
+| LICENSE SHA-256 | `0D96A4FF68AD6D4B6F1F30F713B18D5184912BA8DD389F86AA7710DB079ABCB0` |
+| LICENSE Size | 34,523 bytes |
+| CFF Correction | date-released removed |
+| README Correction | Links → root; status → factual; tree → current |
+| Package Metadata | Verified correct (AGPL-3.0-only, repository, homepage, bugs) |
+| SPDX Validation | 6 headers verified, no behavior changes |
+| Validation | typecheck ✅, 65/65 tests ✅, build ✅, audit 0 vuln ✅ |
+| Report | `docs/reports/260717_0056_RTHINK-IP-001-R1_Canonical-License-Citation-and-Governance-Correction.md` |
+| Executor Recommendation | READY FOR GUARDIAN AND HUMAN ARCHITECT REVIEW |
+| Position After | Complete AGPLv3 at root, all IP docs at root, factual statuses, no commit/push |
+| Pending Guardian Review | YES — acceptance required |
 
 **Immediate Next Mission:** NOT AUTHORIZED
 
@@ -191,13 +232,29 @@
 
 ## Unresolved Questions
 
-None identified.
+1. AuthorityStatus enum remains provisional
+2. `rthink://` schema ID remains provisional
+3. Generic RTP payload shape remains provisional
+4. Artifact source rules beyond Observation remain provisional
+5. ENGINEER versus EXECUTOR role distinction remains provisional
+6. RTHINK-RT-001-R1 governance acceptance remains unresolved
+7. RTHINK-GIT-001 chronology/evidence finalization remains unresolved
+8. Trademark registration has not been completed
+9. Professional IP review has not been completed
+10. RTHINK-IP-001-R1 requires Human Architect and Guardian acceptance
+11. npm publication remains unauthorized
+12. `moduleResolution: "bundler"` may need revisiting for ESM strictness
+13. `site.webmanifest` has empty name/short_name (placeholder)
 
 ---
 
 ## Contradictions
 
-None identified.
+1. IP-001 LICENSE was incomplete despite being described as complete (corrected in R1)
+2. IP-001 moved canonical files away from root (corrected in R1)
+3. IP-001 claimed `COMPLETE` before acceptance (corrected in R1)
+4. IP-001 used wrong mission level L2 vs authorized L3 (corrected in R1)
+5. Tracker previously claimed no unresolved questions (corrected in R1)
 
 ---
 
@@ -205,7 +262,8 @@ None identified.
 
 - RTHINK-RT-001-R1: All 12 Guardian findings addressed. Awaiting review and acceptance.
 - RTHINK-GIT-001: Publication complete. Awaiting Guardian verification.
-- RTHINK-IP-001: IP foundation complete. Awaiting Guardian and Human Architect acceptance.
+- RTHINK-IP-001: REVISION_REQUIRED. Corrected by RTHINK-IP-001-R1.
+- RTHINK-IP-001-R1: Corrections complete. Awaiting Guardian and Human Architect acceptance.
 
 ---
 
@@ -241,6 +299,7 @@ RTHINK-RT-002 has not been authorized. Wait for Guardian review of RTHINK-RT-001
 - **IP-001 Provenance:** `docs/governance/RTHINK-IP-PROVENANCE.md`
 - **IP-001 Brand Inventory:** `docs/brand/RTHINK-BRAND-ASSET-INVENTORY.md`
 - **IP-001 License ADR:** `docs/decisions/RTHINK-IP-001_LICENSE-ARCHITECTURE.md`
+- **IP-001-R1 Report:** `docs/reports/260717_0056_RTHINK-IP-001-R1_Canonical-License-Citation-and-Governance-Correction.md`
 
 ---
 

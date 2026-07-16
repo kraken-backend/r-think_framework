@@ -1,8 +1,9 @@
 # RTHINK-IP-PROVENANCE — Intellectual Property Provenance Record
 
-**Mission:** RTHINK-IP-001
+**Mission:** RTHINK-IP-001 / RTHINK-IP-001-R1
 **Status:** PENDING GUARDIAN AND HUMAN ARCHITECT ACCEPTANCE
 **Created:** 2026-07-17
+**Corrected:** 2026-07-17 (R1: canonical root placement, official AGPL, citation fix)
 
 ---
 
@@ -144,18 +145,19 @@ retains its own license obligations.
 
 ## Evidence Trail
 
-This provenance record was established by RTHINK-IP-001 on 2026-07-17.
+This provenance record was established by RTHINK-IP-001 on 2026-07-17 and
+corrected by RTHINK-IP-001-R1 on 2026-07-17.
 
-### Files Created in RTHINK-IP-001
+### Files at Canonical Root (corrected by R1)
 
 | File | Purpose |
 |------|---------|
-| `LICENSE` | AGPL-3.0 full license text |
+| `LICENSE` | Official AGPL-3.0 full text (downloaded from gnu.org) |
 | `DOCUMENTATION-LICENSE.md` | CC-BY-SA-4.0 documentation license |
 | `NOTICE` | Copyright notice, attribution, third-party obligations |
 | `AUTHORS.md` | Contributor roles and attribution |
 | `TRADEMARKS.md` | Trademark reservation and usage policy |
-| `CITATION.cff` | Academic citation metadata (CFF v1.2.0) |
+| `CITATION.cff` | Academic citation metadata (CFF v1.2.0, no date-released) |
 | `docs/governance/RTHINK-IP-PROVENANCE.md` | This document |
 | `docs/brand/RTHINK-BRAND-ASSET-INVENTORY.md` | Brand asset inventory |
 | `docs/decisions/RTHINK-IP-001_LICENSE-ARCHITECTURE.md` | Architecture decision record |
