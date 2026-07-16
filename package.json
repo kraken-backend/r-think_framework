@@ -1,0 +1,28 @@
+{
+  "name": "rthink-runtime",
+  "version": "0.1.0",
+  "description": "R-Think Runtime — Cognitive Reasoning Algorithm, Protocol, Runtime, and Evidence-Governed Execution System",
+  "type": "module",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "3.25.67"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.31",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "typescript": "5.8.3",
+    "vitest": "3.2.7"
+  }
+}
