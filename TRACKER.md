@@ -313,15 +313,25 @@
 | Parent | RTHINK-GIT-002 |
 | Title | Public README, Tracker, and Governance Status Correction |
 | Level | L3 — Critical / Public Project Identity and Governance |
-| Status | IN PROGRESS |
+| Status | PUBLISHED — GUARDIAN REMOTE VERIFICATION PENDING |
 | Executor | OpenCode Local |
 | Start | 2026-07-17T08:59:00+07:00 |
+| Finish | 2026-07-17T09:04:00+07:00 |
 | Authority | Authorized by Guardian (Bro CG) and Human Architect (Bro Kraken) |
 | Position Before | HEAD == origin/main == `948fcbd09126522fcf7d6b59c58022eb7f0349f2`; 1 unstaged TRACKER.md modification (post-push factual update) |
 | Objective | Correct stale README and TRACKER public status after GIT-002 publication |
 | README Corrections | Public project tree (remove raw/, reports/), factual status table, tech baseline, Quick Start URL, roadmap |
 | TRACKER Corrections | Mission statuses updated to actual; GIT-002-C1 entry added |
 | Decision Record Fix | RTHINK-RT-001-R2-C1 duplicate numbering corrected (formatting only) |
+| Commit SHA | `bc43dfdc4e3f4f09515f14e8ba389a641b19c040` |
+| Commit Message | `fix: correct public README, tracker, and governance status after GIT-002` |
+| Files Changed | 3 (README.md, TRACKER.md, decision record) — 80 insertions, 40 deletions |
+| Push | `948fcbd..bc43dfd main -> main` |
+| Typecheck | PASS |
+| Tests | 65/65 PASSING |
+| Build | PASS |
+| Audit | 0 vulnerabilities |
+| Evidence | `docs/evidence/RTHINK-GIT-002-C1_CORRECTION-EVIDENCE.md` |
 
 ---
 
@@ -407,7 +417,7 @@
 - RTHINK-RT-001-R2: Repository reconciled. ACCEPTED.
 - RTHINK-RT-001-R2-C1: TypeScript resolution corrected to `"nodenext"`. PROVISIONAL-ACCEPTED.
 - RTHINK-GIT-002: Foundation published to origin/main. GUARDIAN REMOTE VERIFIED.
-- RTHINK-GIT-002-C1: Public README, Tracker, and status correction. IN PROGRESS.
+- RTHINK-GIT-002-C1: Public README, Tracker, and status correction. PUBLISHED — GUARDIAN REMOTE VERIFICATION PENDING.
 
 ---
 
@@ -451,6 +461,7 @@ RTHINK-RT-002 has not been authorized. Wait for Guardian review of RT-001-R2 and
 - **RT-001-R2 Evidence:** `docs/evidence/RTHINK-RT-001-R2_REPOSITORY-STATE-EVIDENCE.md`
 - **RT-001-R2-C1 Decision Record:** `docs/decisions/RTHINK-RT-001-R2-C1_TYPESCRIPT-MODULE-RESOLUTION.md`
 - **GIT-002 Evidence:** `docs/evidence/RTHINK-GIT-002_CONTROLLED-PUBLICATION-EVIDENCE.md`
+- **GIT-002-C1 Evidence:** `docs/evidence/RTHINK-GIT-002-C1_CORRECTION-EVIDENCE.md`
 
 ---
 
