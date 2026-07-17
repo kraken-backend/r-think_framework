@@ -293,9 +293,9 @@ npm run build
 npm run typecheck && npm test && npm run build
 ```
 
-Expected output: 870/870 tests passing, zero type errors, clean build.
+Expected output: 923/923 tests passing, zero type errors, clean build.
 
-> **Note:** The latest local commit (`68f1e24`) has not been pushed to GitHub — publication is **NOT AUTHORIZED** (not an authentication error). RT-005, RT-005-C1, and RT-006 remain uncommitted local working-tree changes on top of `68f1e24`. See [Publication State](#publication-state) for details.
+> **Note:** RT-005, RT-005-C1, RT-006, and RT-006-C1 were **published by direct Human Architect action** (commits `f18f31c` + `b266541`, HEAD = `b266541`, origin/main = `b266541`). The post-publication baseline was clean; the current working tree is intentionally dirty because documentation reconciliation (RT-006-C2 / C2-R1 / C2-R2) has not yet been committed. Further commit or push is **NOT AUTHORIZED** by this line of missions. RT-007 remains unauthorized.
 
 ---
 
@@ -331,9 +331,12 @@ r_think/
 │       ├── artifact-registry.ts    # ArtifactRegistry: register, replace, version history, validation
 │       ├── evidence-graph.ts       # EvidenceGraph: nodes, edges, pathfinding, cycle detection, validation
 │       ├── router.ts               # Method/Provider Router: ProviderRegistry, Router, capability/priority routing
-│       ├── event-store.ts          # EventStore: immutable append-only operational history (RT-006)
-│       ├── persistence.ts          # Persistence: EventStore composition + materialized record namespace (RT-006)
-│       └── replay.ts               # ReplayEngine: deterministic replay, validation, snapshots (RT-006)
+│       ├── evidence-export.ts       # RouterDecision → EvidenceGraph export adapter (decoupled, RT-005-C1)
+│       ├── event-store.ts          # EventStore: immutable append-only operational history, store-owned globalPosition, atomic batch (RT-006/RT-006-C1)
+│       ├── storage-adapters.ts     # EventStorageAdapter + SnapshotStorageAdapter (InMemory + Fake), durability boundary (RT-006-C1)
+│       ├── materialized-view-store.ts # InMemoryMaterializedViewStore: derived-view separation (RT-006-C1)
+│       ├── persistence.ts          # Persistence: EventStore + SnapshotStorageAdapter + MaterializedViewStore composition (RT-006/RT-006-C1)
+│       └── replay.ts               # ReplayEngine: deterministic replay, 12-code validation, snapshots (RT-006/RT-006-C1)
 │
    ├── tests/
    │   ├── contracts/
@@ -342,7 +345,7 @@ r_think/
    │   │   ├── rthink-rt-003.test.ts     # Artifact registry tests (44)
    │   │   ├── rthink-rt-004.test.ts     # Evidence graph tests (140)
    │   │   ├── rthink-rt-005.test.ts     # Method/Provider Router + C1 semantic tests (359)
-   │   │   ├── rthink-rt-006.test.ts     # Persistence & Event Store tests (196)
+   │   │   ├── rthink-rt-006.test.ts     # Persistence & Event Store tests (249, incl. RT-006-C1 blocks)
    │   │   └── json-schema.test.ts       # JSON Schema tests (40)
    │   └── fixtures/
 │       ├── valid/               # Valid protocol fixtures
@@ -379,11 +382,16 @@ r_think/
 
 | Dimension | Value |
 |-----------|-------|
-| Local HEAD | `68f1e24` |
-| Remote origin/main | `b9b512b` |
-| Ahead / Behind | 1 ahead, 0 behind |
-| Working tree | Dirty — uncommitted RT-005 + RT-005-C1 + RT-006 local work |
-| Commits on main | 10 (2 authorized, 2 unauthorized, 5 controlled, 1 RT-002/003) |
+| Local HEAD | `b266541` |
+| Remote origin/main | `b266541` |
+| Ahead / Behind | 0 ahead, 0 behind |
+| Branch | main |
+| Commits on main | 12 (2 published RT-006 publication commits `f18f31c` + `b266541` on top of `68f1e24`) |
+| Publication | RT-005, RT-005-C1, RT-006, RT-006-C1 **AUTHORIZED BY DIRECT HUMAN ARCHITECT ACTION** |
+
+**Repository baseline:** clean after publication (HEAD = `b266541`, origin/main = `b266541`, working tree clean at publication time).
+
+**Current local documentation state:** contains uncommitted documentation reconciliation — `README.md` and `TRACKER.md` are modified and not yet committed (RT-006-C2-R1 working-tree edits). No runtime source changes.
 
 ### Runtime State
 
@@ -394,7 +402,8 @@ r_think/
 | Artifact Registry | Implementation produced — Guardian review pending |
 | Evidence Graph | Implementation produced — Guardian review pending |
 | Method / Provider Router | Implementation produced — C1 semantic reconciliation complete, Guardian review pending |
-| Persistence & Event Store | Implementation produced — Guardian review pending |
+| Persistence & Event Store (RT-006) | Implementation produced — SUPERSEDED FOR ACCEPTANCE BY RT-006-C1 |
+| Persistence & Event Store (RT-006-C1) | Runtime architecture — GUARDIAN ACCEPTED |
 | Executor Integration | Not started |
 | Inspector | Not started |
 
@@ -402,10 +411,9 @@ r_think/
 
 | Field | Value |
 |-------|-------|
-| Local commit | `68f1e24` — contains RT-002 + RT-003 implementations |
-| Uncommitted work | RT-005 + RT-005-C1 + RT-006 (uncommitted working-tree changes) |
-| Remote publication | **NOT AUTHORIZED** — out of scope for this mission |
-| Authentication note | No auth failure; publication is intentionally withheld pending Human Architect authorization |
+| Published commits | `f18f31c`, `b266541` (RT-004, RT-005, RT-005-C1, RT-006, RT-006-C1) |
+| Remote publication | **AUTHORIZED BY DIRECT HUMAN ARCHITECT ACTION** — published to `origin/main` |
+| Further publication | **NOT AUTHORIZED** by RT-006-C2 (no additional commit/push) |
 
 ### Acceptance State
 
@@ -413,7 +421,10 @@ r_think/
 |------|--------|
 | RT-002 implementation | Guardian review pending |
 | RT-003 implementation | Guardian review pending |
-| RT-005-C1 semantic reconciliation | Complete (local, uncommitted) |
+| RT-005-C1 semantic reconciliation | Complete |
+| RT-006-C1 runtime architecture | Guardian accepted |
+| RT-006-C2 documentation reconciliation | Superseded for acceptance by RT-006-C2-R1 |
+| RT-006-C2-R1 documentation reconciliation | Guardian review pending |
 | Human Architect approval | Pending |
 | npm/package distribution | DEFERRED |
 
@@ -430,12 +441,12 @@ r_think/
 | Router decision outcomes | 4 (SELECTED, NO_MATCH, ALL_UNAVAILABLE, REQUEST_INVALID) |
 | Rejection reason codes | 9 (typed: STATUS_DISABLED, STATUS_UNAVAILABLE, STATUS_ERROR, METHOD_NOT_SUPPORTED, REQUIRED_CAPABILITY_MISSING, CAPABILITY_VERSION_MISSING, CAPABILITY_VERSION_BELOW_MINIMUM, EXCLUDED_BY_REQUEST_CONSTRAINT, LOWER_SELECTION_PRIORITY) |
 | Event schema version | `rt-006-v1.0` (CURRENT_EVENT_SCHEMA_VERSION) |
-| Replay validation issue codes | 8 (MISSING_SEQUENCE, DUPLICATE_SEQUENCE, INVALID_AGGREGATE, INVALID_SCHEMA_VERSION, INVALID_ORDERING, ORPHAN_EVENT, INVALID_CAUSATION_CHAIN, MISSING_CAUSATION_ROOT) |
+| Replay validation issue codes | 12 (8 aggregate + DUPLICATE_GLOBAL_POSITION, MISSING_GLOBAL_POSITION, INVALID_GLOBAL_POSITION_ORDER, ATOMIC_BATCH_REJECTED) |
 | Zod schemas | 4 (Mission, RTP, Artifact, Transition) |
 | JSON Schemas | 4 (Mission, RTP, Artifact, Transition) |
 | Valid fixtures | 5 |
 | Invalid fixtures | 14 |
-| Contract tests | 870 — all passing |
+| Contract tests | 923 — all passing |
 | License Gate | All pass (MIT, Apache-2.0) |
 | Module classification | PROVISIONAL-ACCEPTED |
 
@@ -554,7 +565,8 @@ r_think/
 | Event types (RuntimeEventType) | 19 members |
 | Aggregate types (AggregateType) | 12 members |
 | Event schema version | `rt-006-v1.0` |
-| Persistence tests (196) | All passing (870 total) |
+| Contract test breakdown | 25 (RT-001) + 66 (RT-002) + 44 (RT-003) + 140 (RT-004) + 359 (RT-005) + 249 (RT-006) + 40 (JSON Schema) = 923 total |
+| Persistence & Event Store tests (249) | All passing (part of 923 total) |
 | Persistence & Event Store (RT-006-C1) | New test block 18.21–18.28 added: globalPosition, atomic batch, storage adapters, materialized views, typed authority, replay ordering/validation codes, honest backend naming |
 
 ---
@@ -568,7 +580,7 @@ r_think/
 | **Formal Contracts** (RT-001) | State Machine, Artifact Registry, Evidence Graph, Method Router, all downstream modules | Blueprint RTHINK-BP-001 |
 | **State Machine** (RT-002) | Artifact Registry, Transition Engine, Evidence Graph | Formal Contracts (enums, interfaces) |
 | **Artifact Registry** (RT-003) | Evidence Graph, Executor Integration, Inspector | State Machine, Formal Contracts (schemas) |
-| **Evidence Graph** (RT-004) | Challenge Engine, Evolution Engine, Inspector, Method Router | Artifact Registry, Formal Contracts (types) |
+| **Evidence Graph** (RT-004) | Challenge Engine, Evolution Engine, Inspector, Evidence Export Adapter, Executor Integration | Artifact Registry, Formal Contracts (types) |
 | **Method Router** (RT-005) | Executor Integration, Persistence, Evidence Export Adapter | Formal Contracts (enums, interfaces), ProviderRegistry, Method Registry, ExecutionConstraints |
 | **Evidence Export Adapter** (RT-005-C1) | Orchestrator → Evidence Graph | RouterDecision, Formal Contracts (EvidenceGraph enums) |
 | **Persistence / Event Store** (RT-006) | Executor Integration, Inspector, Replay Engine, Event Replay | Method Router, State Machine, Formal Contracts (RuntimeEvent) |
@@ -579,43 +591,38 @@ r_think/
 ### Runtime Data Flow
 
 ```
-Blueprint (RTHINK-BP-001)
-  │ defines
-  ▼
-Formal Contracts (enums, interfaces, schemas, JSON Schema)
-  │ enforce
-  ▼
-State Machine ←──→ Transition Engine ←──→ Adaptive Depth
-  │ gate              │ evaluate            │ classify
-  ▼                   ▼                    ▼
-Artifact Registry ──→ Evidence Graph ◄─── Evidence Export Adapter (RT-005-C1)
-   │ validate            │ link              ▲ consumes RouterDecision
-   ▼                     │                  │
-Persistence ──────→ Executor Integration   │
-   │ store (EventStore)  │ execute          │
-   ▼                     ▼                  │
-Event Store ──→ Replay Engine (recovery, validation)
-   │ immutable log       │ deterministic fold
-   ▼                     ▼
-Actual Result          Inspector (read-only)
-                       Method Router produces RouterDecision
-                       (does NOT consume EvidenceGraph)
+Execution Orchestrator (RT-007, future coordinator)
+├── State Machine
+├── Artifact Registry
+├── Method Router
+├── Persistence / Event Store
+├── Replay Engine
+├── Evidence Export Adapter
+└── Evidence Graph
+
+Sibling-orchestration model: each runtime module is coordinated by the
+Execution Orchestrator. The Method Router produces a RouterDecision and does
+NOT consume the Evidence Graph directly; linkage flows through the decoupled
+Evidence Export Adapter into the Evidence Graph.
 ```
 
 ### Ownership Map
 
-| Module | Owner | Authority |
-|--------|-------|-----------|
-| Formal Contracts | Human Architect | Final doctrine authority |
-| State Machine | Guardian | Transition rule authority |
-| Artifact Registry | Executor | Schema enforcement |
-| Evidence Graph | Guardian | Evidence-evidence link authority |
-| Method Router | Guardian | Provider selection authority |
-| Evidence Export Adapter | Guardian | Router→EvidenceGraph mapping authority (decoupled) |
-| Persistence | Executor | Event storage |
-| Replay Engine | Executor | Deterministic recovery authority |
-| Executor Integration | Human Architect | Execution scope authority |
-| Inspector | Human Architect | Read-only observability |
+| Module | Runtime Owner | Guardian | Executor | Authority |
+|--------|--------------|----------|----------|-----------|
+| Formal Contracts | R-Think Runtime | Bro CG | OpenCode Local | Final doctrine authority (Human Architect) |
+| State Machine | R-Think Runtime | Bro CG | OpenCode Local | Transition rule authority |
+| Artifact Registry | R-Think Runtime | Bro CG | OpenCode Local | Schema enforcement |
+| Evidence Graph | R-Think Runtime | Bro CG | OpenCode Local | Evidence-evidence link authority |
+| Method Router | R-Think Runtime | Bro CG | OpenCode Local | Provider selection authority |
+| Evidence Export Adapter | R-Think Runtime | Bro CG | OpenCode Local | Router→EvidenceGraph mapping authority (decoupled) |
+| Persistence / Event Store | R-Think Runtime | Bro CG | OpenCode Local | Operational history integrity |
+| Replay Engine | R-Think Runtime | Bro CG | OpenCode Local | Deterministic reconstruction |
+| Event Storage Adapter | R-Think Runtime | Bro CG | OpenCode Local | Storage boundary compliance |
+| Snapshot Storage Adapter | R-Think Runtime | Bro CG | OpenCode Local | Snapshot integrity |
+| Materialized View Store | R-Think Runtime | Bro CG | OpenCode Local | Derived-state storage only |
+| Executor Integration | R-Think Runtime | Bro CG | OpenCode Local | Execution scope authority (Human Architect) |
+| Inspector | R-Think Runtime | Bro CG | OpenCode Local | Read-only observability |
 
 ---
 
