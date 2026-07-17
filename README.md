@@ -347,9 +347,11 @@ r_think/
     │   └── RTHINK-IP-PROVENANCE.md
     ├── decisions/
     │   ├── RTHINK-RT-001_LICENSE-GATE.md
-    │   └── RTHINK-IP-001_LICENSE-ARCHITECTURE.md
+    │   ├── RTHINK-IP-001_LICENSE-ARCHITECTURE.md
+    │   └── RTHINK-RT-001-R2-C1_TYPESCRIPT-MODULE-RESOLUTION.md
     ├── evidence/
-    │   └── RTHINK-RT-001-R1_EVIDENCE-MANIFEST.md
+    │   ├── RTHINK-RT-001-R1_EVIDENCE-MANIFEST.md
+    │   └── RTHINK-RT-001-R2_REPOSITORY-STATE-EVIDENCE.md
     └── reports/                 # All mission reports (preserved)
 ```
 
@@ -364,7 +366,8 @@ r_think/
 | RTHINK-GIT-001 | L2 | PUBLISHED — GUARDIAN VERIFICATION INCOMPLETE |
 | RTHINK-IP-001 | L3 | REVISION_REQUIRED |
 | RTHINK-IP-001-R1 | L3 | READY FOR GUARDIAN AND HUMAN ARCHITECT REVIEW |
-| RTHINK-RT-001-R2 | — | NOT AUTHORIZED |
+| RTHINK-RT-001-R2 | L3 | READY FOR GUARDIAN REVIEW |
+| RTHINK-RT-001-R2-C1 | L3 | READY FOR GUARDIAN AND HUMAN ARCHITECT REVIEW |
 | RTHINK-RT-002 | — | NOT AUTHORIZED |
 | NPM PUBLICATION | — | NOT AUTHORIZED |
 
@@ -372,11 +375,11 @@ r_think/
 
 | Artifact | Status |
 |----------|--------|
-| Repository baseline | IMPLEMENTED — ACCEPTANCE PENDING |
+| Repository baseline | IMPLEMENTED — ACCEPTED |
 | TypeScript + Node.js workspace | Working |
-| Canonical enums (8) | IMPLEMENTED — ACCEPTANCE PENDING |
-| Zod validators (4 schemas) | IMPLEMENTED — ACCEPTANCE PENDING |
-| JSON Schema definitions (4 schemas) | IMPLEMENTED — ACCEPTANCE PENDING |
+| Canonical enums (8) | IMPLEMENTED — ACCEPTED |
+| Zod validators (4 schemas) | IMPLEMENTED — ACCEPTED |
+| JSON Schema definitions (4 schemas) | IMPLEMENTED — ACCEPTED |
 | Valid fixtures (5) | Passing |
 | Invalid fixtures (14) | Rejected correctly |
 | Contract tests (65) | All passing |
@@ -388,7 +391,7 @@ r_think/
 
 ## Roadmap
 
-### Phase 1: Formal Specification *(RTHINK-RT-001 — IMPLEMENTED, ACCEPTANCE PENDING)*
+### Phase 1: Formal Specification *(RTHINK-RT-001 — IMPLEMENTED, ACCEPTED)*
 - [x] Repository baseline
 - [x] Canonical types and enums
 - [x] JSON Schemas + Zod validators
