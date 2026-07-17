@@ -349,7 +349,7 @@ r_think/
         └── RTHINK-GIT-002_CONTROLLED-PUBLICATION-EVIDENCE.md
 ```
 
-> **Local-only materials:** `docs/reports/` and `raw/` exist on the local working tree for internal governance but are intentionally excluded from this public repository (`.gitignore`). They are never staged, committed, or pushed.
+> **Local-only materials:** Local development maintains raw source materials and mission reports. These directories are intentionally excluded from the current public repository and must remain excluded from future pushes unless the Human Architect changes this policy.
 
 ---
 
@@ -357,17 +357,18 @@ r_think/
 
 | Mission | Level | Status |
 |---------|-------|--------|
-| RTHINK-RT-001 | L2 | IMPLEMENTED — ACCEPTED |
-| RTHINK-RT-001-R1 | L2 | ACCEPTED — all Guardian findings resolved |
-| RTHINK-GIT-001 | L2 | PUBLISHED — GUARDIAN REMOTE VERIFIED |
+| RTHINK-RT-001 | L2 | ACCEPTED — FOUNDATION ESTABLISHED |
+| RTHINK-RT-001-R1 | L2 | ACCEPTED THROUGH RECONCILIATION |
+| RTHINK-GIT-001 | L2 | PUBLISHED — HISTORICAL BASELINE |
 | RTHINK-IP-001 | L3 | SUPERSEDED BY RTHINK-IP-001-R1 |
-| RTHINK-IP-001-R1 | L3 | ACCEPTED — Guardian and Human Architect |
+| RTHINK-IP-001-R1 | L3 | ACCEPTED |
 | RTHINK-RT-001-R2 | L3 | ACCEPTED |
 | RTHINK-RT-001-R2-C1 | L3 | PROVISIONAL-ACCEPTED |
 | RTHINK-GIT-002 | L3 | PUBLISHED — GUARDIAN REMOTE VERIFIED |
-| RTHINK-GIT-002-C1 | L3 | IN PROGRESS (this correction) |
+| RTHINK-GIT-002-C1 | L2 | CORRECTED BY RTHINK-GIT-002-C2 — GOVERNANCE VIOLATION PRESERVED |
+| RTHINK-GIT-002-C2 | L2 | CORRECTION PUBLISHED — GUARDIAN VERIFICATION PENDING |
 | RTHINK-RT-002 | — | NOT AUTHORIZED |
-| NPM PUBLICATION | — | NOT AUTHORIZED |
+| npm/package distribution | — | DEFERRED |
 
 ### Current Technical Baseline
 

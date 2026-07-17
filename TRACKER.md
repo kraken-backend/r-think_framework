@@ -1,7 +1,7 @@
 # R-Think Runtime — TRACKER
 
 **Tracker Created At:** Historical exact time not recorded
-**Last Updated At:** 2026-07-17T08:55:00+07:00
+**Last Updated At:** 2026-07-17T09:10:00+07:00
 **Project:** R-Think Runtime
 **Controlled Blueprint:** RTHINK-BP-001 v1.0
 **Owner:** Hendri RH — Bro Kraken
@@ -333,6 +333,33 @@
 | Audit | 0 vulnerabilities |
 | Evidence | `docs/evidence/RTHINK-GIT-002-C1_CORRECTION-EVIDENCE.md` |
 
+### RTHINK-GIT-002-C2 — Final Public Status and Governance Record Correction
+
+| Field | Value |
+|-------|-------|
+| Mission ID | RTHINK-GIT-002-C2 |
+| Parent | RTHINK-GIT-002-C1 |
+| Title | Final Public Status and Governance Record Correction |
+| Level | L2 — Controlled Public Documentation Correction |
+| Status | CORRECTION PUBLISHED — GUARDIAN VERIFICATION PENDING |
+| Executor | OpenCode Local |
+| Start | 2026-07-17T09:10:00+07:00 |
+| Authority | Authorized by Guardian (Bro CG) and Human Architect (Bro Kraken) |
+| Position Before | HEAD == origin/main == `d7e74863dfd6d98dc8631934ebbdb750e64793e3`; 8 commits on main |
+| Objective | Correct remaining public documentation and governance contradictions from GIT-002-C1 |
+| Guardian Findings | 12 findings (see Section 2 of Guardian prompt) |
+| GIT-002-C1 Violation | Commit `d7e7486` created despite task authorizing only one commit; contained TRACKER.md and new evidence file outside authorized scope; history preserved; corrected by GIT-002-C2 |
+| README Corrections | Mission status table corrected to Guardian-specified statuses; local-only wording changed from absolute to policy-based; public tree and links verified |
+| TRACKER Corrections | GIT-002-C2 entry appended; unresolved questions reconciled; contradiction appended; pending review updated |
+| npm/package distribution | DEFERRED |
+| RT-002 | NOT AUTHORIZED |
+| Files Created | NONE |
+| Files Updated | README.md, TRACKER.md |
+| Files Moved | NONE |
+| Files Deleted | NONE |
+| Planned Commit Count | exactly one |
+| Push Target | origin/main |
+
 ---
 
 ## Current Artifacts
@@ -381,12 +408,12 @@
 3. Generic RTP payload shape remains provisional
 4. Artifact source rules beyond Observation remain provisional
 5. ENGINEER versus EXECUTOR role distinction remains provisional
-6. RTHINK-RT-001-R1 governance acceptance remains unresolved
-7. RTHINK-GIT-001 chronology/evidence finalization remains unresolved
+6. ~~RTHINK-RT-001-R1 governance acceptance remains unresolved~~ RESOLVED — ACCEPTED (RT-001-R1)
+7. ~~RTHINK-GIT-001 chronology/evidence finalization remains unresolved~~ RESOLVED — GUARDIAN REMOTE VERIFIED (GIT-001)
 8. Trademark registration has not been completed
 9. Professional IP review has not been completed
-10. RTHINK-IP-001-R1 requires Human Architect and Guardian acceptance
-11. npm publication remains unauthorized
+10. ~~RTHINK-IP-001-R1 requires Human Architect and Guardian acceptance~~ RESOLVED — ACCEPTED (IP-001-R1)
+11. npm/package distribution is DEFERRED (not an active task)
 12. ~~`moduleResolution: "bundler"` — REVERTED to "node" in RT-001-R2 (no authorization found)~~ RESOLVED by R2-C1 → `"nodenext"` (PROVISIONAL-ACCEPTED)
 13. `site.webmanifest` has empty name/short_name (placeholder)
 
@@ -405,6 +432,7 @@
 9. Historical reports and blueprint deleted without authorization (RT-001-R2)
 10. tsconfig `moduleResolution: "bundler"` introduced without authorization (RT-001-R2, reverted)
 11. R2 stated `moduleResolution: "node"` but executor changed to `"bundler"` post-report (RT-001-R2-C1, corrected to `"nodenext"` PROVISIONAL-ACCEPTED)
+12. RTHINK-GIT-002-C1 authorized exactly one commit and three files, but executor created a second commit `d7e7486` containing TRACKER.md and a new evidence file. History preserved; corrected by RTHINK-GIT-002-C2.
 
 ---
 
@@ -413,11 +441,12 @@
 - RTHINK-RT-001-R1: All 12 Guardian findings addressed. ACCEPTED.
 - RTHINK-GIT-001: Publication complete. GUARDIAN REMOTE VERIFIED.
 - RTHINK-IP-001: SUPERSEDED BY RTHINK-IP-001-R1.
-- RTHINK-IP-001-R1: Corrections complete. ACCEPTED — Guardian and Human Architect.
+- RTHINK-IP-001-R1: Corrections complete. ACCEPTED.
 - RTHINK-RT-001-R2: Repository reconciled. ACCEPTED.
 - RTHINK-RT-001-R2-C1: TypeScript resolution corrected to `"nodenext"`. PROVISIONAL-ACCEPTED.
 - RTHINK-GIT-002: Foundation published to origin/main. GUARDIAN REMOTE VERIFIED.
-- RTHINK-GIT-002-C1: Public README, Tracker, and status correction. PUBLISHED — GUARDIAN REMOTE VERIFICATION PENDING.
+- RTHINK-GIT-002-C1: Governance violation preserved. CORRECTED BY RTHINK-GIT-002-C2.
+- RTHINK-GIT-002-C2: Final status and governance correction. CORRECTION PUBLISHED — GUARDIAN VERIFICATION PENDING.
 
 ---
 
@@ -425,7 +454,7 @@
 
 **NOT AUTHORIZED**
 
-RTHINK-RT-002 has not been authorized. Wait for Guardian review of RT-001-R2 and IP-001-R1.
+RTHINK-RT-002 has not been authorized. npm/package distribution is DEFERRED.
 
 **Candidate:** RTHINK-RT-002 — State Machine Implementation (requires explicit authorization)
 
