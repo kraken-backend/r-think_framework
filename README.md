@@ -292,7 +292,7 @@ npm run build
 npm run typecheck && npm test && npm run build
 ```
 
-Expected output: 65/65 tests passing, zero type errors, clean build.
+Expected output: 175/175 tests passing, zero type errors, clean build.
 
 ---
 
@@ -317,15 +317,22 @@ r_think/
 │   ├── contracts/
 │   │   ├── types.ts            # Canonical enums and type definitions
 │   │   └── index.ts            # TypeScript interfaces (Mission, RTP, Artifact, Transition)
-│   └── schemas/
-│       ├── index.ts            # Zod runtime validators
-│       ├── json-schema.ts      # JSON Schema definitions
-│       └── validation.ts       # DERIVED policy validators
+│   ├── schemas/
+│   │   ├── index.ts            # Zod runtime validators
+│   │   ├── json-schema.ts      # JSON Schema definitions
+│   │   └── validation.ts       # DERIVED policy validators
+│   └── runtime/
+│       ├── index.ts            # Runtime barrel exports
+│       ├── rules.ts            # Transition rules, reason codes, adaptive depth, artifact gates
+│       ├── state-machine.ts    # evaluateTransition, applyTransition, evaluateRetry
+│       └── artifact-registry.ts # ArtifactRegistry: register, replace, version history, validation
 │
 ├── tests/
 │   ├── contracts/
-│   │   ├── rthink-rt-001.test.ts     # Zod validation tests
-│   │   └── json-schema.test.ts       # JSON Schema tests (ajv)
+│   │   ├── rthink-rt-001.test.ts     # Zod validation tests (25)
+│   │   ├── rthink-rt-002.test.ts     # State machine tests (66)
+│   │   ├── rthink-rt-003.test.ts     # Artifact registry tests (44)
+│   │   └── json-schema.test.ts       # JSON Schema tests (40)
 │   └── fixtures/
 │       ├── valid/               # Valid protocol fixtures
 │       └── invalid/             # Invalid protocol fixtures (rejection test data)
@@ -342,11 +349,13 @@ r_think/
     ├── decisions/
     │   ├── RTHINK-RT-001_LICENSE-GATE.md
     │   ├── RTHINK-IP-001_LICENSE-ARCHITECTURE.md
-    │   └── RTHINK-RT-001-R2-C1_TYPESCRIPT-MODULE-RESOLUTION.md
+    │   ├── RTHINK-RT-001-R2-C1_TYPESCRIPT-MODULE-RESOLUTION.md
+    │   └── RTHINK-RT-002_STATE-MACHINE-AND-TRANSITION-RULES.md
     └── evidence/
         ├── RTHINK-RT-001-R1_EVIDENCE-MANIFEST.md
         ├── RTHINK-RT-001-R2_REPOSITORY-STATE-EVIDENCE.md
-        └── RTHINK-GIT-002_CONTROLLED-PUBLICATION-EVIDENCE.md
+        ├── RTHINK-GIT-002_CONTROLLED-PUBLICATION-EVIDENCE.md
+        └── RTHINK-RT-002_STATE-MACHINE-ACCEPTANCE-EVIDENCE.md
 ```
 
 > **Local-only materials:** Local development maintains raw source materials and mission reports. These directories are intentionally excluded from the current public repository and must remain excluded from future pushes unless the Human Architect changes this policy.
@@ -366,8 +375,10 @@ r_think/
 | RTHINK-RT-001-R2-C1 | L3 | PROVISIONAL-ACCEPTED |
 | RTHINK-GIT-002 | L3 | PUBLISHED — GUARDIAN REMOTE VERIFIED |
 | RTHINK-GIT-002-C1 | L2 | CORRECTED BY RTHINK-GIT-002-C2 — GOVERNANCE VIOLATION PRESERVED |
-| RTHINK-GIT-002-C2 | L2 | CORRECTION PUBLISHED — GUARDIAN VERIFICATION PENDING |
-| RTHINK-RT-002 | — | NOT AUTHORIZED |
+| RTHINK-GIT-002-C2 | L2 | PUBLISHED — GUARDIAN REMOTE VERIFIED |
+| RTHINK-RT-002 | L2 | IMPLEMENTED — COMPLIANCE CORRECTED — PENDING GUARDIAN AND HUMAN ARCHITECT REVIEW |
+| RTHINK-RT-002-C1 | L2 | INSPECTION COMPLETE — PENDING GUARDIAN AND HUMAN ARCHITECT REVIEW |
+| RTHINK-RT-003 | L2 | IMPLEMENTED — PENDING GUARDIAN AND HUMAN ARCHITECT REVIEW |
 | npm/package distribution | — | DEFERRED |
 
 ### Current Technical Baseline
@@ -382,7 +393,7 @@ r_think/
 | JSON Schemas | 4 (Mission, RTP, Artifact, Transition) |
 | Valid fixtures | 5 |
 | Invalid fixtures | 14 |
-| Contract tests | 65 — all passing |
+| Contract tests | 175 — all passing |
 | License Gate | All pass (MIT, Apache-2.0) |
 | Module classification | PROVISIONAL-ACCEPTED |
 
@@ -402,6 +413,34 @@ r_think/
 | TypeScript strict typecheck | Passing |
 | Build | Passing |
 
+### RTHINK-RT-002 — Implemented (Compliance Corrected)
+
+| Artifact | Status |
+|----------|--------|
+| Transition rules (17) | IMPLEMENTED |
+| Reason codes (14) | IMPLEMENTED |
+| Adaptive depth config (L0–L3) | IMPLEMENTED |
+| Artifact gates (8) | IMPLEMENTED |
+| evaluateTransition() | IMPLEMENTED |
+| applyTransition() | IMPLEMENTED |
+| evaluateRetry() | IMPLEMENTED |
+| State machine tests (66) | All passing |
+| Decision document | Created |
+| Evidence document | Created |
+
+### RTHINK-RT-003 — Implemented
+
+| Artifact | Status |
+|----------|--------|
+| ArtifactRegistry class | IMPLEMENTED |
+| registerArtifact() | IMPLEMENTED |
+| replaceArtifact() with versioning | IMPLEMENTED |
+| getArtifact(), listArtifacts(), hasArtifact(), removeArtifact() | IMPLEMENTED |
+| getVersionHistory() (immutable) | IMPLEMENTED |
+| validateArtifact() | IMPLEMENTED |
+| Schema validation (reuses ArtifactEnvelopeSchema) | IMPLEMENTED |
+| Registry tests (44) | All passing |
+
 ---
 
 ## Roadmap
@@ -414,14 +453,14 @@ r_think/
 - [x] Contract tests
 - [x] License Gate
 
-### Phase 2: State Machine & Transitions *(planned)*
-- [ ] Runtime state machine engine
-- [ ] Adaptive-depth policy enforcement
-- [ ] Illegal transition denial
-- [ ] Transition rule versioning
+### Phase 2: State Machine & Transitions *(RTHINK-RT-002 — IMPLEMENTED, COMPLIANCE CORRECTED)*
+- [x] Runtime state machine engine
+- [x] Adaptive-depth policy enforcement
+- [x] Illegal transition denial
+- [x] Transition rule versioning
 
-### Phase 3: Artifacts & Evidence Graph *(planned)*
-- [ ] Artifact registry with schema validation
+### Phase 3: Artifacts & Evidence Graph *(in progress)*
+- [x] Artifact registry with schema validation (RT-003)
 - [ ] Evidence graph relationships
 - [ ] Required artifact gates
 - [ ] Claim-evidence linking

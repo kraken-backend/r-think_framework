@@ -1,7 +1,7 @@
 # R-Think Runtime — TRACKER
 
 **Tracker Created At:** Historical exact time not recorded
-**Last Updated At:** 2026-07-17T09:10:00+07:00
+**Last Updated At:** 2026-07-17T10:08:00+07:00
 **Project:** R-Think Runtime
 **Controlled Blueprint:** RTHINK-BP-001 v1.0
 **Owner:** Hendri RH — Bro Kraken
@@ -19,7 +19,7 @@
 | Operating System | Windows 10 (NT 10.0.26200.0) |
 | Node.js | v22.23.1 |
 | npm | 10.9.8 |
-| Git | Initialized, 6 commits on `main` (2 authorized, 2 unauthorized, 2 controlled) |
+| Git | Initialized, 9 commits on `main` (2 authorized, 2 unauthorized, 5 controlled) |
 | Branch | main |
 | Remote | origin → https://github.com/kraken-backend/r-think_framework.git |
 
@@ -360,6 +360,115 @@
 | Planned Commit Count | exactly one |
 | Push Target | origin/main |
 
+### RTHINK-RT-002 — State Machine, Transition Engine, and Adaptive-Depth Foundation
+
+| Field | Value |
+|-------|-------|
+| Mission ID | RTHINK-RT-002 |
+| Title | State Machine, Transition Engine, and Adaptive-Depth Foundation |
+| Level | L2 — Significant / Runtime Core |
+| Status | IMPLEMENTED — COMPLIANCE CORRECTED — PENDING GUARDIAN AND HUMAN ARCHITECT REVIEW |
+| Executor | OpenCode Local |
+| Start | 2026-07-17T09:22:00+07:00 |
+| Finish | 2026-07-17T09:40:00+07:00 |
+| Authority | Authorized by Guardian (Bro CG) and Human Architect (Bro Kraken) |
+| Position Before | HEAD == origin/main == `b9b512b`; 65/65 tests passing; no runtime logic |
+| Objective | Implement state machine engine, transition rules, adaptive depth, artifact gates |
+| Non-Scope | Persistence, PostgreSQL, event sourcing, API, WebSocket, CLI, SDK, Inspector UI, provider adapters |
+| Transition Rules | 17 (7 canonical forward + 4 loop + 6 operational) |
+| Reason Codes | 14 typed machine codes |
+| Adaptive Depth Configs | 4 (L0–L3) |
+| Artifact Gates | 8 (OBSERVE through completion) |
+| Rule Version | rt-002-v1.0 |
+| Files Created | 3 (rules.ts, state-machine.ts, runtime/index.ts) |
+| Files Modified | 1 (src/index.ts — added runtime export) |
+| Test File Created | 1 (rthink-rt-002.test.ts — 66 tests) |
+| New Dependencies | NONE (pure TypeScript) |
+| Typecheck | PASS (exit 0) |
+| Tests | 131/131 PASSING (25 RT-001 + 66 RT-002 + 40 JSON Schema) |
+| Build | PASS (exit 0) |
+| Audit | 0 vulnerabilities |
+| Decision Record | `docs/decisions/RTHINK-RT-002_STATE-MACHINE-AND-TRANSITION-RULES.md` |
+| Evidence | `docs/evidence/RTHINK-RT-002_STATE-MACHINE-ACCEPTANCE-EVIDENCE.md` |
+| Commit | NONE (local-only per mission charter) |
+| Push | NONE (local-only per mission charter) |
+| Position After | Working tree: 5 modified/untracked files; 131 tests passing; no commit/push |
+| Executor Recommendation | READY FOR GUARDIAN AND HUMAN ARCHITECT REVIEW |
+| Pending Guardian Review | YES — acceptance required |
+
+### RTHINK-RT-002-C1 — Mandatory README, Tracker, Report, and Implementation Inspection Correction
+
+| Field | Value |
+|-------|-------|
+| Mission ID | RTHINK-RT-002-C1 |
+| Title | Mandatory README, Tracker, Report, and Implementation Inspection Correction |
+| Level | L2 — Significant / Core Runtime Compliance Correction |
+| Status | INSPECTION COMPLETE — PENDING GUARDIAN AND HUMAN ARCHITECT REVIEW |
+| Executor | OpenCode Local |
+| Start | 2026-07-17T10:05:38+07:00 |
+| Finish | 2026-07-17T10:10:00+07:00 |
+| Authority | Authorized by Guardian (Bro CG) and Human Architect (Bro Kraken) |
+| Position Before | HEAD == origin/main == `b9b512b`; RT-002 implemented; no original RT-002 report; self-declared COMPLETE |
+| Correction Reason | Executor self-declared COMPLETE instead of READY FOR GUARDIAN REVIEW; did not create mandatory report during RT-002 execution; factual documentation errors (rule count 16→17, test filename typo) |
+| Original RT-002 Report | MISSING — never created during RT-002 execution |
+| Retrospective Report | CREATED during C1: `docs/reports/260717_1006_RTHINK-RT-002_Retrospective-Implementation-and-Validation-Report.md` |
+| C1 Report | `docs/reports/260717_1005_RTHINK-RT-002-C1_Mandatory-Documentation-and-Implementation-Inspection-Correction.md` |
+| Files Inspected | rules.ts, state-machine.ts, runtime/index.ts, src/index.ts, rthink-rt-002.test.ts, decision doc, evidence doc |
+| Actual Rule Count | 17 (7 CF + 4 LP + 6 OP) — executor claimed 16 |
+| Actual Reason Codes | 14 |
+| Actual Artifact Gates | 8 |
+| Actual Test Count | 66 RT-002 tests (131 total) |
+| Test Quality | 28 canonical forward, 7 illegal, 10 adaptive depth, 6 loops/retries, 8 state application, 7 parity/API |
+| Findings | Rule count factual error (16→17); README test filename typo (rthink-rt-rt-002→rthink-rt-002); original report missing |
+| npm ci | PASS (0 vulnerabilities) |
+| Typecheck | PASS (exit 0) |
+| Tests | 131/131 PASSING |
+| Build | PASS (exit 0) |
+| Audit | 0 vulnerabilities |
+| Runtime Import | PASS — all exports verified |
+| README Changes | Fixed rule count (16→17), test filename typo, added RT-002-C1 status, updated GIT-002-C2 to VERIFIED |
+| TRACKER Changes | Added C1 entry, corrected rule count, updated RT-002 status |
+| Files Created | 1 (retrospective RT-002 report) |
+| Files Updated | README.md, TRACKER.md |
+| Files Moved | NONE |
+| Files Deleted | NONE |
+| Contradictions | 13 (rule count factual error added) |
+| Position After | HEAD == origin/main == `b9b512b` (unchanged); README/TRACKER corrected; C1 report + retrospective report created; no commit/push |
+| RT-003 Status | NOT AUTHORIZED |
+| Next Action | Guardian and Human Architect review only |
+
+### RTHINK-RT-003 — Artifact Registry Foundation
+
+| Field | Value |
+|-------|-------|
+| Mission ID | RTHINK-RT-003 |
+| Title | Artifact Registry Foundation |
+| Level | L2 — Significant / Runtime Core |
+| Status | IMPLEMENTED — PENDING GUARDIAN AND HUMAN ARCHITECT REVIEW |
+| Executor | OpenCode Local |
+| Start | 2026-07-17T15:54:17+07:00 |
+| Authority | Authorized by Human Architect (Bro Kraken) |
+| Position Before | HEAD == origin/main == `b9b512b`; 131/131 tests passing; ArtifactEnvelope exists but no registry |
+| Objective | Implement ArtifactRegistry for artifact storage, versioning, validation, and retrieval |
+| Non-Scope | Evidence Graph, Database, Persistence, Event Store, API, CLI, SDK, Inspector, Provider Router |
+| ArtifactRegistry Methods | registerArtifact, replaceArtifact, getArtifact, listArtifacts, hasArtifact, removeArtifact, validateArtifact, getVersionHistory |
+| Version Replacement | Creates new version with incremented version number, supersedes field set, history preserved |
+| Schema Validation | Reuses ArtifactEnvelopeSchema from src/schemas/index.ts (no duplicate schemas) |
+| New Dependencies | NONE (pure TypeScript) |
+| Files Created | 2 (artifact-registry.ts, rthink-rt-003.test.ts) |
+| Files Modified | 1 (runtime/index.ts — added ArtifactRegistry export) |
+| Test Cases | 44 (5 registration, 3 duplicate rejection, 7 validation, 7 version replacement, 3 retrieval, 5 removal, 6 listing, 3 determinism, 5 immutable version history) |
+| Typecheck | PASS (exit 0) |
+| Tests | 175/175 PASSING (25 RT-001 + 66 RT-002 + 44 RT-003 + 40 JSON Schema) |
+| Build | PASS (exit 0) |
+| Audit | 0 vulnerabilities |
+| Commit | NONE (pending authorization) |
+| Push | NONE (pending authorization) |
+| Report | `docs/reports/260717_1554_RTHINK-RT-003_Artifact-Registry-Foundation.md` |
+| Position After | Working tree: uncommitted changes (artifact-registry.ts, test, runtime/index.ts, README, TRACKER); 175 tests passing; no commit/push |
+| Executor Recommendation | READY FOR GUARDIAN AND HUMAN ARCHITECT REVIEW |
+| Pending Guardian Review | YES — acceptance required |
+
 ---
 
 ## Current Artifacts
@@ -374,11 +483,19 @@
 ### Contracts (1)
 - `src/contracts/index.ts` — TypeScript interfaces: MissionContract, RtpMessage, ArtifactEnvelope, TransitionDecision
 
+### Runtime (4) — RT-002, RT-003
+- `src/runtime/rules.ts` — Transition rules (17), reason codes (14), adaptive depth config, artifact gates
+- `src/runtime/state-machine.ts` — evaluateTransition, applyTransition, evaluateRetry, createTimestamp
+- `src/runtime/artifact-registry.ts` — ArtifactRegistry: register, replace, version history, validation
+- `src/runtime/index.ts` — Barrel export for runtime module
+
 ### Validation Helpers (1) — DERIVED
 - `src/schemas/validation.ts` — validateAllowDecisionArtifacts, validateCriticalMissionAuthority, validateRtpVersion
 
-### Tests (2 files, 65 tests)
+### Tests (4 files, 175 tests)
 - `tests/contracts/rthink-rt-001.test.ts` — 25 Zod validation tests
+- `tests/contracts/rthink-rt-002.test.ts` — 66 state machine and transition rule tests
+- `tests/contracts/rthink-rt-003.test.ts` — 44 artifact registry tests
 - `tests/contracts/json-schema.test.ts` — 40 JSON Schema tests (ajv)
 
 ### Fixtures (5 valid, 14 invalid)
@@ -395,7 +512,9 @@
 | Build (tsc) | ✅ PASS (exit 0) |
 | Contract tests (Zod) | ✅ 25/25 PASSING |
 | Contract tests (JSON Schema) | ✅ 40/40 PASSING |
-| Total tests | ✅ 65/65 PASSING |
+| Contract tests (RT-002 state machine) | ✅ 66/66 PASSING |
+| Contract tests (RT-003 artifact registry) | ✅ 44/44 PASSING |
+| Total tests | ✅ 175/175 PASSING |
 | License Gate (6 deps) | ✅ ALL PASS (MIT, Apache-2.0) |
 | npm audit | ✅ 0 vulnerabilities |
 
@@ -447,6 +566,9 @@
 - RTHINK-GIT-002: Foundation published to origin/main. GUARDIAN REMOTE VERIFIED.
 - RTHINK-GIT-002-C1: Governance violation preserved. CORRECTED BY RTHINK-GIT-002-C2.
 - RTHINK-GIT-002-C2: Final status and governance correction. CORRECTION PUBLISHED — GUARDIAN VERIFICATION PENDING.
+- RTHINK-RT-002: State machine, transition engine, adaptive depth. IMPLEMENTED — COMPLIANCE CORRECTED — PENDING GUARDIAN AND HUMAN ARCHITECT REVIEW.
+- RTHINK-RT-002-C1: Mandatory inspection and correction. INSPECTION COMPLETE — PENDING GUARDIAN AND HUMAN ARCHITECT REVIEW.
+- RTHINK-RT-003: Artifact Registry Foundation. IMPLEMENTED — PENDING GUARDIAN AND HUMAN ARCHITECT REVIEW.
 
 ---
 
@@ -454,9 +576,9 @@
 
 **NOT AUTHORIZED**
 
-RTHINK-RT-002 has not been authorized. npm/package distribution is DEFERRED.
+RTHINK-RT-002-C1 inspection complete. RTHINK-RT-002 compliance corrected. npm/package distribution is DEFERRED.
 
-**Candidate:** RTHINK-RT-002 — State Machine Implementation (requires explicit authorization)
+**Candidate:** RTHINK-RT-003 — Artifact Registry (requires explicit authorization)
 
 ---
 
@@ -491,6 +613,11 @@ RTHINK-RT-002 has not been authorized. npm/package distribution is DEFERRED.
 - **RT-001-R2-C1 Decision Record:** `docs/decisions/RTHINK-RT-001-R2-C1_TYPESCRIPT-MODULE-RESOLUTION.md`
 - **GIT-002 Evidence:** `docs/evidence/RTHINK-GIT-002_CONTROLLED-PUBLICATION-EVIDENCE.md`
 - **GIT-002-C1 Evidence:** `docs/evidence/RTHINK-GIT-002-C1_CORRECTION-EVIDENCE.md`
+- **RT-002 Decision Record:** `docs/decisions/RTHINK-RT-002_STATE-MACHINE-AND-TRANSITION-RULES.md`
+- **RT-002 Evidence:** `docs/evidence/RTHINK-RT-002_STATE-MACHINE-ACCEPTANCE-EVIDENCE.md`
+- **RT-002 Retrospective Report:** `docs/reports/260717_1006_RTHINK-RT-002_Retrospective-Implementation-and-Validation-Report.md` (local-only)
+- **RT-002-C1 Report:** `docs/reports/260717_1005_RTHINK-RT-002-C1_Mandatory-Documentation-and-Implementation-Inspection-Correction.md` (local-only)
+- **RT-003 Report:** `docs/reports/260717_1554_RTHINK-RT-003_Artifact-Registry-Foundation.md` (local-only)
 
 ---
 
