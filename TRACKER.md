@@ -1,7 +1,7 @@
 # R-Think Runtime — TRACKER
 
 **Tracker Created At:** Historical exact time not recorded
-**Last Updated At:** 2026-07-17T16:40:00+07:00
+**Last Updated At:** 2026-07-17T22:29:34+07:00
 **Project:** R-Think Runtime
 **Controlled Blueprint:** RTHINK-BP-001 v1.0
 **Owner:** Hendri RH — Bro Kraken
@@ -14,10 +14,10 @@
 
 | Field | Value |
 |-------|-------|
-| **LAST COMPLETED** | RT-004 — Evidence Graph Foundation |
-| **CURRENT** | RT-004-C1 — Documentation & Founding Leadership Reconciliation |
-| **NEXT** | RT-005 — Method / Provider Router |
-| **FINAL DESTINATION** | Runtime v1 — Production-ready runtime |
+| **LAST COMPLETED** | RT-005-C1 — RT-005 Semantic Contract & Documentation Reconciliation |
+| **CURRENT** | RT-006-C1 — Durability Boundary, Global Ordering, Governance Reconciliation |
+| **NEXT** | RT-007 — Executor Integration |
+| **FINAL DESTINATION** | R-Think Runtime operational baseline (Runtime v1) |
 
 ---
 
@@ -56,19 +56,19 @@ Artifact Registry (RT-003)
         ▼
 Evidence Graph (RT-004)
   Claims, Evidence, Contradiction, Acceptance
-        ◄──────────── YOU ARE HERE
         │
         ▼
 Method / Provider Router (RT-005)
-  Model, Tool, Human, Experiment Selection
-        │
-        ▼
+   Model, Tool, Human, Experiment Selection
+         │
+         ▼
 Persistence & Event Store (RT-006)
-  PostgreSQL, Event Sourcing, Recovery
-        │
-        ▼
+   Immutable Event Log, Replay, Snapshots, Recovery
+         ◄──────────── YOU ARE HERE
+         │
+         ▼
 Executor Integration (RT-007)
-  OpenCode Adapter, Revision Loop, Self-Approval Prevention
+   OpenCode Adapter, Revision Loop, Self-Approval Prevention
         │
         ▼
 Inspector (RT-008)
@@ -108,7 +108,7 @@ R-Think Runtime v1
 | Local HEAD | `68f1e2452a952e3c6b417c1ef14a6a4f7f074903` |
 | Remote origin/main | `b9b512bddada3ecedde86a53611d693532496c80` |
 | Ahead / Behind | 1 ahead, 0 behind |
-| Working tree | Clean |
+| Working tree | Dirty — uncommitted RT-005 + RT-005-C1 + RT-006 local work |
 | Commits on main | 10 (2 authorized, 2 unauthorized, 5 controlled, 1 RT-002/003) |
 
 ### Runtime State
@@ -119,8 +119,8 @@ R-Think Runtime v1
 | State Machine & Transition Engine | Implementation produced — Guardian review pending |
 | Artifact Registry | Implementation produced — Guardian review pending |
 | Evidence Graph | Implementation produced — Guardian review pending |
-| Method / Provider Router | Not started |
-| Persistence & Event Store | Not started |
+| Method / Provider Router | Implementation produced — C1 reconciled, Guardian review pending |
+| Persistence & Event Store | Implementation produced — superseded for acceptance by RT-006-C1 — Guardian review pending |
 | Executor Integration | Not started |
 | Inspector | Not started |
 
@@ -129,9 +129,9 @@ R-Think Runtime v1
 | Field | Value |
 |-------|-------|
 | Local commit | `68f1e24` — contains RT-002 + RT-003 implementations |
-| Remote publication | BLOCKED |
-| Authentication | BLOCKED — `krakenworld28` lacks push permission to `kraken-backend/r-think_framework` |
-| Required action | Grant write access or use `kraken-backend` account credentials |
+| Uncommitted work | RT-005 + RT-005-C1 + RT-006 + RT-006-C1 (working-tree changes, local-only) |
+| Remote publication | **NOT AUTHORIZED** — out of scope for this mission (no auth failure) |
+| Required action | Await Human Architect authorization before any push |
 
 ### Acceptance State
 
@@ -141,6 +141,8 @@ R-Think Runtime v1
 | RT-003 implementation | Guardian review pending |
 | RT-004 implementation | Guardian review pending |
 | RT-004-C1 documentation reconciliation | Guardian review pending |
+| RT-005 implementation | Guardian review pending |
+| RT-005-C1 semantic reconciliation | Complete (local, uncommitted) |
 | Human Architect approval | Pending |
 | npm/package distribution | DEFERRED |
 
@@ -380,6 +382,85 @@ RT-004 Evidence Graph (requires explicit authorization)
 | Documents Updated | AUTHORS.md, NOTICE, CITATION.cff, TRADEMARKS.md, DOCUMENTATION-LICENSE.md, README.md, TRACKER.md, RT-004 Report, IP Provenance |
 | Report | `docs/reports/260717_1930_RTHINK-RT-004_Evidence-Graph-Foundation.md` (appended) (local-only) |
 
+### RTHINK-RT-005 — Method / Provider Router Foundation
+
+| Field | Value |
+|-------|-------|
+| Mission ID | RTHINK-RT-005 |
+| Title | Method / Provider Router Foundation |
+| Level | L2 — Significant / Runtime Core |
+| Status | Implementation produced — local only — C1 reconciled — Guardian review pending |
+| New Enums | ProviderStatus (4: AVAILABLE, UNAVAILABLE, DISABLED, ERROR), RouterDecisionOutcome (4: SELECTED, NO_MATCH, ALL_UNAVAILABLE, REQUEST_INVALID), RejectionReasonCode (9 typed codes, added in C1) |
+| New Interfaces | Method, Provider, ProviderRegistration, Capability, Requirement, ExecutionContext, ExecutionRequest, ExecutionResult, ExecutionConstraints, RouterDecision, RejectedProvider, CapabilityMatchResult, PriorityEvaluation, ProviderPriorityScore, ProviderCapability, EvidenceGraphExport |
+| Classes | `ProviderRegistry` (register/unregister/enable/disable/list/lookup/findByCapability/findByMethod), `Router` (registerMethod/unregisterMethod/validateRequest/resolve/route/explainDecision/listCapabilities/exportRegistry/getRegistry), `evidence-export.ts` adapter (RouterDecision → EvidenceGraph, decoupled) |
+| Routing Stages | Capability Completeness → Version Compliance → Runtime Availability → Constraint Apply → Lexicographic Selection |
+| Lexicographic Comparator | version-mismatch → method-supported → availability → preferred → priority → registration order → id |
+| Priority Formula (display only) | `capabilityScore*1000 + methodScore*100 + availabilityScore*10 + priorityScore` |
+| Constraints | excludeProviders, preferProviders (soft preference), requiredCapabilities |
+| Version Handling | `minVersion` is a HARD requirement — missing → CAPABILITY_VERSION_MISSING, below → CAPABILITY_VERSION_BELOW_MINIMUM; both reject the provider |
+| Excluded Providers | Recorded in `rejectedProviders` (EXCLUDED_BY_REQUEST_CONSTRAINT); exhaustion → NO_MATCH (never ALL_UNAVAILABLE) |
+| Generic Constraint | Router contains NO business-specific logic (no OCR, OpenAI, Claude, etc.); does NOT import EvidenceGraph runtime class |
+| Tests | 359 router tests (incl. C1 semantic) — all passing as part of 674 total |
+| Report | `docs/reports/260717_2031_RTHINK-RT-005_Method-Provider-Router-Foundation.md` (local-only, C1 appendix appended) |
+
+### RTHINK-RT-005-C1 — Semantic Contract & Documentation Reconciliation
+
+| Field | Value |
+|-------|-------|
+| Mission ID | RTHINK-RT-005-C1 |
+| Parent | RTHINK-RT-005 |
+| Title | Semantic Contract & Documentation Reconciliation |
+| Level | L2 — Significant / Runtime Governance & Semantics |
+| Status | COMPLETE — local only — Guardian review pending |
+| Scope | Reconcile router semantics with the four-state model and the Absolute Three-Artifact Law; produce typed rejection reasons; decouple Router from EvidenceGraph |
+| Semantic Decisions | (1) RouterDecisionOutcome = 4 (corrected from 3); (2) RejectionReasonCode enum (9) added and populated on every rejected provider; (3) `minVersion` HARD — missing/below rejects; (4) excluded providers always in `rejectedProviders` with EXCLUDED_BY_REQUEST_CONSTRAINT; (5) ALL_UNAVAILABLE only on runtime-blocked providers; (6) lexicographic comparator replaces fragile weighted score for selection; (7) priority formula retained display-only inside buildPriorityEvaluation; (8) RouterDecision→EvidenceGraph decoupled via evidence-export adapter (no import of EvidenceGraph class) |
+| Files Changed | `src/runtime/router.ts`, `src/runtime/evidence-export.ts` (new), `src/runtime/index.ts`, `src/contracts/types.ts`, `src/contracts/index.ts`, `tests/contracts/rthink-rt-005.test.ts` (+C1 section), README.md, TRACKER.md, RT-005 report |
+| Test Result | 674/674 passing; `tsc --noEmit` clean; `npm run build` clean |
+| Publication | NOT AUTHORIZED — local only, out of scope for this mission |
+| Report | Appended to `docs/reports/260717_2031_RTHINK-RT-005_Method-Provider-Router-Foundation.md` (C1 section, local-only) |
+
+### RTHINK-RT-006 — Persistence & Event Store Foundation
+
+| Field | Value |
+|-------|-------|
+| Mission ID | RTHINK-RT-006 |
+| Title | Persistence & Event Store Foundation |
+| Level | L2 — Significant / Runtime Core |
+| Status | Implementation produced — local only — superseded for acceptance by RT-006-C1 — Guardian review pending |
+| New Enums | RuntimeEventType (19 members), AggregateType (12 members) |
+| New Interfaces | RuntimeEvent, Snapshot, ReplayValidationResult, ReplayIssue, ReplayResult |
+| Event Schema Version | `rt-006-v1.0` (CURRENT_EVENT_SCHEMA_VERSION) |
+| Classes | `EventStore` (append-only log, per-aggregate contiguous sequence enforcement, deterministic ordering, deep-copy load/stream/export), `Persistence` (EventStore composition + current-state record namespace; `putRecord` never appends events), `ReplayEngine` (deterministic fold, 8-code validation, snapshot optimization — result equals full replay) |
+| Replay Validation Codes (8) | MISSING_SEQUENCE, DUPLICATE_SEQUENCE, INVALID_AGGREGATE, INVALID_SCHEMA_VERSION, INVALID_ORDERING, ORPHAN_EVENT, INVALID_CAUSATION_CHAIN, MISSING_CAUSATION_ROOT |
+| Canonical Ordering | sequence → timestamp → eventId (primary, secondary, final tiebreak) |
+| Immutability | Events never mutated; loaded copies independent of stored state |
+| Generic Constraint | EventStore / Persistence / ReplayEngine contain NO business-specific logic (no OCR, OpenAI, Claude, Gemini, KDAP, DIP); do NOT import EvidenceGraph (decoupled, verified by tests 18.19.7 / 18.19.8) |
+| Responsibility Separation | Router → Decision → Persistence Event → Evidence Export → EvidenceGraph (unchanged) |
+| Tests | 196 Persistence & Event Store tests — all passing as part of 870 total |
+| Verification | `tsc --noEmit` clean; `npm run build` clean; full suite 870/870 passing |
+| Publication | NOT AUTHORIZED — local only, out of scope for this mission |
+| Report | `docs/reports/RTHINK-RT-006_Persistence-and-Event-Store-Foundation.md` (local-only) |
+
+### RTHINK-RT-006-C1 — Durability Boundary, Global Ordering, and Governance Reconciliation
+
+| Field | Value |
+|-------|-------|
+| Mission ID | RTHINK-RT-006-C1 |
+| Parent | RTHINK-RT-006 |
+| Title | Durability Boundary, Global Ordering, and Governance Reconciliation |
+| Level | L2 — Significant / Runtime Core Governance & Semantics |
+| Status | COMPLETE — local only — Guardian review pending |
+| Scope | Correct RT-006 semantics per Guardian review: (a) introduce explicit EventStorageAdapter / SnapshotStorageAdapter contracts so EventStore depends on the durability boundary, not undocumented in-memory Maps; (b) store-owned globalPosition as GLOBAL ordering (distinct from AGGREGATE sequence→timestamp→eventId ordering); (c) atomic batch append (all-or-nothing); (d) separate MaterializedViewStore from the event log; (e) typed AuthorityReference + RuntimeActorReference; (f) 12-code replay validation incl. global-position integrity; (g) honest non-durable in-memory backend naming (no PostgreSQL in this mission); (h) decoupling preserved (no EvidenceGraph import) |
+| New Files | `src/runtime/storage-adapters.ts` (InMemoryEventStorageAdapter, InMemorySnapshotStorageAdapter, FakeEventStorageAdapter), `src/runtime/materialized-view-store.ts` (InMemoryMaterializedViewStore) |
+| Contracts Added | `EventStorageAdapter`, `SnapshotStorageAdapter` (with `list()`), `MaterializedViewRecord`, `MaterializedViewStore`, `AuthorityReference`, `RuntimeActorReference` |
+| Contracts Changed | `RuntimeEvent` (globalPosition + typed authority), `Snapshot` (globalPosition), `ReplayIssue.code` (12 codes: +DUPLICATE_GLOBAL_POSITION, MISSING_GLOBAL_POSITION, INVALID_GLOBAL_POSITION_ORDER, ATOMIC_BATCH_REJECTED) |
+| Key Semantic Decisions | (1) globalPosition is store-wide monotonic, assigned by EventStore and ALWAYS reassigned on append (caller cannot override — proven by overwrite, not rejected, to preserve cross-store recovery/replay-rebuild); (2) GLOBAL ordering drives stream/export/streamMission/replayMission; AGGREGATE ordering drives loadAggregate/replayAggregate; (3) atomic append: validate-all → tentatively reserve positions → commit all or roll back none; rejected count reports full batch on failure; (4) MaterializedViewStore is derived state — putRecord never appends events, remove/clear never deletes events; (5) typed AuthorityReference validated (authorityId non-empty + AuthorityStatus valid); (6) InMemoryEventStorageAdapter is process-local NON-durable; PostgreSQL is a future pluggable adapter |
+| Files Changed | `src/contracts/types.ts`, `src/contracts/index.ts`, `src/runtime/event-store.ts`, `src/runtime/persistence.ts`, `src/runtime/replay.ts`, `src/runtime/index.ts`, `tests/contracts/rthink-rt-006.test.ts` (+blocks 18.21–18.28), README.md, TRACKER.md |
+| Test Result | 249/249 RT-006 tests passing; full suite 923/923 passing; `tsc --noEmit` clean; `npm run build` clean |
+| Decoupling Verification | Tests 18.27.1–18.27.4 assert event-store / replay / persistence / router do NOT import EvidenceGraph |
+| Publication | NOT AUTHORIZED — local only, out of scope for this mission |
+| Report | `docs/reports/YYMMDD_HHMM_RTHINK-RT-006-C1_Durability-Boundary-Global-Ordering-and-Governance-Reconciliation.md` (local-only) |
+
 ---
 
 ## Current Artifacts
@@ -394,21 +475,30 @@ RT-004 Evidence Graph (requires explicit authorization)
 ### Contracts (1)
 - `src/contracts/index.ts` — TypeScript interfaces: MissionContract, RtpMessage, ArtifactEnvelope, TransitionDecision, EvidenceGraphNode, EvidenceGraphEdge, EvidenceGraphExport
 
-### Runtime (5) — RT-002, RT-003, RT-004
+### Runtime (9) — RT-002, RT-003, RT-004, RT-005, RT-006
 - `src/runtime/rules.ts` — Transition rules (17), reason codes (14), adaptive depth config, artifact gates
 - `src/runtime/state-machine.ts` — evaluateTransition, applyTransition, evaluateRetry, createTimestamp
 - `src/runtime/artifact-registry.ts` — ArtifactRegistry: register, replace, version history, validation
 - `src/runtime/evidence-graph.ts` — EvidenceGraph: nodes, edges, pathfinding, cycle detection, validation, export
+- `src/runtime/router.ts` — ProviderRegistry, Router: capability/version/availability/constraint/lexicographic routing, typed rejection
+- `src/runtime/evidence-export.ts` — RouterDecision → EvidenceGraph export adapter (decoupled; imports only EvidenceGraph enums)
+- `src/runtime/event-store.ts` — EventStore: immutable append-only operational history, per-aggregate contiguous sequence enforcement, store-owned globalPosition, atomic batch append, depends on EventStorageAdapter
+- `src/runtime/storage-adapters.ts` — InMemoryEventStorageAdapter, InMemorySnapshotStorageAdapter, FakeEventStorageAdapter (test-injectable; durability boundary)
+- `src/runtime/materialized-view-store.ts` — InMemoryMaterializedViewStore (derived-view separation from event log)
+- `src/runtime/persistence.ts` — Persistence: EventStore + SnapshotStorageAdapter + MaterializedViewStore composition (putRecord never appends events)
+- `src/runtime/replay.ts` — ReplayEngine: deterministic replay, 12-code validation (global-position integrity), snapshot optimization, global vs aggregate ordering
 - `src/runtime/index.ts` — Barrel export for runtime module
 
 ### Validation Helpers (1) — DERIVED
 - `src/schemas/validation.ts` — validateAllowDecisionArtifacts, validateCriticalMissionAuthority, validateRtpVersion
 
-### Tests (5 files, 315 tests)
+### Tests (6 files, 923 tests)
 - `tests/contracts/rthink-rt-001.test.ts` — 25 Zod validation tests
 - `tests/contracts/rthink-rt-002.test.ts` — 66 state machine and transition rule tests
 - `tests/contracts/rthink-rt-003.test.ts` — 44 artifact registry tests
 - `tests/contracts/rthink-rt-004.test.ts` — 140 evidence graph tests
+- `tests/contracts/rthink-rt-005.test.ts` — 359 router + C1 semantic tests
+- `tests/contracts/rthink-rt-006.test.ts` — 249 Persistence & Event Store tests (+RT-006-C1 block 18.21–18.28)
 - `tests/contracts/json-schema.test.ts` — 40 JSON Schema tests (ajv)
 
 ### Fixtures (5 valid, 14 invalid)
@@ -428,7 +518,9 @@ RT-004 Evidence Graph (requires explicit authorization)
 | Contract tests (RT-002 state machine) | ✅ 66/66 PASSING |
 | Contract tests (RT-003 artifact registry) | ✅ 44/44 PASSING |
 | Contract tests (RT-004 evidence graph) | ✅ 140/140 PASSING |
-| Total tests | ✅ 315/315 PASSING |
+| Contract tests (RT-005 router + C1) | ✅ 359/359 PASSING |
+| Contract tests (RT-006 persistence & event store) | ✅ 249/249 PASSING (+RT-006-C1 block) |
+| Total tests | ✅ 923/923 PASSING |
 | License Gate (6 deps) | ✅ ALL PASS (MIT, Apache-2.0) |
 | npm audit | ✅ 0 vulnerabilities |
 
@@ -466,7 +558,7 @@ RT-004 Evidence Graph (requires explicit authorization)
 10. tsconfig `moduleResolution: "bundler"` introduced without authorization (RT-001-R2, reverted)
 11. R2 stated `moduleResolution: "node"` but executor changed to `"bundler"` post-report (RT-001-R2-C1, corrected to `"nodenext"` PROVISIONAL-ACCEPTED)
 12. RTHINK-GIT-002-C1 authorized exactly one commit and three files, but executor created a second commit `d7e7486` containing TRACKER.md and a new evidence file. History preserved; corrected by RTHINK-GIT-002-C2.
-13. RT-003 commit `68f1e24` created but cannot be pushed — `krakenworld28` lacks push permission to `kraken-backend/r-think_framework` (RT-003-C1).
+13. RT-003 commit `68f1e24` created but cannot be pushed — publication is **NOT AUTHORIZED** for this mission (no auth failure; withheld pending Human Architect authorization). RT-005 + RT-005-C1 + RT-006 remain uncommitted local working-tree changes on top.
 
 ---
 
@@ -480,7 +572,7 @@ RT-004 Evidence Graph (requires explicit authorization)
 | Unauthorized commits on origin/main | ESCALATED (RT-001-R2) |
 | Historical artifacts deleted from remote | RESTORED locally; ESCALATED (RT-001-R2) |
 | tsconfig unauthorized change | REVERTED to "node" (RT-001-R2) |
-| GitHub publication blocked (RT-003) | `krakenworld28` lacks push permission to `kraken-backend/r-think_framework` |
+| GitHub publication NOT AUTHORIZED (RT-003/RT-005/RT-005-C1/RT-006) | Withheld pending Human Architect authorization (no auth failure) |
 
 ---
 
@@ -510,6 +602,9 @@ RT-004 Evidence Graph (requires explicit authorization)
 - **RT-003-C1 Report:** `docs/reports/260717_1610_RTHINK-RT-003-C1_Documentation-Reconciliation-and-Controlled-Publication.md` (local-only)
 - **RT-003-C2 Report:** `docs/reports/260717_1640_RTHINK-RT-003-C2_Planning-Map-and-Governance-State-Correction.md` (local-only)
 - **RT-004 Report:** `docs/reports/260717_1930_RTHINK-RT-004_Evidence-Graph-Foundation.md` (local-only)
+- **RT-005 Report:** `docs/reports/260717_2031_RTHINK-RT-005_Method-Provider-Router-Foundation.md` (local-only, C1 appendix)
+- **RT-006 Report:** `docs/reports/RTHINK-RT-006_Persistence-and-Event-Store-Foundation.md` (local-only)
+- **RT-006-C1 Report:** `docs/reports/260717_2229_RTHINK-RT-006-C1_Durability-Boundary-Global-Ordering-and-Governance-Reconciliation.md` (local-only)
 
 ---
 

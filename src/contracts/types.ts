@@ -206,3 +206,116 @@ export const EvidenceGraphRelationType = {
 
 export type EvidenceGraphRelationType =
   (typeof EvidenceGraphRelationType)[keyof typeof EvidenceGraphRelationType];
+
+// ─── Provider Status ────────────────────────────────────────────────────────
+// RTHINK-BP-001: Method/Provider Router — provider lifecycle states
+
+export const ProviderStatus = {
+  AVAILABLE: "AVAILABLE",
+  UNAVAILABLE: "UNAVAILABLE",
+  DISABLED: "DISABLED",
+  ERROR: "ERROR",
+} as const;
+
+export type ProviderStatus =
+  (typeof ProviderStatus)[keyof typeof ProviderStatus];
+
+// ─── Router Decision Outcome ────────────────────────────────────────────────
+// RTHINK-BP-001: Method/Provider Router — routing decision outcomes
+
+export const RouterDecisionOutcome = {
+  SELECTED: "SELECTED",
+  NO_MATCH: "NO_MATCH",
+  ALL_UNAVAILABLE: "ALL_UNAVAILABLE",
+  REQUEST_INVALID: "REQUEST_INVALID",
+} as const;
+
+export type RouterDecisionOutcome =
+  (typeof RouterDecisionOutcome)[keyof typeof RouterDecisionOutcome];
+
+// ─── Rejection Reason Codes ──────────────────────────────────────────────────
+// RTHINK-BP-001: Method/Provider Router — typed rejection reasons
+
+export const RejectionReasonCode = {
+  STATUS_DISABLED: "STATUS_DISABLED",
+  STATUS_UNAVAILABLE: "STATUS_UNAVAILABLE",
+  STATUS_ERROR: "STATUS_ERROR",
+  METHOD_NOT_SUPPORTED: "METHOD_NOT_SUPPORTED",
+  REQUIRED_CAPABILITY_MISSING: "REQUIRED_CAPABILITY_MISSING",
+  CAPABILITY_VERSION_MISSING: "CAPABILITY_VERSION_MISSING",
+  CAPABILITY_VERSION_BELOW_MINIMUM: "CAPABILITY_VERSION_BELOW_MINIMUM",
+  EXCLUDED_BY_REQUEST_CONSTRAINT: "EXCLUDED_BY_REQUEST_CONSTRAINT",
+  LOWER_SELECTION_PRIORITY: "LOWER_SELECTION_PRIORITY",
+} as const;
+
+export type RejectionReasonCode =
+  (typeof RejectionReasonCode)[keyof typeof RejectionReasonCode];
+
+// ─── Runtime Event Types ──────────────────────────────────────────────────────
+// RTHINK-BP-001 §19: Persistence & Event Store — canonical runtime event types
+// These are generic operational events. No business/provider-specific values.
+
+export const RuntimeEventType = {
+  MISSION_CREATED: "MISSION_CREATED",
+  MISSION_UPDATED: "MISSION_UPDATED",
+  STATE_CHANGED: "STATE_CHANGED",
+  ARTIFACT_REGISTERED: "ARTIFACT_REGISTERED",
+  ARTIFACT_REPLACED: "ARTIFACT_REPLACED",
+  ROUTER_DECISION: "ROUTER_DECISION",
+  EXECUTION_STARTED: "EXECUTION_STARTED",
+  EXECUTION_COMPLETED: "EXECUTION_COMPLETED",
+  EXECUTION_FAILED: "EXECUTION_FAILED",
+  EVIDENCE_CREATED: "EVIDENCE_CREATED",
+  CONTRADICTION_DETECTED: "CONTRADICTION_DETECTED",
+  CHALLENGE_STARTED: "CHALLENGE_STARTED",
+  CHALLENGE_COMPLETED: "CHALLENGE_COMPLETED",
+  DISCOVERY_CREATED: "DISCOVERY_CREATED",
+  EVOLUTION_CREATED: "EVOLUTION_CREATED",
+  AUTHORITY_GRANTED: "AUTHORITY_GRANTED",
+  AUTHORITY_DENIED: "AUTHORITY_DENIED",
+  RECOVERY_STARTED: "RECOVERY_STARTED",
+  RECOVERY_COMPLETED: "RECOVERY_COMPLETED",
+} as const;
+
+export type RuntimeEventType =
+  (typeof RuntimeEventType)[keyof typeof RuntimeEventType];
+
+// ─── Aggregate Types (for event aggregateType) ─────────────────────────────────
+// RTHINK-BP-001 §19: Persistence — generic aggregate classification
+
+export const AggregateType = {
+  MISSION: "MISSION",
+  STATE: "STATE",
+  ARTIFACT: "ARTIFACT",
+  ROUTER: "ROUTER",
+  EXECUTION: "EXECUTION",
+  EVIDENCE: "EVIDENCE",
+  CONTRADICTION: "CONTRADICTION",
+  CHALLENGE: "CHALLENGE",
+  DISCOVERY: "DISCOVERY",
+  EVOLUTION: "EVOLUTION",
+  AUTHORITY: "AUTHORITY",
+  RECOVERY: "RECOVERY",
+} as const;
+
+export type AggregateType = (typeof AggregateType)[keyof typeof AggregateType];
+
+// ─── Authority Reference ───────────────────────────────────────────────────────
+// RTHINK-BP-001 §17, §19: Persistence — typed authority reference for events.
+// Operational and generic. Identifies the authority record that permitted an
+// event, the role that exercised it, the current authority status, and an
+// optional decision/granting linkage. No legal or external identity semantics.
+
+export interface AuthorityReference {
+  authorityId: string;
+  actorRole: ActorRole;
+  status: AuthorityStatus;
+  decisionId?: string;
+  grantedBy?: string;
+}
+
+// Runtime actor reference used by events (re-exported from contracts/index).
+export interface RuntimeActorReference {
+  id: string;
+  role: ActorRole;
+}

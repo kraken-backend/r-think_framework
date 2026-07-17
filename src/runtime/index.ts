@@ -43,3 +43,59 @@ export {
   type GraphNodeInput,
   type GraphEdgeInput,
 } from "./evidence-graph.js";
+
+export {
+  ProviderRegistry,
+  Router,
+  ROUTER_VERSION,
+  RejectionReasonCode,
+} from "./router.js";
+
+export {
+  toEvidenceGraphArtifacts,
+  toEvidenceGraphExport,
+  EVIDENCE_EXPORT_VERSION,
+  type RouterDecisionEvidenceExport,
+} from "./evidence-export.js";
+
+export {
+  EventStore,
+  EVENT_STORE_VERSION,
+} from "./event-store.js";
+
+export {
+  Persistence,
+  PERSISTENCE_VERSION,
+} from "./persistence.js";
+
+export {
+  ReplayEngine,
+  REPLAY_VERSION,
+  type StateReducer,
+} from "./replay.js";
+
+export {
+  InMemoryEventStorageAdapter,
+  InMemorySnapshotStorageAdapter,
+  FakeEventStorageAdapter,
+  STORAGE_ADAPTER_VERSION,
+} from "./storage-adapters.js";
+
+export {
+  InMemoryMaterializedViewStore,
+  MATERIALIZED_VIEW_VERSION,
+} from "./materialized-view-store.js";
+
+export { CURRENT_EVENT_SCHEMA_VERSION } from "../contracts/index.js";
+
+export type {
+  RuntimeEvent,
+  Snapshot,
+  ReplayValidationResult,
+  ReplayIssue,
+  ReplayResult,
+  EventStorageAdapter,
+  SnapshotStorageAdapter,
+  MaterializedViewStore,
+  MaterializedViewRecord,
+} from "../contracts/index.js";

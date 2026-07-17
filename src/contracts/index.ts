@@ -16,6 +16,13 @@ import type {
   AuthorityStatus,
   EvidenceGraphNodeType,
   EvidenceGraphRelationType,
+  ProviderStatus as ProviderStatusEnum,
+  RouterDecisionOutcome,
+  RejectionReasonCode,
+  RuntimeEventType,
+  AggregateType,
+  AuthorityReference,
+  RuntimeActorReference,
 } from "./types.js";
 
 // ─── Mission Contract ───────────────────────────────────────────────────────
@@ -167,4 +174,257 @@ export interface EvidenceGraphExport {
   edges: EvidenceGraphEdge[];
   exportedAt: string;
   version: string;
+}
+
+// ─── Method / Provider Router Contracts ─────────────────────────────────────
+// RTHINK-BP-001: Method/Provider Router — typed contracts
+
+export interface Method {
+  methodId: string;
+  displayName: string;
+  description: string;
+  requiredCapabilities: Requirement[];
+}
+
+export interface Capability {
+  capabilityId: string;
+  displayName: string;
+  description: string;
+}
+
+export interface Requirement {
+  capabilityId: string;
+  minVersion?: string;
+  optional?: boolean;
+}
+
+export interface Provider {
+  providerId: string;
+  displayName: string;
+  version: string;
+  priority: number;
+  status: ProviderStatusEnum;
+  supportedMethods: string[];
+  capabilities: ProviderCapability[];
+  metadata: Record<string, unknown>;
+}
+
+export interface ProviderCapability {
+  capabilityId: string;
+  version: string;
+}
+
+export interface ProviderRegistration {
+  provider: Provider;
+  registeredAt: string;
+  enabled: boolean;
+}
+
+export interface ExecutionContext {
+  missionId: string;
+  state: RuntimeState;
+  riskLevel: MissionRiskLevel;
+  metadata: Record<string, unknown>;
+}
+
+export interface ExecutionRequest {
+  requestId: string;
+  methodId: string;
+  context: ExecutionContext;
+  requirements?: Requirement[];
+  constraints?: ExecutionConstraints;
+}
+
+export interface ExecutionConstraints {
+  excludeProviders?: string[];
+  preferProviders?: string[];
+  maxResponseTime?: number;
+  requiredCapabilities?: string[];
+}
+
+export interface ExecutionResult {
+  requestId: string;
+  providerId: string;
+  success: boolean;
+  result?: Record<string, unknown>;
+  error?: string;
+  duration?: number;
+  evidenceRefs: string[];
+}
+
+export interface RouterDecision {
+  decisionId: string;
+  requestId: string;
+  methodId: string;
+  selectedProvider: string | null;
+  rejectedProviders: RejectedProvider[];
+  reason: string;
+  capabilityMatch: CapabilityMatchResult;
+  priorityEvaluation: PriorityEvaluation;
+  finalDecision: RouterDecisionOutcome;
+  timestamp: string;
+}
+
+export interface RejectedProvider {
+  providerId: string;
+  reason: string;
+  code: RejectionReasonCode;
+}
+
+export interface CapabilityMatchResult {
+  requiredCapabilities: string[];
+  matchedCapabilities: string[];
+  missingCapabilities: string[];
+  versionMatches: string[];
+  versionMismatches: string[];
+  versionMissing: string[];
+  versionBelow: string[];
+}
+
+export interface PriorityEvaluation {
+  candidates: ProviderPriorityScore[];
+  winner: string | null;
+  tieBreakingRule: string;
+}
+
+export interface ProviderPriorityScore {
+  providerId: string;
+  capabilityScore: number;
+  methodScore: number;
+  availabilityScore: number;
+  priorityScore: number;
+  totalScore: number;
+}
+
+// ─── Persistence & Event Store Contracts ──────────────────────────────────────
+// RTHINK-BP-001 §19: Persistence & Event Store — canonical event model
+// Fully generic. No business/provider-specific fields.
+
+export const CURRENT_EVENT_SCHEMA_VERSION = "rt-006-v1.0";
+
+export interface ActorIdentityRef {
+  id: string;
+  role: ActorRole;
+}
+
+export interface RuntimeEvent {
+  eventId: string;
+  missionId: string;
+  aggregateId: string;
+  aggregateType: AggregateType;
+  eventType: RuntimeEventType;
+  sequence: number;
+  timestamp: string;
+  actor: RuntimeActorReference;
+  authority: AuthorityReference;
+  payload: Record<string, unknown>;
+  metadata: Record<string, unknown>;
+  correlationId?: string;
+  causationId?: string;
+  schemaVersion: string;
+  /**
+   * Canonical global position assigned by the Event Store at append time.
+   * Monotonically increasing across the ENTIRE store, starting at 1, unique,
+   * immutable after append, and independent from per-aggregate `sequence`.
+   * Callers cannot supply or override this; the store owns assignment.
+   */
+  globalPosition: number;
+}
+
+export interface Snapshot {
+  snapshotId: string;
+  aggregateId: string;
+  sequence: number;
+  /** globalPosition boundary the snapshot was taken at (store high-water mark) */
+  globalPosition: number;
+  timestamp: string;
+  runtimeState: Record<string, unknown>;
+  metadata: Record<string, unknown>;
+}
+
+export interface ReplayValidationResult {
+  valid: boolean;
+  errors: ReplayIssue[];
+}
+
+export interface ReplayIssue {
+  code:
+    | "MISSING_SEQUENCE"
+    | "DUPLICATE_SEQUENCE"
+    | "INVALID_AGGREGATE"
+    | "INVALID_SCHEMA_VERSION"
+    | "INVALID_ORDERING"
+    | "ORPHAN_EVENT"
+    | "INVALID_CAUSATION_CHAIN"
+    | "MISSING_CAUSATION_ROOT"
+    | "DUPLICATE_GLOBAL_POSITION"
+    | "MISSING_GLOBAL_POSITION"
+    | "INVALID_GLOBAL_POSITION_ORDER"
+    | "ATOMIC_BATCH_REJECTED";
+  message: string;
+  eventId?: string;
+  sequence?: number;
+  aggregateId?: string;
+  globalPosition?: number;
+}
+
+export interface ReplayResult {
+  aggregateId: string;
+  events: RuntimeEvent[];
+  state: Record<string, unknown>;
+  validation: ReplayValidationResult;
+}
+
+// ─── Storage Adapter Contracts ────────────────────────────────────────────────
+// RTHINK-BP-001 §19: Persistence — explicit durability boundary.
+// The EventStore depends on adapter interfaces, NOT on undocumented Maps as its
+// persistence identity. The current backend is process-local and non-durable.
+// Durable adapters (PostgreSQL, NATS, …) are FUTURE work; only the boundary
+// exists now.
+
+export interface EventStorageAdapter {
+  /** Append a single already-validated event (store assigns globalPosition). */
+  append(event: RuntimeEvent): void;
+  /** Append a batch atomically. Implementations must reject the whole batch on conflict. */
+  appendBatch(events: RuntimeEvent[]): void;
+  loadEvent(eventId: string): RuntimeEvent | undefined;
+  loadAll(): RuntimeEvent[];
+  loadMission(missionId: string): RuntimeEvent[];
+  loadAggregate(aggregateId: string): RuntimeEvent[];
+  count(): number;
+}
+
+export interface SnapshotStorageAdapter {
+  save(snapshot: Snapshot): void;
+  load(snapshotId: string): Snapshot | undefined;
+  list(): Snapshot[];
+  listByAggregate(aggregateId: string): Snapshot[];
+  delete(snapshotId: string): boolean;
+}
+
+// ─── Materialized View Store Contract ──────────────────────────────────────────
+// RTHINK-BP-001 §19: Persistence — derived current-state views.
+// NOT authoritative history. Removing/clearing a view never deletes events.
+// Writing a view never appends events.
+
+export interface MaterializedViewRecord {
+  recordId: string;
+  aggregateId: string;
+  missionId: string;
+  state: Record<string, unknown>;
+  metadata: Record<string, unknown>;
+  updatedAt: string;
+  /** globalPosition of the event that produced this record (provenance) */
+  derivedFromGlobalPosition: number;
+  schemaVersion: string;
+}
+
+export interface MaterializedViewStore {
+  put(record: MaterializedViewRecord): void;
+  load(recordId: string): MaterializedViewRecord | undefined;
+  exists(recordId: string): boolean;
+  remove(recordId: string): boolean;
+  list(): MaterializedViewRecord[];
+  clear(): void;
+  count(): number;
 }
