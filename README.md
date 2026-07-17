@@ -260,16 +260,13 @@ All components must pass the **License Gate**: open-source/open-weight status, c
 ### Prerequisites
 
 - **Node.js** >= 18.0.0
-- **npm** (pnpm also supported)
+- **npm** 9+ (pnpm also supported)
 
 ### Installation
 
 ```bash
-# Clone the repository
-git clone <repository-url>
-cd r_think
-
-# Install dependencies
+git clone https://github.com/kraken-backend/r-think_framework.git
+cd r-think_framework
 npm install
 ```
 
@@ -292,7 +289,7 @@ npm run build
 ### Verify Everything Works
 
 ```bash
-npm install && npm run typecheck && npm test && npm run build
+npm run typecheck && npm test && npm run build
 ```
 
 Expected output: 65/65 tests passing, zero type errors, clean build.
@@ -315,9 +312,6 @@ r_think/
 ├── README.md                   # This file
 ├── TRACKER.md                  # Living project tracker
 │
-├── raw/                        # Source documents (blueprint)
-│   └── R-Think_Runtime_Master_Blueprint_v1.0.docx
-│
 ├── src/
 │   ├── index.ts                # Public API exports
 │   ├── contracts/
@@ -330,8 +324,8 @@ r_think/
 │
 ├── tests/
 │   ├── contracts/
-│   │   ├── rthink-rt-001.test.ts     # Zod validation tests (25 tests)
-│   │   └── json-schema.test.ts       # JSON Schema tests (40 tests, ajv)
+│   │   ├── rthink-rt-001.test.ts     # Zod validation tests
+│   │   └── json-schema.test.ts       # JSON Schema tests (ajv)
 │   └── fixtures/
 │       ├── valid/               # Valid protocol fixtures
 │       └── invalid/             # Invalid protocol fixtures (rejection test data)
@@ -349,11 +343,13 @@ r_think/
     │   ├── RTHINK-RT-001_LICENSE-GATE.md
     │   ├── RTHINK-IP-001_LICENSE-ARCHITECTURE.md
     │   └── RTHINK-RT-001-R2-C1_TYPESCRIPT-MODULE-RESOLUTION.md
-    ├── evidence/
-    │   ├── RTHINK-RT-001-R1_EVIDENCE-MANIFEST.md
-    │   └── RTHINK-RT-001-R2_REPOSITORY-STATE-EVIDENCE.md
-    └── reports/                 # All mission reports (preserved)
+    └── evidence/
+        ├── RTHINK-RT-001-R1_EVIDENCE-MANIFEST.md
+        ├── RTHINK-RT-001-R2_REPOSITORY-STATE-EVIDENCE.md
+        └── RTHINK-GIT-002_CONTROLLED-PUBLICATION-EVIDENCE.md
 ```
+
+> **Local-only materials:** `docs/reports/` and `raw/` exist on the local working tree for internal governance but are intentionally excluded from this public repository (`.gitignore`). They are never staged, committed, or pushed.
 
 ---
 
@@ -361,15 +357,33 @@ r_think/
 
 | Mission | Level | Status |
 |---------|-------|--------|
-| RTHINK-RT-001 | L2 | SUPERSEDED BY CORRECTION PROCESS |
-| RTHINK-RT-001-R1 | L2 | PARTIAL — GOVERNANCE EVIDENCE INCOMPLETE / REVISION_REQUIRED |
-| RTHINK-GIT-001 | L2 | PUBLISHED — GUARDIAN VERIFICATION INCOMPLETE |
-| RTHINK-IP-001 | L3 | REVISION_REQUIRED |
-| RTHINK-IP-001-R1 | L3 | READY FOR GUARDIAN AND HUMAN ARCHITECT REVIEW |
-| RTHINK-RT-001-R2 | L3 | READY FOR GUARDIAN REVIEW |
-| RTHINK-RT-001-R2-C1 | L3 | READY FOR GUARDIAN AND HUMAN ARCHITECT REVIEW |
+| RTHINK-RT-001 | L2 | IMPLEMENTED — ACCEPTED |
+| RTHINK-RT-001-R1 | L2 | ACCEPTED — all Guardian findings resolved |
+| RTHINK-GIT-001 | L2 | PUBLISHED — GUARDIAN REMOTE VERIFIED |
+| RTHINK-IP-001 | L3 | SUPERSEDED BY RTHINK-IP-001-R1 |
+| RTHINK-IP-001-R1 | L3 | ACCEPTED — Guardian and Human Architect |
+| RTHINK-RT-001-R2 | L3 | ACCEPTED |
+| RTHINK-RT-001-R2-C1 | L3 | PROVISIONAL-ACCEPTED |
+| RTHINK-GIT-002 | L3 | PUBLISHED — GUARDIAN REMOTE VERIFIED |
+| RTHINK-GIT-002-C1 | L3 | IN PROGRESS (this correction) |
 | RTHINK-RT-002 | — | NOT AUTHORIZED |
 | NPM PUBLICATION | — | NOT AUTHORIZED |
+
+### Current Technical Baseline
+
+| Dimension | Value |
+|-----------|-------|
+| Runtime | Node.js >= 18.0.0, ESM (`"type": "module"`) |
+| TypeScript | 5.8.3 |
+| Module system | `"module": "nodenext"`, `"moduleResolution": "nodenext"` |
+| Canonical enums | 8 |
+| Zod schemas | 4 (Mission, RTP, Artifact, Transition) |
+| JSON Schemas | 4 (Mission, RTP, Artifact, Transition) |
+| Valid fixtures | 5 |
+| Invalid fixtures | 14 |
+| Contract tests | 65 — all passing |
+| License Gate | All pass (MIT, Apache-2.0) |
+| Module classification | PROVISIONAL-ACCEPTED |
 
 ### RTHINK-RT-001 — Implemented
 
@@ -391,7 +405,7 @@ r_think/
 
 ## Roadmap
 
-### Phase 1: Formal Specification *(RTHINK-RT-001 — IMPLEMENTED, ACCEPTED)*
+### Phase 1: Formal Specification *(RTHINK-RT-001 — ACCEPTED)*
 - [x] Repository baseline
 - [x] Canonical types and enums
 - [x] JSON Schemas + Zod validators

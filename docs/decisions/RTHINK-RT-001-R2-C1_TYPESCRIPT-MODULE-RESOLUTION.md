@@ -126,4 +126,4 @@ Classification is PROVISIONAL-ACCEPTED. The selection is technically sound for t
 3. TypeScript major version upgrade (e.g., TypeScript 7.0)
 4. Runtime architecture change (e.g., Deno/Bun target)
 5. Introduction of a bundler into the build pipeline
-5. If the project is consumed as a library by other TypeScript projects requiring specific resolution modes
+6. If the project is consumed as a library by other TypeScript projects requiring specific resolution modes

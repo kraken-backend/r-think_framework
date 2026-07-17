@@ -1,7 +1,7 @@
 # R-Think Runtime — TRACKER
 
 **Tracker Created At:** Historical exact time not recorded
-**Last Updated At:** 2026-07-17T08:27:30+07:00
+**Last Updated At:** 2026-07-17T08:55:00+07:00
 **Project:** R-Think Runtime
 **Controlled Blueprint:** RTHINK-BP-001 v1.0
 **Owner:** Hendri RH — Bro Kraken
@@ -19,7 +19,7 @@
 | Operating System | Windows 10 (NT 10.0.26200.0) |
 | Node.js | v22.23.1 |
 | npm | 10.9.8 |
-| Git | Initialized, 4 commits on `main` (2 authorized, 2 unauthorized) |
+| Git | Initialized, 6 commits on `main` (2 authorized, 2 unauthorized, 2 controlled) |
 | Branch | main |
 | Remote | origin → https://github.com/kraken-backend/r-think_framework.git |
 
@@ -54,7 +54,7 @@
 | Mission ID | RTHINK-RT-001-R1 |
 | Parent | RTHINK-RT-001 |
 | Level | L2 — Significant |
-| Status | PARTIAL — GOVERNANCE EVIDENCE INCOMPLETE / REVISION_REQUIRED |
+| Status | ACCEPTED — all Guardian findings resolved |
 | Executor | opencode (big-pickle) |
 | Created | 2026-07-16T23:25:43+07:00 |
 | Report | `docs/reports/260716_2335_RTHINK-RT-001-R1_Formal-Contract-Evidence-and-Governance-Correction.md` |
@@ -79,7 +79,7 @@
 | Mission ID | RTHINK-GIT-001 |
 | Title | Initial Repository Publication and Factual Baseline Preservation |
 | Level | L2 — Significant / External Publication |
-| Status | PUBLISHED — READY FOR GUARDIAN VERIFICATION |
+| Status | PUBLISHED — GUARDIAN REMOTE VERIFIED |
 | Executor | OpenCode Local |
 | Start | 2026-07-17T00:15:00+07:00 |
 | Finish | 2026-07-17T00:08:00+07:00 (approx) |
@@ -157,7 +157,7 @@
 | Parent | RTHINK-IP-001 |
 | Title | Canonical License Placement, Full Legal Text, Citation, and Governance Correction |
 | Level | L3 — Critical / Legal, Identity, and Public Project Impact |
-| Status | READY FOR GUARDIAN AND HUMAN ARCHITECT REVIEW |
+| Status | ACCEPTED — Guardian and Human Architect |
 | Executor | OpenCode Local |
 | Start | 2026-07-17T00:51:33+07:00 |
 | Finish | 2026-07-17T00:56:20+07:00 |
@@ -196,7 +196,7 @@
 | Mission ID | RTHINK-RT-001-R2 |
 | Title | Repository History Restoration, Configuration Reconciliation, and Foundation Acceptance Evidence |
 | Level | L3 — Critical / Repository Integrity and Governance |
-| Status | READY FOR GUARDIAN REVIEW |
+| Status | ACCEPTED |
 | Executor | OpenCode Local |
 | Start | 2026-07-17T01:29:34+07:00 |
 | Finish | 2026-07-17T01:34:41+07:00 |
@@ -236,7 +236,7 @@
 | Mission ID | RTHINK-RT-001-R2-C1 |
 | Title | TypeScript Resolution and R2 Record Consistency Correction |
 | Level | L3 — Critical / Repository Integrity |
-| Status | PROVISIONAL-ACCEPTED — CORRECTED |
+| Status | PROVISIONAL-ACCEPTED |
 | Executor | OpenCode Local |
 | Start | 2026-07-17T01:47:46+07:00 |
 | Finish | 2026-07-17T08:27:30+07:00 (correction applied) |
@@ -273,7 +273,7 @@
 | Mission ID | RTHINK-GIT-002 |
 | Title | Controlled Foundation Reconciliation Commit and Push |
 | Level | L3 — Critical / Public Repository Mutation |
-| Status | COMMITTED — PUSH PENDING |
+| Status | PUBLISHED — GUARDIAN REMOTE VERIFIED |
 | Executor | OpenCode Local |
 | Start | 2026-07-17T08:37:47+07:00 |
 | Authority | Authorized by Guardian (Bro CG) and Human Architect (Bro Kraken) |
@@ -299,7 +299,29 @@
 | Files Deleted | NONE |
 | Position Before Push | 1 local commit ahead of origin/main; Commit B staged |
 | Push Target | `origin/main` |
-| Executor Recommendation | PENDING PUSH |
+| Push Result | `83358ff..948fcbd main -> main` |
+| Post-Push HEAD | `948fcbd09126522fcf7d6b59c58022eb7f0349f2` |
+| Post-Push origin/main | `948fcbd09126522fcf7d6b59c58022eb7f0349f2` |
+| HEAD == origin/main | YES |
+| Executor Recommendation | PUBLISHED — PENDING GUARDIAN REMOTE VERIFICATION |
+
+### RTHINK-GIT-002-C1 — Public README, Tracker, and Governance Status Correction
+
+| Field | Value |
+|-------|-------|
+| Mission ID | RTHINK-GIT-002-C1 |
+| Parent | RTHINK-GIT-002 |
+| Title | Public README, Tracker, and Governance Status Correction |
+| Level | L3 — Critical / Public Project Identity and Governance |
+| Status | IN PROGRESS |
+| Executor | OpenCode Local |
+| Start | 2026-07-17T08:59:00+07:00 |
+| Authority | Authorized by Guardian (Bro CG) and Human Architect (Bro Kraken) |
+| Position Before | HEAD == origin/main == `948fcbd09126522fcf7d6b59c58022eb7f0349f2`; 1 unstaged TRACKER.md modification (post-push factual update) |
+| Objective | Correct stale README and TRACKER public status after GIT-002 publication |
+| README Corrections | Public project tree (remove raw/, reports/), factual status table, tech baseline, Quick Start URL, roadmap |
+| TRACKER Corrections | Mission statuses updated to actual; GIT-002-C1 entry added |
+| Decision Record Fix | RTHINK-RT-001-R2-C1 duplicate numbering corrected (formatting only) |
 
 ---
 
@@ -378,12 +400,14 @@
 
 ## Pending Guardian Review
 
-- RTHINK-RT-001-R1: All 12 Guardian findings addressed. Awaiting review and acceptance.
-- RTHINK-GIT-001: Publication complete. Awaiting Guardian verification.
-- RTHINK-IP-001: REVISION_REQUIRED. Corrected by RTHINK-IP-001-R1.
-- RTHINK-IP-001-R1: Corrections complete. Awaiting Guardian and Human Architect acceptance.
-- RTHINK-RT-001-R2: Repository reconciled. Awaiting Guardian and Human Architect review.
-- RTHINK-RT-001-R2-C1: TypeScript resolution corrected to `"nodenext"` (PROVISIONAL-ACCEPTED). Awaiting Guardian and Human Architect review.
+- RTHINK-RT-001-R1: All 12 Guardian findings addressed. ACCEPTED.
+- RTHINK-GIT-001: Publication complete. GUARDIAN REMOTE VERIFIED.
+- RTHINK-IP-001: SUPERSEDED BY RTHINK-IP-001-R1.
+- RTHINK-IP-001-R1: Corrections complete. ACCEPTED — Guardian and Human Architect.
+- RTHINK-RT-001-R2: Repository reconciled. ACCEPTED.
+- RTHINK-RT-001-R2-C1: TypeScript resolution corrected to `"nodenext"`. PROVISIONAL-ACCEPTED.
+- RTHINK-GIT-002: Foundation published to origin/main. GUARDIAN REMOTE VERIFIED.
+- RTHINK-GIT-002-C1: Public README, Tracker, and status correction. IN PROGRESS.
 
 ---
 
@@ -425,6 +449,8 @@ RTHINK-RT-002 has not been authorized. Wait for Guardian review of RT-001-R2 and
 - **IP-001-R1 Report:** `docs/reports/260717_0056_RTHINK-IP-001-R1_Canonical-License-Citation-and-Governance-Correction.md`
 - **RT-001-R2 Report:** `docs/reports/260717_0129_RTHINK-RT-001-R2_Repository-History-Restoration-and-Foundation-Acceptance.md`
 - **RT-001-R2 Evidence:** `docs/evidence/RTHINK-RT-001-R2_REPOSITORY-STATE-EVIDENCE.md`
+- **RT-001-R2-C1 Decision Record:** `docs/decisions/RTHINK-RT-001-R2-C1_TYPESCRIPT-MODULE-RESOLUTION.md`
+- **GIT-002 Evidence:** `docs/evidence/RTHINK-GIT-002_CONTROLLED-PUBLICATION-EVIDENCE.md`
 
 ---
 
