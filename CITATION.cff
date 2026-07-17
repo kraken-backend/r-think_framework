@@ -6,6 +6,19 @@ authors:
   - family-names: RH
     given-names: Hendri
     alias: Bro Kraken
+    role:
+      - creator
+      - lead
+  - family-names: ""
+    given-names: "Bro CG"
+    alias: "Bro CG"
+    role:
+      - co-founder
+  - family-names: Ramuny
+    given-names: Hatmadita
+    role:
+      - co-founder
+      - public-relations
 license: AGPL-3.0-only
 repository-code: "https://github.com/kraken-backend/r-think_framework"
 url: "https://github.com/kraken-backend/r-think_framework"
@@ -25,4 +38,4 @@ preferred-citation:
       alias: Bro Kraken
   year: 2026
   url: "https://github.com/kraken-backend/r-think_framework"
-notes: "Framework concept originated from the Iqra/Perhatikan principle. Origin reference: Alvarendra Mahdi Hendrianto (Rendra), 27 August 2021."
+notes: "Framework concept originated from the Iqra/Perhatikan principle. Origin reference: Alvarendra Mahdi Hendrianto (Rendra), 27 August 2021. Founding Leadership established by RTHINK-RT-004-C1."

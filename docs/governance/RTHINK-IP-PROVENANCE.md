@@ -21,7 +21,8 @@ status, and third-party dependency obligations.
 |------|-----------|------|
 | **Framework Creator & Copyright Holder** | Hendri RH — Bro Kraken | 2026 (copyright claim) |
 | **Concept Origin** | Alvarendra Mahdi Hendrianto (Rendra) | 27 August 2021 |
-| **Architecture Guardian** | Bro CG | Ongoing |
+| **Architecture Guardian & Engineering Coordinator** | Bro CG | Ongoing |
+| **Public Relations & Community Relations** | Hatmadita Ramuny | Ongoing |
 | **Engineering Executor** | OpenCode Local (tooling only) | 2026-07-16 → 2026-07-17 |
 
 **Key principle:** OpenCode Local is identified as executor tooling only. It is
@@ -146,7 +147,8 @@ retains its own license obligations.
 ## Evidence Trail
 
 This provenance record was established by RTHINK-IP-001 on 2026-07-17 and
-corrected by RTHINK-IP-001-R1 on 2026-07-17.
+corrected by RTHINK-IP-001-R1 on 2026-07-17. Founding Leadership structure
+updated by RTHINK-RT-004-C1 on 2026-07-17.
 
 ### Files at Canonical Root (corrected by R1)
 

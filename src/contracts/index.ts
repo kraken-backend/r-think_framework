@@ -14,6 +14,8 @@ import type {
   ActorRole,
   ArtifactType,
   AuthorityStatus,
+  EvidenceGraphNodeType,
+  EvidenceGraphRelationType,
 } from "./types.js";
 
 // ─── Mission Contract ───────────────────────────────────────────────────────
@@ -131,4 +133,38 @@ export interface TransitionDecision {
   reasonCode?: string;
   nextAllowedActions: RuntimeState[];
   timestamp: string;
+}
+
+// ─── Evidence Graph Node ────────────────────────────────────────────────────
+// RTHINK-BP-001 §9: Evidence Graph — node
+
+export interface EvidenceGraphNode {
+  nodeId: string;
+  nodeType: EvidenceGraphNodeType;
+  missionId: string;
+  timestamp: string;
+  version: number;
+  sourceRefs: SourceRef[];
+  metadata: Record<string, unknown>;
+}
+
+// ─── Evidence Graph Edge ────────────────────────────────────────────────────
+// RTHINK-BP-001 §9: Evidence Graph — edge
+
+export interface EvidenceGraphEdge {
+  edgeId: string;
+  fromNodeId: string;
+  toNodeId: string;
+  relationType: EvidenceGraphRelationType;
+  timestamp: string;
+  metadata: Record<string, unknown>;
+}
+
+// ─── Evidence Graph Export ──────────────────────────────────────────────────
+
+export interface EvidenceGraphExport {
+  nodes: EvidenceGraphNode[];
+  edges: EvidenceGraphEdge[];
+  exportedAt: string;
+  version: string;
 }

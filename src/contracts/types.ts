@@ -164,3 +164,45 @@ export const AuthorityStatus = {
 
 export type AuthorityStatus =
   (typeof AuthorityStatus)[keyof typeof AuthorityStatus];
+
+// ─── Evidence Graph Node Types ──────────────────────────────────────────────
+// RTHINK-BP-001 §9: Evidence Graph — node types
+
+export const EvidenceGraphNodeType = {
+  MISSION: "MISSION",
+  OBSERVATION: "OBSERVATION",
+  CLAIM: "CLAIM",
+  HYPOTHESIS: "HYPOTHESIS",
+  EXPERIMENT: "EXPERIMENT",
+  EVIDENCE: "EVIDENCE",
+  DECISION: "DECISION",
+  ACTION: "ACTION",
+  ACTUAL_RESULT: "ACTUAL_RESULT",
+  ACCEPTANCE: "ACCEPTANCE",
+  EVOLUTION: "EVOLUTION",
+} as const;
+
+export type EvidenceGraphNodeType =
+  (typeof EvidenceGraphNodeType)[keyof typeof EvidenceGraphNodeType];
+
+// ─── Evidence Graph Relation Types ──────────────────────────────────────────
+// RTHINK-BP-001 §9: Evidence Graph — typed relationships
+
+export const EvidenceGraphRelationType = {
+  OBSERVED_AS: "OBSERVED_AS",
+  SUPPORTS: "SUPPORTS",
+  CONTRADICTS: "CONTRADICTS",
+  GENERATES: "GENERATES",
+  TESTED_BY: "TESTED_BY",
+  PRODUCES: "PRODUCES",
+  AUTHORIZES: "AUTHORIZES",
+  EXECUTES: "EXECUTES",
+  RESULTS_IN: "RESULTS_IN",
+  SATISFIES: "SATISFIES",
+  VIOLATES: "VIOLATES",
+  SUPERSEDES: "SUPERSEDES",
+  EVOLVES_TO: "EVOLVES_TO",
+} as const;
+
+export type EvidenceGraphRelationType =
+  (typeof EvidenceGraphRelationType)[keyof typeof EvidenceGraphRelationType];

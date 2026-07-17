@@ -24,7 +24,7 @@ R-Think bukan prompt dan bukan checklist teori. R-Think Runtime adalah software 
 - [Quick Start](#quick-start)
 - [Project Structure](#project-structure)
 - [Current Status](#current-status)
-- [Roadmap](#roadmap)
+- [Runtime Roadmap](#runtime-roadmap)
 - [Development](#development)
 - [Authority](#authority)
 - [License](#license)
@@ -292,7 +292,9 @@ npm run build
 npm run typecheck && npm test && npm run build
 ```
 
-Expected output: 175/175 tests passing, zero type errors, clean build.
+Expected output: 315/315 tests passing, zero type errors, clean build.
+
+> **Note:** The latest local commit (`68f1e24`) has not been pushed to GitHub due to an authentication issue. The remote `origin/main` is at `b9b512b`. See [GitHub Publication Status](#github-publication-status) for details.
 
 ---
 
@@ -325,13 +327,15 @@ r_think/
 │       ├── index.ts            # Runtime barrel exports
 │       ├── rules.ts            # Transition rules, reason codes, adaptive depth, artifact gates
 │       ├── state-machine.ts    # evaluateTransition, applyTransition, evaluateRetry
-│       └── artifact-registry.ts # ArtifactRegistry: register, replace, version history, validation
+│       ├── artifact-registry.ts # ArtifactRegistry: register, replace, version history, validation
+│       └── evidence-graph.ts   # EvidenceGraph: nodes, edges, pathfinding, cycle detection, validation
 │
 ├── tests/
 │   ├── contracts/
 │   │   ├── rthink-rt-001.test.ts     # Zod validation tests (25)
 │   │   ├── rthink-rt-002.test.ts     # State machine tests (66)
 │   │   ├── rthink-rt-003.test.ts     # Artifact registry tests (44)
+│   │   ├── rthink-rt-004.test.ts     # Evidence graph tests (140)
 │   │   └── json-schema.test.ts       # JSON Schema tests (40)
 │   └── fixtures/
 │       ├── valid/               # Valid protocol fixtures
@@ -364,22 +368,46 @@ r_think/
 
 ## Current Status
 
-| Mission | Level | Status |
-|---------|-------|--------|
-| RTHINK-RT-001 | L2 | ACCEPTED — FOUNDATION ESTABLISHED |
-| RTHINK-RT-001-R1 | L2 | ACCEPTED THROUGH RECONCILIATION |
-| RTHINK-GIT-001 | L2 | PUBLISHED — HISTORICAL BASELINE |
-| RTHINK-IP-001 | L3 | SUPERSEDED BY RTHINK-IP-001-R1 |
-| RTHINK-IP-001-R1 | L3 | ACCEPTED |
-| RTHINK-RT-001-R2 | L3 | ACCEPTED |
-| RTHINK-RT-001-R2-C1 | L3 | PROVISIONAL-ACCEPTED |
-| RTHINK-GIT-002 | L3 | PUBLISHED — GUARDIAN REMOTE VERIFIED |
-| RTHINK-GIT-002-C1 | L2 | CORRECTED BY RTHINK-GIT-002-C2 — GOVERNANCE VIOLATION PRESERVED |
-| RTHINK-GIT-002-C2 | L2 | PUBLISHED — GUARDIAN REMOTE VERIFIED |
-| RTHINK-RT-002 | L2 | IMPLEMENTED — COMPLIANCE CORRECTED — PENDING GUARDIAN AND HUMAN ARCHITECT REVIEW |
-| RTHINK-RT-002-C1 | L2 | INSPECTION COMPLETE — PENDING GUARDIAN AND HUMAN ARCHITECT REVIEW |
-| RTHINK-RT-003 | L2 | IMPLEMENTED — PENDING GUARDIAN AND HUMAN ARCHITECT REVIEW |
-| npm/package distribution | — | DEFERRED |
+### Repository State
+
+| Dimension | Value |
+|-----------|-------|
+| Local HEAD | `68f1e24` |
+| Remote origin/main | `b9b512b` |
+| Ahead / Behind | 1 ahead, 0 behind |
+| Working tree | Clean |
+| Commits on main | 10 (2 authorized, 2 unauthorized, 5 controlled, 1 RT-002/003) |
+
+### Runtime State
+
+| Module | Status |
+|--------|--------|
+| Formal Contracts (enums, interfaces, schemas) | Implementation produced — ACCEPTED |
+| State Machine & Transition Engine | Implementation produced — Guardian review pending |
+| Artifact Registry | Implementation produced — Guardian review pending |
+| Evidence Graph | Implementation produced — Guardian review pending |
+| Method / Provider Router | Not started |
+| Persistence & Event Store | Not started |
+| Executor Integration | Not started |
+| Inspector | Not started |
+
+### Publication State
+
+| Field | Value |
+|-------|-------|
+| Local commit | `68f1e24` — contains RT-002 + RT-003 implementations |
+| Remote publication | BLOCKED |
+| Authentication | BLOCKED — `krakenworld28` lacks push permission to `kraken-backend/r-think_framework` |
+| Required action | Grant write access or use `kraken-backend` account credentials |
+
+### Acceptance State
+
+| Item | Status |
+|------|--------|
+| RT-002 implementation | Guardian review pending |
+| RT-003 implementation | Guardian review pending |
+| Human Architect approval | Pending |
+| npm/package distribution | DEFERRED |
 
 ### Current Technical Baseline
 
@@ -388,12 +416,12 @@ r_think/
 | Runtime | Node.js >= 18.0.0, ESM (`"type": "module"`) |
 | TypeScript | 5.8.3 |
 | Module system | `"module": "nodenext"`, `"moduleResolution": "nodenext"` |
-| Canonical enums | 8 |
+| Canonical enums | 10 (8 original + EvidenceGraphNodeType + EvidenceGraphRelationType) |
 | Zod schemas | 4 (Mission, RTP, Artifact, Transition) |
 | JSON Schemas | 4 (Mission, RTP, Artifact, Transition) |
 | Valid fixtures | 5 |
 | Invalid fixtures | 14 |
-| Contract tests | 175 — all passing |
+| Contract tests | 315 — all passing |
 | License Gate | All pass (MIT, Apache-2.0) |
 | Module classification | PROVISIONAL-ACCEPTED |
 
@@ -413,84 +441,164 @@ r_think/
 | TypeScript strict typecheck | Passing |
 | Build | Passing |
 
-### RTHINK-RT-002 — Implemented (Compliance Corrected)
+### RTHINK-RT-002 — Implementation Produced
 
 | Artifact | Status |
 |----------|--------|
-| Transition rules (17) | IMPLEMENTED |
-| Reason codes (14) | IMPLEMENTED |
-| Adaptive depth config (L0–L3) | IMPLEMENTED |
-| Artifact gates (8) | IMPLEMENTED |
-| evaluateTransition() | IMPLEMENTED |
-| applyTransition() | IMPLEMENTED |
-| evaluateRetry() | IMPLEMENTED |
+| Transition rules (17) | Implementation produced |
+| Reason codes (14) | Implementation produced |
+| Adaptive depth config (L0–L3) | Implementation produced |
+| Artifact gates (8) | Implementation produced |
+| evaluateTransition() | Implementation produced |
+| applyTransition() | Implementation produced |
+| evaluateRetry() | Implementation produced |
 | State machine tests (66) | All passing |
 | Decision document | Created |
 | Evidence document | Created |
 
-### RTHINK-RT-003 — Implemented
+### RTHINK-RT-003 — Implementation Produced
 
 | Artifact | Status |
 |----------|--------|
-| ArtifactRegistry class | IMPLEMENTED |
-| registerArtifact() | IMPLEMENTED |
-| replaceArtifact() with versioning | IMPLEMENTED |
-| getArtifact(), listArtifacts(), hasArtifact(), removeArtifact() | IMPLEMENTED |
-| getVersionHistory() (immutable) | IMPLEMENTED |
-| validateArtifact() | IMPLEMENTED |
-| Schema validation (reuses ArtifactEnvelopeSchema) | IMPLEMENTED |
+| ArtifactRegistry class | Implementation produced |
+| registerArtifact() | Implementation produced |
+| replaceArtifact() with versioning | Implementation produced |
+| getArtifact(), listArtifacts(), hasArtifact(), removeArtifact() | Implementation produced |
+| getVersionHistory() (immutable) | Implementation produced |
+| validateArtifact() | Implementation produced |
+| Schema validation (reuses ArtifactEnvelopeSchema) | Implementation produced |
 | Registry tests (44) | All passing |
+
+### RTHINK-RT-004 — Implementation Produced
+
+| Artifact | Status |
+|----------|--------|
+| EvidenceGraph class | Implementation produced |
+| createNode() | Implementation produced |
+| connect() with relation validity | Implementation produced |
+| getNode(), getEdge(), getOutgoing(), getIncoming() | Implementation produced |
+| findPath() (BFS) | Implementation produced |
+| hasCyclicEvolution() (DFS) | Implementation produced |
+| validateGraph() | Implementation produced |
+| exportGraph() | Implementation produced |
+| removeNode(), removeEdge() with cascading | Implementation produced |
+| Node types (11): MISSION, OBSERVATION, CLAIM, HYPOTHESIS, EXPERIMENT, EVIDENCE, DECISION, ACTION, ACTUAL_RESULT, ACCEPTANCE, EVOLUTION | Defined |
+| Relation types (13): OBSERVED_AS, SUPPORTS, CONTRADICTS, GENERATES, TESTED_BY, PRODUCES, AUTHORIZES, EXECUTES, RESULTS_IN, SATISFIES, VIOLATES, SUPERSEDES, EVOLVES_TO | Defined |
+| Evidence graph tests (140) | All passing |
 
 ---
 
-## Roadmap
+## Consumer Map, Runtime Data Flow, Ownership Map
 
-### Phase 1: Formal Specification *(RTHINK-RT-001 — ACCEPTED)*
-- [x] Repository baseline
-- [x] Canonical types and enums
-- [x] JSON Schemas + Zod validators
-- [x] Valid/invalid fixtures
-- [x] Contract tests
-- [x] License Gate
+### Consumer Map
 
-### Phase 2: State Machine & Transitions *(RTHINK-RT-002 — IMPLEMENTED, COMPLIANCE CORRECTED)*
-- [x] Runtime state machine engine
-- [x] Adaptive-depth policy enforcement
-- [x] Illegal transition denial
-- [x] Transition rule versioning
+| Module | Consumers | Consumes From |
+|--------|-----------|---------------|
+| **Formal Contracts** (RT-001) | State Machine, Artifact Registry, Evidence Graph, Method Router, all downstream modules | Blueprint RTHINK-BP-001 |
+| **State Machine** (RT-002) | Artifact Registry, Transition Engine, Evidence Graph | Formal Contracts (enums, interfaces) |
+| **Artifact Registry** (RT-003) | Evidence Graph, Executor Integration, Inspector | State Machine, Formal Contracts (schemas) |
+| **Evidence Graph** (RT-004) | Challenge Engine, Evolution Engine, Inspector, Method Router | Artifact Registry, Formal Contracts (types) |
+| **Method Router** (RT-005) | Executor Integration, Persistence | Evidence Graph, State Machine |
+| **Persistence** (RT-006) | Executor Integration, Inspector, Event Replay | Method Router, State Machine |
+| **Executor Integration** (RT-007) | Inspector, Human | Persistence, Artifact Registry |
+| **Inspector** (RT-008) | Human, Guardian | All modules (read-only) |
 
-### Phase 3: Artifacts & Evidence Graph *(in progress)*
-- [x] Artifact registry with schema validation (RT-003)
-- [ ] Evidence graph relationships
-- [ ] Required artifact gates
-- [ ] Claim-evidence linking
+### Runtime Data Flow
 
-### Phase 4: Method/Provider Router *(planned)*
-- [ ] Provider interface (CognitiveProvider)
-- [ ] Mock/deterministic providers
-- [ ] Local model adapters (Ollama, llama.cpp)
-- [ ] Tool routing
+```
+Blueprint (RTHINK-BP-001)
+  │ defines
+  ▼
+Formal Contracts (enums, interfaces, schemas, JSON Schema)
+  │ enforce
+  ▼
+State Machine ←──→ Transition Engine ←──→ Adaptive Depth
+  │ gate              │ evaluate            │ classify
+  ▼                   ▼                    ▼
+Artifact Registry ──→ Evidence Graph ──→ Method Router
+  │ validate            │ link              │ select
+  ▼                   ▼                    ▼
+Persistence ──────→ Executor Integration ──→ Inspector
+  │ store               │ execute             │ observe
+  ▼                   ▼                    ▼
+Event Store        Actual Result       Human / Guardian
+```
 
-### Phase 5: Persistence & Recovery *(planned)*
-- [ ] PostgreSQL event state
-- [ ] Recovery at every state
-- [ ] Replay from event stream
-- [ ] Restart resumes factual state
+### Ownership Map
 
-### Phase 6: Executor Integration *(planned)*
-- [ ] OpenCode adapter
-- [ ] Executor cannot self-complete
-- [ ] Revision loop
+| Module | Owner | Authority |
+|--------|-------|-----------|
+| Formal Contracts | Human Architect | Final doctrine authority |
+| State Machine | Guardian | Transition rule authority |
+| Artifact Registry | Executor | Schema enforcement |
+| Evidence Graph | Guardian | Evidence-evidence link authority |
+| Method Router | Guardian | Provider selection authority |
+| Persistence | Executor | Event storage |
+| Executor Integration | Human Architect | Execution scope authority |
+| Inspector | Human Architect | Read-only observability |
 
-### Phase 7: Inspector & Real Mission *(planned)*
-- [ ] Inspector UI
-- [ ] Real mission challenge
-- [ ] Evidence-based accept/revise result
+---
 
-### Production v1 *(8-12 weeks)*
-- Security hardening
-- Multi-executor support
-- Replay and benchmarks
+## Runtime Roadmap
+
+```
+Blueprint (RTHINK-BP-001)
+        │
+        ▼
+Formal Contracts (RT-001)
+  Enums, Interfaces, Schemas, Fixtures
+        │
+        ▼
+Runtime State Machine (RT-002)
+  Transition Rules, Adaptive Depth, Artifact Gates
+        │
+        ▼
+Artifact Registry (RT-003)
+  Schema Validation, Immutable Versioning, Provenance
+        │
+        ▼
+Evidence Graph (RT-004)
+  Claims, Evidence, Contradiction, Acceptance
+        ◄──────────── YOU ARE HERE
+        │
+        ▼
+Method / Provider Router (RT-005)
+  Model, Tool, Human, Experiment Selection
+        │
+        ▼
+Persistence & Event Store (RT-006)
+  PostgreSQL, Event Sourcing, Recovery
+        │
+        ▼
+Executor Integration (RT-007)
+  OpenCode Adapter, Revision Loop, Self-Approval Prevention
+        │
+        ▼
+Inspector (RT-008)
+  UI, Evidence Visualization, Process Observation
+        │
+        ▼
+Mission Validation
+  End-to-End Protocol Compliance Verification
+        │
+        ▼
+R-Think Runtime v1
+```
+
+### Phase Completion Status
+
+| Phase | Mission | Status |
+|-------|---------|--------|
+| Formal Contracts | RT-001 | Implementation produced — ACCEPTED |
+| State Machine | RT-002 | Implementation produced — Guardian review pending |
+| Artifact Registry | RT-003 | Implementation produced — Guardian review pending |
+| Evidence Graph | RT-004 | Implementation produced — Guardian review pending |
+| Method / Provider Router | RT-005 | Not started |
+| Persistence & Event Store | RT-006 | Not started |
+| Executor Integration | RT-007 | Not started |
+| Inspector | RT-008 | Not started |
+| Mission Validation | — | Not started |
+| Runtime v1 | — | Not started |
 
 ---
 
@@ -533,12 +641,29 @@ Scopes: contracts, schemas, tests, fixtures, docs
 
 ---
 
+## Founding Leadership
+
+| Role | Person | Responsibilities |
+|------|--------|-----------------|
+| **Founder** | Hendri RH — Bro Kraken | Framework Creator, Human Architect, Final Doctrine Authority, Project Direction Authority |
+| **Co-Founder** | Bro CG | Architecture Guardian, Engineering Coordinator, Governance Review Partner |
+| **Co-Founder** | Hatmadita Ramuny | Public Relations, Community Relations, Partnership Development, External Representation |
+
+### Origin Reference
+
+**Alvarendra Mahdi Hendrianto (Rendra)** — 27 August 2021
+The R-Think framework concept originated from the Iqra/Perhatikan principle
+attributed to this origin reference.
+
+---
+
 ## Authority
 
 | Role | Person |
 |------|--------|
 | **Human Architect & Final Doctrine Authority** | Hendri RH — Bro Kraken |
 | **Architecture Guardian** | Bro CG |
+| **Public Relations** | Hatmadita Ramuny |
 | **Primary Consumer** | CG OS |
 
 ---

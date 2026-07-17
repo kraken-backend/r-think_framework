@@ -36,3 +36,10 @@ export {
   ArtifactRegistry,
   type ValidationResult,
 } from "./artifact-registry.js";
+
+export {
+  EvidenceGraph,
+  type GraphValidationResult,
+  type GraphNodeInput,
+  type GraphEdgeInput,
+} from "./evidence-graph.js";

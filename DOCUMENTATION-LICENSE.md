@@ -43,6 +43,14 @@ Copyright (C) 2026 Hendri RH
 Licensed under CC-BY-SA-4.0
 ```
 
+## Founding Leadership
+
+The R-Think project Founding Leadership is:
+
+- **Founder:** Hendri RH (Bro Kraken) — Framework Creator, Human Architect
+- **Co-Founder:** Bro CG — Architecture Guardian, Engineering Coordinator
+- **Co-Founder:** Hatmadita Ramuny — Public Relations, Community Relations
+
 ## ShareAlike
 
 If you remix, transform, or build upon the material, you must distribute your

@@ -3,6 +3,26 @@
 **R-Think™ Trademark Policy**
 **Status:** PENDING GUARDIAN AND HUMAN ARCHITECT ACCEPTANCE
 
+## Founding Leadership
+
+### Founder
+
+**Hendri RH — Bro Kraken**
+Framework Creator, Human Architect, Final Doctrine Authority
+
+### Co-Founder
+
+**Bro CG**
+Architecture Guardian, Engineering Coordinator
+
+### Co-Founder
+
+**Hatmadita Ramuny**
+Public Relations, Community Relations, Partnership Development
+LinkedIn: https://www.linkedin.com/in/hatmadita/
+
+---
+
 ## Project Identifiers
 
 The following are claimed project identifiers:
@@ -66,6 +86,12 @@ Trademark permission requests are currently managed by:
 **Hendri RH — Bro Kraken**
 Framework Creator and Human Architect
 
+Public Relations and community inquiries:
+
+**Hatmadita Ramuny**
+Public Relations, Community Relations
+LinkedIn: https://www.linkedin.com/in/hatmadita/
+
 ## Legal Disclaimer
 
 This trademark policy does not replace professional legal advice. Trademark
@@ -76,4 +102,5 @@ enforcement.
 ---
 
 *This trademark policy is part of the R-Think IP foundation established by
-RTHINK-IP-001. It requires Guardian and Human Architect acceptance.*
+RTHINK-IP-001. Founding Leadership structure established by RTHINK-RT-004-C1.*
+*It requires Guardian and Human Architect acceptance.*

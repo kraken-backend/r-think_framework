@@ -1,16 +1,42 @@
 # AUTHORS
 
-This file records the individuals and roles involved in the R-Think project.
+This file records the Founding Leadership and roles involved in the R-Think
+project.
 
-## Framework Creator and Human Architect
+---
+
+## Founding Leadership
+
+### Founder
 
 **Hendri RH — Bro Kraken**
 
-- Framework creator and final doctrine authority
-- Human architect with decision authority over R-Think identity, direction, and
-  evolution
+- Framework Creator
+- Human Architect
+- Final Doctrine Authority
+- Project Direction Authority
 - Copyright holder for project-owned source code and documentation
 - Contact for trademark permissions
+
+### Co-Founder
+
+**Bro CG**
+
+- Architecture Guardian
+- Engineering Coordinator
+- Governance Review Partner
+
+### Co-Founder
+
+**Hatmadita Ramuny**
+
+- Public Relations
+- Community Relations
+- Partnership Development
+- External Representation
+- LinkedIn: https://www.linkedin.com/in/hatmadita/
+
+---
 
 ## Origin Reference
 
@@ -20,13 +46,7 @@ This file records the individuals and roles involved in the R-Think project.
 - The R-Think framework concept originated from the Iqra/Perhatikan principle
   attributed to this origin reference
 
-## Architecture Partner
-
-**Bro CG**
-
-- Architecture Guardian
-- Reviews and approves material transitions, corrections, and governance
-  decisions
+---
 
 ## Engineering Executor Tooling
 
@@ -48,3 +68,4 @@ process.
 ---
 
 *This file is part of the R-Think IP foundation established by RTHINK-IP-001.*
+*Founding Leadership structure established by RTHINK-RT-004-C1.*
