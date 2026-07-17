@@ -266,6 +266,41 @@
 | Executor Recommendation | READY FOR GUARDIAN AND HUMAN ARCHITECT REVIEW |
 | Pending Guardian Review | YES — acceptance required |
 
+### RTHINK-GIT-002 — Controlled Foundation Reconciliation Commit and Push
+
+| Field | Value |
+|-------|-------|
+| Mission ID | RTHINK-GIT-002 |
+| Title | Controlled Foundation Reconciliation Commit and Push |
+| Level | L3 — Critical / Public Repository Mutation |
+| Status | COMMITTED — PUSH PENDING |
+| Executor | OpenCode Local |
+| Start | 2026-07-17T08:37:47+07:00 |
+| Authority | Authorized by Guardian (Bro CG) and Human Architect (Bro Kraken) |
+| Position Before | HEAD == origin/main == `83358ff`; 5 pending files (3 unstaged, 2 untracked) |
+| Starting HEAD | `83358ff88b8c64bd33891af4ac5f800241891a64` |
+| Starting origin/main | `83358ff88b8c64bd33891af4ac5f800241891a64` |
+| Remote Sync | No divergence |
+| Git Identity | `kraken-backend <aolbackend8@gmail.com>` (repository-local) |
+| Commit A SHA | `ce56699093c1cd8dda839913fe0b0c5d6a26ebfd` |
+| Commit A Message | `fix: reconcile foundation history and Node ESM configuration` |
+| Commit A Files | README.md (M), TRACKER.md (M), tsconfig.json (M), docs/decisions/... (A), docs/evidence/... (A) |
+| Commit B Purpose | Record GIT-002 publication evidence |
+| Typecheck | PASS (exit 0) |
+| Tests | 65/65 PASSING |
+| Build | PASS (exit 0) |
+| Audit | 0 vulnerabilities |
+| Runtime Import | OK |
+| Public Files Added/Updated | 5 (README.md, TRACKER.md, tsconfig.json, decision record, R2 evidence) |
+| Local-Only Excluded | `docs/reports/`, `raw/` (intentionally ignored) |
+| Files Created | 1 (GIT-002 evidence) |
+| Files Updated | 1 (TRACKER.md) |
+| Files Moved | NONE |
+| Files Deleted | NONE |
+| Position Before Push | 1 local commit ahead of origin/main; Commit B staged |
+| Push Target | `origin/main` |
+| Executor Recommendation | PENDING PUSH |
+
 ---
 
 ## Current Artifacts
