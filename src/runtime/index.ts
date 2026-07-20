@@ -86,6 +86,14 @@ export {
   MATERIALIZED_VIEW_VERSION,
 } from "./materialized-view-store.js";
 
+export {
+  MissionRuntimeCoordinator,
+  MISSION_RUNTIME_COORDINATOR_VERSION,
+  type MissionRuntimeCoordinatorConfig,
+  type MissionCoordinatorState,
+  type MissionRuntimeCoordinatorDependencies,
+} from "./mission-runtime-coordinator.js";
+
 export { CURRENT_EVENT_SCHEMA_VERSION } from "../contracts/index.js";
 
 export type {

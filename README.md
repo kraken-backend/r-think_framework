@@ -41,6 +41,8 @@ R-Think Runtime **controls what can be controlled**: work state, input, artifact
 
 The system stands alone. **CG OS** is the primary consumer, **OpenCode** can be an executor, and projects like OCR/DIP or KDAP can provide domain blueprints and tools. Models can be changed without altering R-Think identity and protocol.
 
+R-Think Runtime is **NOT an executor**. It governs mission process — state, transition, artifact, evidence, authority, and recovery — but never runs business logic. Business execution (methods, tools, experiments) is performed by external consumers and executors. The runtime coordinates; it does not execute.
+
 ### Product Forms
 
 | Form | Definition |
@@ -191,7 +193,7 @@ OBSERVE → UNDERSTAND → QUESTION → VALIDATE → CONNECT → CHALLENGE → D
 
 | Module | Responsibility |
 |--------|---------------|
-| **Mission Runtime** | Lifecycle, dependencies, recovery |
+| **Mission Runtime Coordinator (RT-007)** | Lifecycle, state/transition coordination, artifact/evidence flow, contradiction handling, authority waiting, replay/recovery coordination — does NOT execute business logic |
 | **State Machine** | Current state and allowed transitions |
 | **Transition Engine** | Rule evaluation and authority checks |
 | **Artifact Registry** | Schema validation and provenance |
@@ -293,9 +295,9 @@ npm run build
 npm run typecheck && npm test && npm run build
 ```
 
-Expected output: 923/923 tests passing, zero type errors, clean build.
+Expected output: 1007/1007 tests passing, zero type errors, clean build.
 
-> **Note:** RT-005, RT-005-C1, RT-006, and RT-006-C1 were **published by direct Human Architect action** (commits `f18f31c` + `b266541`, HEAD = `b266541`, origin/main = `b266541`). The post-publication baseline was clean; the current working tree is intentionally dirty because documentation reconciliation (RT-006-C2 / C2-R1 / C2-R2) has not yet been committed. Further commit or push is **NOT AUTHORIZED** by this line of missions. RT-007 remains unauthorized.
+> **Note:** RT-004, RT-005, RT-005-C1, RT-006, RT-006-C1, and RT-007 were **published by direct Human Architect action** (commits `f18f31c` + `b266541` + `6687146` + RT-007 publication commit). RT-007 (Mission Runtime Coordinator) implementation is **GUARDIAN ACCEPTED** and locked as the official repository baseline. RT-008 (Inspector) has **NOT STARTED** and is **NOT AUTHORIZED**.
 
 ---
 
@@ -336,18 +338,20 @@ r_think/
 │       ├── storage-adapters.ts     # EventStorageAdapter + SnapshotStorageAdapter (InMemory + Fake), durability boundary (RT-006-C1)
 │       ├── materialized-view-store.ts # InMemoryMaterializedViewStore: derived-view separation (RT-006-C1)
 │       ├── persistence.ts          # Persistence: EventStore + SnapshotStorageAdapter + MaterializedViewStore composition (RT-006/RT-006-C1)
-│       └── replay.ts               # ReplayEngine: deterministic replay, 12-code validation, snapshots (RT-006/RT-006-C1)
+│       ├── replay.ts               # ReplayEngine: deterministic replay, 12-code validation, snapshots (RT-006/RT-006-C1)
+│       └── mission-runtime-coordinator.ts  # MissionRuntimeCoordinator: orchestration layer (RT-007)
 │
-   ├── tests/
-   │   ├── contracts/
-   │   │   ├── rthink-rt-001.test.ts     # Zod validation tests (25)
-   │   │   ├── rthink-rt-002.test.ts     # State machine tests (66)
-   │   │   ├── rthink-rt-003.test.ts     # Artifact registry tests (44)
-   │   │   ├── rthink-rt-004.test.ts     # Evidence graph tests (140)
-   │   │   ├── rthink-rt-005.test.ts     # Method/Provider Router + C1 semantic tests (359)
-   │   │   ├── rthink-rt-006.test.ts     # Persistence & Event Store tests (249, incl. RT-006-C1 blocks)
-   │   │   └── json-schema.test.ts       # JSON Schema tests (40)
-   │   └── fixtures/
+├── tests/
+│   ├── contracts/
+│   │   ├── rthink-rt-001.test.ts     # Zod validation tests (25)
+│   │   ├── rthink-rt-002.test.ts     # State machine tests (66)
+│   │   ├── rthink-rt-003.test.ts     # Artifact registry tests (44)
+│   │   ├── rthink-rt-004.test.ts     # Evidence graph tests (140)
+│   │   ├── rthink-rt-005.test.ts     # Method/Provider Router + C1 semantic tests (359)
+│   │   ├── rthink-rt-006.test.ts     # Persistence & Event Store tests (249, incl. RT-006-C1 blocks)
+│   │   ├── rthink-rt-007.test.ts     # MissionRuntimeCoordinator tests (84)
+│   │   └── json-schema.test.ts       # JSON Schema tests (40)
+│   └── fixtures/
 │       ├── valid/               # Valid protocol fixtures
 │       └── invalid/             # Invalid protocol fixtures (rejection test data)
 │
@@ -382,16 +386,16 @@ r_think/
 
 | Dimension | Value |
 |-----------|-------|
-| Local HEAD | `b266541` |
-| Remote origin/main | `b266541` |
+| Local HEAD | `6687146` |
+| Remote origin/main | `6687146` |
 | Ahead / Behind | 0 ahead, 0 behind |
 | Branch | main |
-| Commits on main | 12 (2 published RT-006 publication commits `f18f31c` + `b266541` on top of `68f1e24`) |
-| Publication | RT-005, RT-005-C1, RT-006, RT-006-C1 **AUTHORIZED BY DIRECT HUMAN ARCHITECT ACTION** |
+| Commits on main | 13 (published commits `f18f31c` + `b266541` + `6687146` on top of `68f1e24`) |
+| Publication | RT-005, RT-005-C1, RT-006, RT-006-C1 **AUTHORIZED BY DIRECT HUMAN ARCHITECT ACTION**; further publication `6687146` (documentation status update) |
 
-**Repository baseline:** clean after publication (HEAD = `b266541`, origin/main = `b266541`, working tree clean at publication time).
+**Repository baseline:** clean after latest publication (HEAD = `6687146`, origin/main = `6687146`, working tree clean at publication time).
 
-**Current local documentation state:** contains uncommitted documentation reconciliation — `README.md` and `TRACKER.md` are modified and not yet committed (RT-006-C2-R1 working-tree edits). No runtime source changes.
+**Current local documentation state:** RT-007 is the locked, Guardian-accepted repository baseline. Working tree will be clean after commit and push.
 
 ### Runtime State
 
@@ -404,16 +408,16 @@ r_think/
 | Method / Provider Router | Implementation produced — C1 semantic reconciliation complete, Guardian review pending |
 | Persistence & Event Store (RT-006) | Implementation produced — SUPERSEDED FOR ACCEPTANCE BY RT-006-C1 |
 | Persistence & Event Store (RT-006-C1) | Runtime architecture — GUARDIAN ACCEPTED |
-| Executor Integration | Not started |
+| Mission Runtime Coordinator (RT-007) | GUARDIAN ACCEPTED — Published baseline |
 | Inspector | Not started |
 
 ### Publication State
 
 | Field | Value |
 |-------|-------|
-| Published commits | `f18f31c`, `b266541` (RT-004, RT-005, RT-005-C1, RT-006, RT-006-C1) |
+| Published commits | `f18f31c`, `b266541`, `6687146` + RT-007 publication commit (RT-004, RT-005, RT-005-C1, RT-006, RT-006-C1, RT-007) |
 | Remote publication | **AUTHORIZED BY DIRECT HUMAN ARCHITECT ACTION** — published to `origin/main` |
-| Further publication | **NOT AUTHORIZED** by RT-006-C2 (no additional commit/push) |
+| RT-008 Inspector | **NOT STARTED — NOT AUTHORIZED** |
 
 ### Acceptance State
 
@@ -421,10 +425,15 @@ r_think/
 |------|--------|
 | RT-002 implementation | Guardian review pending |
 | RT-003 implementation | Guardian review pending |
+| RT-004 implementation | Guardian review pending |
+| RT-004-C1 documentation reconciliation | Guardian review pending |
+| RT-005 implementation | Guardian review pending |
 | RT-005-C1 semantic reconciliation | Complete |
 | RT-006-C1 runtime architecture | Guardian accepted |
 | RT-006-C2 documentation reconciliation | Superseded for acceptance by RT-006-C2-R1 |
 | RT-006-C2-R1 documentation reconciliation | Guardian review pending |
+| RT-006-C2-R2 documentation closure | Guardian review pending |
+| RT-007 Mission Runtime Coordinator implementation | GUARDIAN ACCEPTED — Published baseline |
 | Human Architect approval | Pending |
 | npm/package distribution | DEFERRED |
 
@@ -435,18 +444,19 @@ r_think/
 | Runtime | Node.js >= 18.0.0, ESM (`"type": "module"`) |
 | TypeScript | 5.8.3 |
 | Module system | `"module": "nodenext"`, `"moduleResolution": "nodenext"` |
-| Canonical enums | 15 (8 original + EvidenceGraphNodeType + EvidenceGraphRelationType + ProviderStatus + RouterDecisionOutcome + RejectionReasonCode + 19-event RuntimeEventType + 12-member AggregateType) |
-| Runtime event types (RuntimeEventType) | 19 (MISSION_CREATED, MISSION_UPDATED, STATE_CHANGED, ARTIFACT_REGISTERED, ARTIFACT_REPLACED, ROUTER_DECISION, EXECUTION_STARTED, EXECUTION_COMPLETED, EXECUTION_FAILED, EVIDENCE_CREATED, CONTRADICTION_DETECTED, CHALLENGE_STARTED, CHALLENGE_COMPLETED, DISCOVERY_CREATED, EVOLUTION_CREATED, AUTHORITY_GRANTED, AUTHORITY_DENIED, RECOVERY_STARTED, RECOVERY_COMPLETED) |
-| Aggregate types (AggregateType) | 12 (MISSION, STATE, ARTIFACT, ROUTER, EXECUTION, EVIDENCE, CONTRADICTION, CHALLENGE, DISCOVERY, EVOLUTION, AUTHORITY, RECOVERY) |
+| Canonical enum types | 15 (CognitiveState, OperationalState, TransitionDecisionType, RtpMessageType, MissionRiskLevel, ActorRole, ArtifactType, AuthorityStatus, EvidenceGraphNodeType, EvidenceGraphRelationType, ProviderStatus, RouterDecisionOutcome, RejectionReasonCode, RuntimeEventType, AggregateType) |
+| Total enum members | 135 across all 15 enum types |
+| RuntimeEventType enum members | 19 (MISSION_CREATED, MISSION_UPDATED, STATE_CHANGED, ARTIFACT_REGISTERED, ARTIFACT_REPLACED, ROUTER_DECISION, EXECUTION_STARTED, EXECUTION_COMPLETED, EXECUTION_FAILED, EVIDENCE_CREATED, CONTRADICTION_DETECTED, CHALLENGE_STARTED, CHALLENGE_COMPLETED, DISCOVERY_CREATED, EVOLUTION_CREATED, AUTHORITY_GRANTED, AUTHORITY_DENIED, RECOVERY_STARTED, RECOVERY_COMPLETED) |
+| AggregateType enum members | 12 (MISSION, STATE, ARTIFACT, ROUTER, EXECUTION, EVIDENCE, CONTRADICTION, CHALLENGE, DISCOVERY, EVOLUTION, AUTHORITY, RECOVERY) |
 | Router decision outcomes | 4 (SELECTED, NO_MATCH, ALL_UNAVAILABLE, REQUEST_INVALID) |
 | Rejection reason codes | 9 (typed: STATUS_DISABLED, STATUS_UNAVAILABLE, STATUS_ERROR, METHOD_NOT_SUPPORTED, REQUIRED_CAPABILITY_MISSING, CAPABILITY_VERSION_MISSING, CAPABILITY_VERSION_BELOW_MINIMUM, EXCLUDED_BY_REQUEST_CONSTRAINT, LOWER_SELECTION_PRIORITY) |
 | Event schema version | `rt-006-v1.0` (CURRENT_EVENT_SCHEMA_VERSION) |
 | Replay validation issue codes | 12 (8 aggregate + DUPLICATE_GLOBAL_POSITION, MISSING_GLOBAL_POSITION, INVALID_GLOBAL_POSITION_ORDER, ATOMIC_BATCH_REJECTED) |
-| Zod schemas | 4 (Mission, RTP, Artifact, Transition) |
+| Zod schemas (contract-level) | 4 (Mission, RTP, Artifact, Transition) — 20 total exported Zod schemas including enum/sub-schemas |
 | JSON Schemas | 4 (Mission, RTP, Artifact, Transition) |
 | Valid fixtures | 5 |
-| Invalid fixtures | 14 |
-| Contract tests | 923 — all passing |
+| Invalid fixtures | 13 |
+| Contract tests | 1007 — all passing |
 | License Gate | All pass (MIT, Apache-2.0) |
 | Module classification | PROVISIONAL-ACCEPTED |
 
@@ -456,12 +466,12 @@ r_think/
 |----------|--------|
 | Repository baseline | IMPLEMENTED — ACCEPTED |
 | TypeScript + Node.js workspace | Working |
-| Canonical enums (8) | IMPLEMENTED — ACCEPTED |
-| Zod validators (4 schemas) | IMPLEMENTED — ACCEPTED |
+| Canonical enums (8 at RT-001; 15 current) | IMPLEMENTED — ACCEPTED |
+| Zod validators (4 schemas at RT-001; 20 current) | IMPLEMENTED — ACCEPTED |
 | JSON Schema definitions (4 schemas) | IMPLEMENTED — ACCEPTED |
 | Valid fixtures (5) | Passing |
-| Invalid fixtures (14) | Rejected correctly |
-| Contract tests (655) | All passing |
+| Invalid fixtures (13) | Rejected correctly |
+| Contract tests (655 at RT-001; 1007 current) | All passing |
 | License Gate (6 dependencies) | All pass (MIT, Apache-2.0) |
 | TypeScript strict typecheck | Passing |
 | Build | Passing |
@@ -538,7 +548,7 @@ r_think/
 | Router does NOT import the EvidenceGraph runtime class (decoupled via adapter) | Enforced (C1) |
 | Shared registry pattern (two routers, one registry) | Implementation produced |
 | Generic router (no business-specific logic) | Enforced |
-| Router tests (359) + C1 semantic tests | All passing (674 total) |
+| Router tests (359) + C1 semantic tests | All passing (674 at RT-005-C1; 923 current suite) |
 
 ### RTHINK-RT-006 — Implementation Produced
 
@@ -562,11 +572,11 @@ r_think/
 | `replayMission()` / `replayAggregate()` / `replayUntil()` / `replayFrom()` / `replayRange()` | Deterministic folds; default generic reducer + custom `StateReducer` |
 | Snapshots (optimization only) | `createSnapshot()` / `loadSnapshot()` / `listSnapshots()` / `deleteSnapshot()` / `replayFromSnapshot()` — result equals full replay |
 | `EventStore`, `Persistence`, `ReplayEngine` | Generic — no OCR/OpenAI/Claude/Gemini/KDAP/DIP/business logic; no EvidenceGraph coupling (decoupled verified by tests) |
-| Event types (RuntimeEventType) | 19 members |
-| Aggregate types (AggregateType) | 12 members |
+| RuntimeEventType enum members | 19 |
+| AggregateType enum members | 12 |
 | Event schema version | `rt-006-v1.0` |
-| Contract test breakdown | 25 (RT-001) + 66 (RT-002) + 44 (RT-003) + 140 (RT-004) + 359 (RT-005) + 249 (RT-006) + 40 (JSON Schema) = 923 total |
-| Persistence & Event Store tests (249) | All passing (part of 923 total) |
+| Contract test breakdown | 25 (RT-001) + 66 (RT-002) + 44 (RT-003) + 140 (RT-004) + 359 (RT-005) + 249 (RT-006) + 40 (JSON Schema) + 84 (RT-007) = 1007 total |
+| Persistence & Event Store tests (249) | All passing (part of 1007 total) |
 | Persistence & Event Store (RT-006-C1) | New test block 18.21–18.28 added: globalPosition, atomic batch, storage adapters, materialized views, typed authority, replay ordering/validation codes, honest backend naming |
 
 ---
@@ -579,31 +589,44 @@ r_think/
 |--------|-----------|---------------|
 | **Formal Contracts** (RT-001) | State Machine, Artifact Registry, Evidence Graph, Method Router, all downstream modules | Blueprint RTHINK-BP-001 |
 | **State Machine** (RT-002) | Artifact Registry, Transition Engine, Evidence Graph | Formal Contracts (enums, interfaces) |
-| **Artifact Registry** (RT-003) | Evidence Graph, Executor Integration, Inspector | State Machine, Formal Contracts (schemas) |
-| **Evidence Graph** (RT-004) | Challenge Engine, Evolution Engine, Inspector, Evidence Export Adapter, Executor Integration | Artifact Registry, Formal Contracts (types) |
-| **Method Router** (RT-005) | Executor Integration, Persistence, Evidence Export Adapter | Formal Contracts (enums, interfaces), ProviderRegistry, Method Registry, ExecutionConstraints |
-| **Evidence Export Adapter** (RT-005-C1) | Orchestrator → Evidence Graph | RouterDecision, Formal Contracts (EvidenceGraph enums) |
-| **Persistence / Event Store** (RT-006) | Executor Integration, Inspector, Replay Engine, Event Replay | Method Router, State Machine, Formal Contracts (RuntimeEvent) |
+| **Artifact Registry** (RT-003) | Evidence Graph, Mission Runtime Coordinator, Inspector | State Machine, Formal Contracts (schemas) |
+| **Evidence Graph** (RT-004) | Challenge Engine, Evolution Engine, Inspector, Evidence Export Adapter, Mission Runtime Coordinator | Artifact Registry, Formal Contracts (types) |
+| **Method Router** (RT-005) | Mission Runtime Coordinator, Persistence, Evidence Export Adapter | Formal Contracts (enums, interfaces), ProviderRegistry, Method Registry, ExecutionConstraints |
+| **Evidence Export Adapter** (RT-005-C1) | Coordinator → Evidence Graph | RouterDecision, Formal Contracts (EvidenceGraph enums) |
+| **Persistence / Event Store** (RT-006) | Mission Runtime Coordinator, Inspector, Replay Engine, Event Replay | Method Router, State Machine, Formal Contracts (RuntimeEvent) |
 | **Replay Engine** (RT-006) | Persistence, Inspector, Recovery | EventStore |
-| **Executor Integration** (RT-007) | Inspector, Human | Persistence, Artifact Registry |
+| **Mission Runtime Coordinator** (RT-007) | Inspector, External Consumers | State Machine, Artifact Registry, Evidence Graph, Method Router, Persistence, Replay Engine | Persistence, Formal Contracts (RuntimeEvent) |
 | **Inspector** (RT-008) | Human, Guardian | All modules (read-only) |
 
 ### Runtime Data Flow
 
 ```
-Execution Orchestrator (RT-007, future coordinator)
-├── State Machine
-├── Artifact Registry
-├── Method Router
-├── Persistence / Event Store
-├── Replay Engine
-├── Evidence Export Adapter
-└── Evidence Graph
+External Consumers (CG OS, OpenCode executor, Tools, Human / Guardian)
+        │  submit artifacts / evidence / transition requests / authority
+        ▼
+Mission Runtime Coordinator (RT-007)
+   · mission lifecycle          · state coordination
+   · transition orchestration   · artifact flow
+   · evidence flow              · contradiction handling
+   · authority waiting          · replay coordination
+   · recovery coordination
+        │  coordinates — does NOT execute business logic
+        ▼
+Decoupled Runtime Modules (existing)
+   State Machine · Artifact Registry · Method Router ·
+   Evidence Export Adapter · Evidence Graph ·
+   Persistence / Event Store · Replay Engine
+        │
+        ▼
+Inspector (RT-008, read-only observability)
 
-Sibling-orchestration model: each runtime module is coordinated by the
-Execution Orchestrator. The Method Router produces a RouterDecision and does
-NOT consume the Evidence Graph directly; linkage flows through the decoupled
-Evidence Export Adapter into the Evidence Graph.
+Coordination model: the Mission Runtime Coordinator wires the existing
+decoupled runtime modules together at mission scope. It governs flow and
+enforces gates; it does NOT run business logic. Business execution (running
+methods, tools, experiments) is performed by the external Executor/consumer.
+The Method Router produces a RouterDecision and does NOT consume the Evidence
+Graph directly; linkage flows through the decoupled Evidence Export Adapter
+into the Evidence Graph.
 ```
 
 ### Ownership Map
@@ -621,7 +644,7 @@ Evidence Export Adapter into the Evidence Graph.
 | Event Storage Adapter | R-Think Runtime | Bro CG | OpenCode Local | Storage boundary compliance |
 | Snapshot Storage Adapter | R-Think Runtime | Bro CG | OpenCode Local | Snapshot integrity |
 | Materialized View Store | R-Think Runtime | Bro CG | OpenCode Local | Derived-state storage only |
-| Executor Integration | R-Think Runtime | Bro CG | OpenCode Local | Execution scope authority (Human Architect) |
+| Mission Runtime Coordinator | R-Think Runtime | Bro CG | OpenCode Local | Mission lifecycle/state/transition coordination authority (Human Architect) |
 | Inspector | R-Think Runtime | Bro CG | OpenCode Local | Read-only observability |
 
 ---
@@ -654,11 +677,12 @@ Method / Provider Router (RT-005)
          ▼
 Persistence & Event Store (RT-006)
    Immutable Event Log, Replay, Snapshots, Recovery
-         ◄──────────── YOU ARE HERE
          │
          ▼
-Executor Integration (RT-007)
-    OpenCode Adapter, Revision Loop, Self-Approval Prevention
+Mission Runtime Coordinator (RT-007)
+   Lifecycle, state/transition coordination, artifact/evidence flow,
+   contradiction handling, authority waiting, replay/recovery coordination
+         ◄──────────── YOU ARE HERE (RT-007 GUARDIAN ACCEPTED — Repository Baseline Locked)
          │
          ▼
 Inspector (RT-008)
@@ -681,8 +705,8 @@ R-Think Runtime v1
 | Artifact Registry | RT-003 | Implementation produced — Guardian review pending |
 | Evidence Graph | RT-004 | Implementation produced — Guardian review pending |
 | Method / Provider Router | RT-005 | Implementation produced — C1 reconciled, Guardian review pending |
-| Persistence & Event Store | RT-006 | Implementation produced — Guardian review pending |
-| Executor Integration | RT-007 | Not started |
+| Persistence & Event Store | RT-006 | Implementation produced — C1 accepted (Guardian accepted) |
+| Mission Runtime Coordinator | RT-007 | GUARDIAN ACCEPTED — Published baseline |
 | Inspector | RT-008 | Not started |
 | Mission Validation | — | Not started |
 | Runtime v1 | — | Not started |
