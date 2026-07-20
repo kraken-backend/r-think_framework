@@ -297,7 +297,7 @@ npm run typecheck && npm test && npm run build
 
 Expected output: 1007/1007 tests passing, zero type errors, clean build.
 
-> **Note:** RT-004, RT-005, RT-005-C1, RT-006, RT-006-C1, and RT-007 were **published by direct Human Architect action** (commits `f18f31c` + `b266541` + `6687146` + RT-007 publication commit). RT-007 (Mission Runtime Coordinator) implementation is **GUARDIAN ACCEPTED** and locked as the official repository baseline. RT-008 (Inspector) has **NOT STARTED** and is **NOT AUTHORIZED**.
+> **Note:** RT-004, RT-005, RT-005-C1, RT-006, RT-006-C1, and RT-007 were **published by direct Human Architect action** (commits `f18f31c` + `b266541` + `6687146` + RT-007 publication commit). RT-007 (Mission Runtime Coordinator) implementation is **GUARDIAN ACCEPTED** and locked as the official repository baseline. RT-008A (Inspector Architecture Blueprint) is **ACCEPTED AS ARCHITECTURE BASELINE**. RT-008A-R1 (Factual Reconciliation) is **GUARDIAN ACCEPTED — Locked** (128 claims audited: 74 ACTUAL, 3 DERIVED, 40 PLANNED, 11 INVALID). Inspector implementation is **NOT STARTED**. RT-008B (Inspector Backend API) is **NOT STARTED — NOT AUTHORIZED**.
 
 ---
 
@@ -386,16 +386,16 @@ r_think/
 
 | Dimension | Value |
 |-----------|-------|
-| Local HEAD | `6687146` |
-| Remote origin/main | `6687146` |
+| Local HEAD | `1aa0921` |
+| Remote origin/main | `1aa0921` |
 | Ahead / Behind | 0 ahead, 0 behind |
 | Branch | main |
-| Commits on main | 13 (published commits `f18f31c` + `b266541` + `6687146` on top of `68f1e24`) |
+| Commits on main | 14 (published commits `f18f31c` + `b266541` + `6687146` + RT-007 publication commit on top of `68f1e24`) |
 | Publication | RT-005, RT-005-C1, RT-006, RT-006-C1 **AUTHORIZED BY DIRECT HUMAN ARCHITECT ACTION**; further publication `6687146` (documentation status update) |
 
-**Repository baseline:** clean after latest publication (HEAD = `6687146`, origin/main = `6687146`, working tree clean at publication time).
+**Repository baseline:** clean after latest publication (HEAD = `1aa0921`, origin/main = `1aa0921`, working tree clean at publication time).
 
-**Current local documentation state:** RT-007 is the locked, Guardian-accepted repository baseline. Working tree will be clean after commit and push.
+**Current local documentation state:** RT-007 is the locked, Guardian-accepted repository baseline. RT-008A (Inspector Architecture Blueprint) is ACCEPTED AS ARCHITECTURE BASELINE. RT-008A-R1 (Factual Reconciliation) is GUARDIAN ACCEPTED — Locked. Inspector implementation is NOT STARTED. RT-008B (Inspector Backend API) is NOT STARTED — NOT AUTHORIZED.
 
 ### Runtime State
 
@@ -409,7 +409,7 @@ r_think/
 | Persistence & Event Store (RT-006) | Implementation produced — SUPERSEDED FOR ACCEPTANCE BY RT-006-C1 |
 | Persistence & Event Store (RT-006-C1) | Runtime architecture — GUARDIAN ACCEPTED |
 | Mission Runtime Coordinator (RT-007) | GUARDIAN ACCEPTED — Published baseline |
-| Inspector | Not started |
+| Inspector | Architecture baseline accepted (RT-008A) — Factual reconciliation complete (RT-008A-R1) — Guardian review pending — Implementation NOT STARTED, NOT AUTHORIZED |
 
 ### Publication State
 
@@ -417,7 +417,8 @@ r_think/
 |-------|-------|
 | Published commits | `f18f31c`, `b266541`, `6687146` + RT-007 publication commit (RT-004, RT-005, RT-005-C1, RT-006, RT-006-C1, RT-007) |
 | Remote publication | **AUTHORIZED BY DIRECT HUMAN ARCHITECT ACTION** — published to `origin/main` |
-| RT-008 Inspector | **NOT STARTED — NOT AUTHORIZED** |
+| RT-008A Inspector Blueprint | **ACCEPTED AS ARCHITECTURE BASELINE — Implementation NOT STARTED, NOT AUTHORIZED** |
+| RT-008A-R1 Factual Reconciliation | **GUARDIAN ACCEPTED — Locked** |
 
 ### Acceptance State
 
@@ -434,6 +435,8 @@ r_think/
 | RT-006-C2-R1 documentation reconciliation | Guardian review pending |
 | RT-006-C2-R2 documentation closure | Guardian review pending |
 | RT-007 Mission Runtime Coordinator implementation | GUARDIAN ACCEPTED — Published baseline |
+| RT-008A Inspector Architecture Blueprint | ACCEPTED AS ARCHITECTURE BASELINE |
+| RT-008A-R1 Inspector Factual Reconciliation | GUARDIAN ACCEPTED |
 | Human Architect approval | Pending |
 | npm/package distribution | DEFERRED |
 
@@ -569,7 +572,7 @@ r_think/
 | `validateReplay()` | 12 issue codes: MISSING_SEQUENCE, DUPLICATE_SEQUENCE, INVALID_AGGREGATE, INVALID_SCHEMA_VERSION, INVALID_ORDERING, ORPHAN_EVENT, INVALID_CAUSATION_CHAIN, MISSING_CAUSATION_ROOT, DUPLICATE_GLOBAL_POSITION, MISSING_GLOBAL_POSITION, INVALID_GLOBAL_POSITION_ORDER, ATOMIC_BATCH_REJECTED |
 | `EventStorageAdapter` / `SnapshotStorageAdapter` | Explicit durability boundary — `EventStore` depends on the adapter contract, NOT undocumented in-memory Maps; default `InMemoryEventStorageAdapter` is process-local and NON-durable (PostgreSQL is a future pluggable adapter) |
 | `globalPosition` | Store-wide monotonic ordering assigned by the EventStore on append; GLOBAL order (`stream`/`export`/`replayMission`) is distinct from AGGREGATE order (`sequence` → `timestamp` → `eventId`, used by `replayAggregate`) |
-| `replayMission()` / `replayAggregate()` / `replayUntil()` / `replayFrom()` / `replayRange()` | Deterministic folds; default generic reducer + custom `StateReducer` |
+| `replayMission()` / `replayAggregate()` / `replayAggregateUntil()` / `replayAggregateFrom()` / `replayAggregateRange()` | Deterministic folds; default generic reducer + custom `StateReducer` |
 | Snapshots (optimization only) | `createSnapshot()` / `loadSnapshot()` / `listSnapshots()` / `deleteSnapshot()` / `replayFromSnapshot()` — result equals full replay |
 | `EventStore`, `Persistence`, `ReplayEngine` | Generic — no OCR/OpenAI/Claude/Gemini/KDAP/DIP/business logic; no EvidenceGraph coupling (decoupled verified by tests) |
 | RuntimeEventType enum members | 19 |
@@ -596,7 +599,7 @@ r_think/
 | **Persistence / Event Store** (RT-006) | Mission Runtime Coordinator, Inspector, Replay Engine, Event Replay | Method Router, State Machine, Formal Contracts (RuntimeEvent) |
 | **Replay Engine** (RT-006) | Persistence, Inspector, Recovery | EventStore |
 | **Mission Runtime Coordinator** (RT-007) | Inspector, External Consumers | State Machine, Artifact Registry, Evidence Graph, Method Router, Persistence, Replay Engine | Persistence, Formal Contracts (RuntimeEvent) |
-| **Inspector** (RT-008) | Human, Guardian | All modules (read-only) |
+| **Inspector** (RT-008A/RT-008A-R1) | Human, Guardian | All modules (read-only) — Architecture baseline accepted, factual reconciliation complete — Implementation NOT STARTED |
 
 ### Runtime Data Flow
 
@@ -618,7 +621,7 @@ Decoupled Runtime Modules (existing)
    Persistence / Event Store · Replay Engine
         │
         ▼
-Inspector (RT-008, read-only observability)
+Inspector (RT-008A/RT-008A-R1, read-only observatory — architecture baseline accepted, factual reconciliation complete — implementation NOT STARTED)
 
 Coordination model: the Mission Runtime Coordinator wires the existing
 decoupled runtime modules together at mission scope. It governs flow and
@@ -682,15 +685,20 @@ Persistence & Event Store (RT-006)
 Mission Runtime Coordinator (RT-007)
    Lifecycle, state/transition coordination, artifact/evidence flow,
    contradiction handling, authority waiting, replay/recovery coordination
-         ◄──────────── YOU ARE HERE (RT-007 GUARDIAN ACCEPTED — Repository Baseline Locked)
+          ◄──────────── YOU ARE HERE (RT-007 GUARDIAN ACCEPTED — Repository Baseline Locked; RT-008A-R1 COMPLETE — Guardian Review Pending)
          │
          ▼
-Inspector (RT-008)
-  UI, Evidence Visualization, Process Observation
+Inspector (RT-008A)
+  UI, Evidence Visualization, Process Observation — Architecture Baseline Accepted
         │
         ▼
-Mission Validation
-  End-to-End Protocol Compliance Verification
+Inspector Factual Reconciliation (RT-008A-R1)
+  Blueprint Verification, Capability Audit, ReadModel Boundary — GUARDIAN ACCEPTED — Locked
+        ◄──────────── YOU ARE HERE (RT-008A-R1 GUARDIAN ACCEPTED — Locked)
+        │
+        ▼
+Inspector Backend API (RT-008B)
+  Read-Only API, SSE Stream — NOT STARTED, NOT AUTHORIZED
         │
         ▼
 R-Think Runtime v1
@@ -707,7 +715,9 @@ R-Think Runtime v1
 | Method / Provider Router | RT-005 | Implementation produced — C1 reconciled, Guardian review pending |
 | Persistence & Event Store | RT-006 | Implementation produced — C1 accepted (Guardian accepted) |
 | Mission Runtime Coordinator | RT-007 | GUARDIAN ACCEPTED — Published baseline |
-| Inspector | RT-008 | Not started |
+| Inspector Blueprint | RT-008A | ACCEPTED AS ARCHITECTURE BASELINE — Implementation NOT STARTED |
+| Inspector Factual Reconciliation | RT-008A-R1 | GUARDIAN ACCEPTED — Locked |
+| Inspector Backend API | RT-008B | NOT STARTED — NOT AUTHORIZED |
 | Mission Validation | — | Not started |
 | Runtime v1 | — | Not started |
 

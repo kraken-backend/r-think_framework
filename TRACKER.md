@@ -1,7 +1,7 @@
 # R-Think Runtime — TRACKER
 
 **Tracker Created At:** Historical exact time not recorded
-**Last Updated At:** 2026-07-20T12:05:00+07:00
+**Last Updated At:** 2026-07-20T13:00:00+07:00
 **Project:** R-Think Runtime
 **Controlled Blueprint:** RTHINK-BP-001 v1.0
 **Owner:** Hendri RH — Bro Kraken
@@ -14,9 +14,9 @@
 
 | Field | Value |
 |-------|-------|
-| **LAST COMPLETED** | RT-007 — Mission Runtime Coordinator — GUARDIAN ACCEPTED |
-| **CURRENT** | Repository Baseline Locked — RT-007 Published |
-| **NEXT** | RT-008 — Inspector — NOT STARTED, NOT AUTHORIZED |
+| **LAST COMPLETED** | RT-008A-R1 — Inspector Architecture Enhancement and Factual Reconciliation — GUARDIAN ACCEPTED — Locked |
+| **CURRENT** | Waiting Human Architect Authorization for RT-008B |
+| **NEXT** | RT-008B — Inspector Backend API |
 | **FINAL DESTINATION** | R-Think Runtime operational baseline (Runtime v1) |
 
 ---
@@ -69,15 +69,20 @@ Persistence & Event Store (RT-006)
 Mission Runtime Coordinator (RT-007)
    Lifecycle, state/transition coordination, artifact/evidence flow,
    contradiction handling, authority waiting, replay/recovery coordination
-         ◄──────────── YOU ARE HERE (RT-007 implementation COMPLETE; Guardian Review Pending)
+         ◄──────────── YOU ARE HERE (RT-007 GUARDIAN ACCEPTED — Repository Baseline Locked)
          │
          ▼
-Inspector (RT-008)
-  UI, Evidence Visualization, Process Observation
+Inspector (RT-008A)
+  UI, Evidence Visualization, Process Observation — Architecture Baseline Accepted
         │
         ▼
-Mission Validation
-  End-to-End Protocol Compliance Verification
+Inspector Factual Reconciliation (RT-008A-R1)
+  Blueprint Verification, Capability Audit, ReadModel Boundary — COMPLETE — Guardian Review Pending
+        ◄──────────── YOU ARE HERE (RT-008A-R1 COMPLETE — Guardian Review Pending)
+        │
+        ▼
+Inspector Backend API (RT-008B)
+  Read-Only API, SSE Stream — NOT STARTED, NOT AUTHORIZED
         │
         ▼
 R-Think Runtime v1
@@ -93,8 +98,10 @@ R-Think Runtime v1
 | RT-004 Evidence Graph | Registry, Contracts | Evidence relationships, claim-evidence linking | RT-005 Method Router |
 | RT-005 Method Router | Formal Contracts, Provider Registry, Method Registry, Execution Constraints | Provider interface, model/tool routing | RT-006 Persistence |
 | RT-006 Persistence | Router | Event store, recovery, replay | RT-007 Mission Runtime Coordinator |
-| RT-007 Mission Runtime Coordinator | Persistence, State Machine, Artifact Registry, Evidence Graph, Router | Lifecycle/state/transition/artifact/evidence/replay/recovery coordination | RT-008 Inspector |
-| RT-008 Inspector | Coordinator | UI, visualization | Mission Validation |
+| RT-007 Mission Runtime Coordinator | Persistence, State Machine, Artifact Registry, Evidence Graph, Router | Lifecycle/state/transition/artifact/evidence/replay/recovery coordination | RT-008A Inspector Blueprint |
+| RT-008A Inspector Blueprint | Coordinator, all modules (read-only) | Architecture design — 16-section blueprint | RT-008B Inspector Backend API |
+| RT-008B Inspector Backend API | Coordinator, Event Store, Persistence | Read-only API, SSE stream | RT-008C Inspector Frontend |
+| RT-008C–G Inspector Frontend + Viewers | Backend API | UI, graph, replay, authority, dashboard | Mission Validation |
 | Mission Validation | All modules | End-to-end compliance | Runtime v1 |
 | **Runtime v1** | **All** | **Production-ready runtime** | **CG OS, OpenCode, consumers** |
 
@@ -106,15 +113,15 @@ R-Think Runtime v1
 
 | Dimension | Value |
 |-----------|-------|
-| Local HEAD | `6687146bdaec7d17e9c5376b8576bd6d5c149b48` |
-| Remote origin/main | `6687146bdaec7d17e9c5376b8576bd6d5c149b48` |
+| Local HEAD | `1aa0921` |
+| Remote origin/main | `1aa0921` |
 | Ahead / Behind | 0 ahead, 0 behind |
 | Branch | main |
-| Commits on main | 13 (published commits `f18f31c` + `b266541` + `6687146` on top of `68f1e24`) |
+| Commits on main | 14 (published commits `f18f31c` + `b266541` + `6687146` + RT-007 publication commit `1aa0921` on top of `68f1e24`) |
 
 **Baseline:** RT-007 Guardian-accepted baseline — locked as official repository state.
 
-**Current:** All RT-007 files committed and pushed. Working tree clean after publication.
+**Current:** Working tree has README.md + TRACKER.md modified (documentation only — RT-008A-R1 reconciliation).
 
 ### Runtime State
 
@@ -128,7 +135,7 @@ R-Think Runtime v1
 | Persistence & Event Store (RT-006) | Implementation produced — SUPERSEDED FOR ACCEPTANCE BY RT-006-C1 |
 | Persistence & Event Store (RT-006-C1) | Runtime architecture — GUARDIAN ACCEPTED (published) |
 | Mission Runtime Coordinator (RT-007) | GUARDIAN ACCEPTED — Published baseline |
-| Inspector | Not started |
+| Inspector | Architecture baseline accepted (RT-008A) — Factual reconciliation complete (RT-008A-R1) — Guardian review pending — Implementation NOT STARTED, NOT AUTHORIZED |
 
 ### Publication State
 
@@ -136,7 +143,8 @@ R-Think Runtime v1
 |-------|-------|
 | Published commits | `f18f31c`, `b266541`, `6687146` + RT-007 publication commit (RT-004, RT-005, RT-005-C1, RT-006, RT-006-C1, RT-007) |
 | Remote publication | **AUTHORIZED BY DIRECT HUMAN ARCHITECT ACTION** — published to `origin/main` |
-| RT-008 Inspector | **NOT STARTED — NOT AUTHORIZED** |
+| RT-008A Inspector Blueprint | **ACCEPTED AS ARCHITECTURE BASELINE — Implementation NOT STARTED, NOT AUTHORIZED** |
+| RT-008A-R1 Factual Reconciliation | **GUARDIAN ACCEPTED — Documentation Locked** |
 
 ### Acceptance State
 
@@ -153,27 +161,38 @@ R-Think Runtime v1
 | RT-006-C2-R1 documentation reconciliation | Guardian review pending |
 | RT-006-C2-R2 documentation closure | Guardian review pending |
 | RT-007 Mission Runtime Coordinator implementation | GUARDIAN ACCEPTED — Published baseline |
+| RT-008A Inspector Architecture Blueprint | ACCEPTED AS ARCHITECTURE BASELINE |
+| RT-008A-R1 Inspector Factual Reconciliation | GUARDIAN ACCEPTED |
 | Human Architect approval | Pending |
 | npm/package distribution | DEFERRED |
 
 ---
 
-## Dependency Chain — Immediate Next Steps
+## Dependency Chain — Historical (pre-RT-007 publication)
 
 ```
 RT-006-C1 runtime acceptance
-        │
-        ▼
+         │
+         ▼
 RT-006-C2 repository / document reconciliation
-        │
-        ▼
+         │
+         ▼
 Guardian verification
-        │
-        ▼
+         │
+         ▼
 Human Architect next-mission decision
-        │
-        ▼
-RT-007 only if explicitly authorized — now implemented as Mission Runtime Coordinator; Guardian review pending
+         │
+         ▼
+RT-007 — now GUARDIAN ACCEPTED and published as official baseline
+         │
+         ▼
+RT-008A — Inspector Architecture Blueprint — ACCEPTED AS ARCHITECTURE BASELINE
+         │
+         ▼
+RT-008A-R1 — Inspector Factual Reconciliation — GUARDIAN ACCEPTED — Locked
+         │
+         ▼
+RT-008B — Inspector Backend API — NOT STARTED, NOT AUTHORIZED
 ```
 
 ---
@@ -590,6 +609,48 @@ RT-007 only if explicitly authorized — now implemented as Mission Runtime Coor
 | Commit Message | `feat(runtime): lock RT-007 Guardian accepted baseline` |
 | Report | `docs/reports/YYYYMMDD_HHmm_RTHINK-RT-007_FINAL_Guardian-Acceptance-and-Publication.md` |
 
+### RTHINK-RT-008A — Inspector Architecture Blueprint
+
+| Field | Value |
+|-------|-------|
+| Mission ID | RTHINK-RT-008A |
+| Title | Inspector Architecture Blueprint |
+| Level | L1 — Architecture Design |
+| Status | ARCHITECTURE COMPLETE |
+| Implementation Status | NOT STARTED — NOT AUTHORIZED |
+| Purpose | Complete architecture design for R-Think Inspector as Read-Only Runtime Observatory. 16-section blueprint covering purpose, architecture, data sources, screen layout, realtime flow, navigation, filtering, search, evidence visualization, replay visualization, authority visualization, runtime metrics, security, future extension, technology, and development roadmap. |
+| Blueprint Reference | RTHINK-BP-001 §18 (R-Think Inspector) |
+| Scope | Architecture design only — no code, no runtime changes |
+| Contradictions Found | None (verified against RT-001 through RT-007) |
+| Report | `docs/reports/20260720_1217_RTHINK-RT-008A_Inspector-Architecture-Blueprint.md` |
+
+### RTHINK-RT-008A-R1 — Inspector Architecture Enhancement and Factual Contract Reconciliation
+
+| Field | Value |
+|-------|-------|
+| Mission ID | RTHINK-RT-008A-R1 |
+| Title | Inspector Architecture Enhancement and Factual Contract Reconciliation |
+| Level | L2 — Significant / Architecture Governance |
+| Status | GUARDIAN ACCEPTED — Locked |
+| Purpose | Verify every factual claim in the RT-008A Blueprint against RT-001 through RT-007 source code. Produce Contract Reality Matrix, Eight-Capability Audit, InspectorReadModel boundary design, RT-008B bounded scope. |
+| Blueprint Reference | RTHINK-RT-008A |
+| Depends On | RT-008A (Blueprint Baseline), RT-007 (Guardian-Accepted Baseline) |
+| Source Files Inspected | 15 (all contracts, runtime modules, schemas) |
+| Claims Audited | 128 exact |
+| Classification | 74 ACTUAL, 3 DERIVED, 40 PLANNED, 11 INVALID |
+| Proof | 74 + 3 + 40 + 11 = 128 |
+| Capability Audit | C-1 PARTIAL (RT-008B / RT-008C-G), C-2 MISSING (FUTURE EXTENSION), C-3 PARTIAL (RT-008B), C-4 PARTIAL (DERIVED / RT-008C-G), C-5 PARTIAL (CURRENT DATA / REQUIRES INSTRUMENTATION), C-6 PARTIAL (RT-008B / RT-008C-G), C-7 PARTIAL (DERIVED / RT-008C-G), C-8 PARTIAL (DERIVED / REQUIRES REGISTRY) |
+| Endpoint Count | HTTP GET Endpoints: 26, Streaming Endpoints (SSE): 1, Total Public Endpoints: 27 |
+| Realtime Decision | SSE Transport backed by Polling Cursor (EventStore has NO native subscription API) |
+| InspectorReadModel | Architecture design only — composition root, 8 query groups, 11 DTO types, 4 filter types, cursor pagination, deep-copy boundary. Implementation NOT STARTED. |
+| Factual Corrections | 13 (3 HIGH, 5 MEDIUM, 5 LOW) |
+| RT-008B Scope | 15 steps: read-model contracts, immutable DTOs, composition root, DI, query service, 26 HTTP GET + 1 SSE, pagination, filtering, polling baseline, error handling, deep-copy tests, zero-mutation tests, endpoint contract tests |
+| RT-008B Exclusions | Frontend UI, React Flow, Recharts, Mission Diff, native EventStore subscriptions, runtime instrumentation, OpenTelemetry, CPU/memory, mutations, new events/enums, RT-001 through RT-007 changes |
+| Key Technical Decisions | (1) SSE Transport backed by Polling Cursor — NOT native subscription; (2) InspectorReadModel composition root with DI — NOT global singleton; (3) Deep-copy boundary — structuredClone; (4) Cursor-based pagination — globalPosition for events; (5) EvidenceGraph is NOT a pure DAG — cycles via EVOLVES_TO possible |
+| Files Changed | README.md, TRACKER.md, report (docs/reports/) |
+| Validation | ✅ ALL PASS (typecheck, 1007/1007 tests, build, audit, git diff --check, documentation searches) |
+| Report | `docs/reports/20260720_1245_RTHINK-RT-008A-R1_Inspector-Architecture-Enhancement-and-Factual-Reconciliation.md` |
+
 ---
 
 
@@ -656,6 +717,8 @@ RT-007 only if explicitly authorized — now implemented as Mission Runtime Coor
 | Total tests | ✅ 1007/1007 PASSING |
 | License Gate (6 deps) | ✅ ALL PASS (MIT, Apache-2.0) |
 | npm audit | ✅ 0 vulnerabilities |
+| git diff --check | ✅ CLEAN (CRLF warnings only) |
+| git status --short | ✅ Only README.md + TRACKER.md modified (documentation only) |
 
 ---
 
@@ -707,7 +770,7 @@ RT-007 only if explicitly authorized — now implemented as Mission Runtime Coor
 | Historical artifacts deleted from remote | RESTORED locally; ESCALATED (RT-001-R2) |
 | tsconfig unauthorized change | REVERTED to "node" (RT-001-R2) |
 | GitHub publication | Publication completed and verified (commits `f18f31c` + `b266541`, AUTHORIZED BY DIRECT HUMAN ARCHITECT ACTION). Further publication remains unauthorized. |
-| RT-007 terminology drift (Execution Orchestrator) | RESOLVED by RT-007 implementation — now MissionRuntimeCoordinator; Guardian review pending |
+| RT-007 terminology drift (Execution Orchestrator) | RESOLVED by RT-007 implementation — now MissionRuntimeCoordinator; GUARDIAN ACCEPTED |
 
 ---
 
@@ -749,6 +812,8 @@ RT-007 only if explicitly authorized — now implemented as Mission Runtime Coor
 - **RT-006-C2-R2 Report:** `docs/reports/260720_0710_RTHINK-RT-006-C2-R2_Final-Documentation-Closure-and-Living-Tracker-Synchronization.md`
 - **RT-006-C2-R2-F1 Report:** `docs/reports/20260720_0730_RTHINK-RT-006-C2-R2-F1_Guardian-Documentation-Reconciliation.md`
 - **RT-006-C2-R2-F2 Report:** `docs/reports/20260720_0745_RTHINK-RT-006-C2-R2-F2_Final-Guardian-Reconciliation.md`
+- **RT-008A Report:** `docs/reports/20260720_1217_RTHINK-RT-008A_Inspector-Architecture-Blueprint.md`
+- **RT-008A-R1 Report:** `docs/reports/20260720_1245_RTHINK-RT-008A-R1_Inspector-Architecture-Enhancement-and-Factual-Reconciliation.md`
 
 ---
 
