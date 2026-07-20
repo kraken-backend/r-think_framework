@@ -386,14 +386,14 @@ r_think/
 
 | Dimension | Value |
 |-----------|-------|
-| Local HEAD | `1aa0921` |
+| Local HEAD | `587992c` |
 | Remote origin/main | `1aa0921` |
-| Ahead / Behind | 0 ahead, 0 behind |
+| Ahead / Behind | 1 ahead, 0 behind |
 | Branch | main |
-| Commits on main | 14 (published commits `f18f31c` + `b266541` + `6687146` + RT-007 publication commit on top of `68f1e24`) |
-| Publication | RT-005, RT-005-C1, RT-006, RT-006-C1 **AUTHORIZED BY DIRECT HUMAN ARCHITECT ACTION**; further publication `6687146` (documentation status update) |
+| Commits on main | 15 (commit `587992c` on top of RT-007 baseline `1aa0921` + `f18f31c` + `b266541` + `6687146` + `68f1e24`) |
+| Publication | RT-005, RT-005-C1, RT-006, RT-006-C1 **AUTHORIZED BY DIRECT HUMAN ARCHITECT ACTION**; further publication `6687146` (documentation status update); commit `587992c` LOCAL ONLY — NOT PUBLISHED |
 
-**Repository baseline:** clean after latest publication (HEAD = `1aa0921`, origin/main = `1aa0921`, working tree clean at publication time).
+**Repository baseline:** last published commit `1aa0921` (RT-007 baseline). Local HEAD `587992c` is 1 ahead, NOT PUBLISHED.
 
 **Current local documentation state:** RT-007 is the locked, Guardian-accepted repository baseline. RT-008A (Inspector Architecture Blueprint) is ACCEPTED AS ARCHITECTURE BASELINE. RT-008A-R1 (Factual Reconciliation) is GUARDIAN ACCEPTED — Locked. Inspector implementation is NOT STARTED. RT-008B (Inspector Backend API) is NOT STARTED — NOT AUTHORIZED.
 
@@ -409,7 +409,7 @@ r_think/
 | Persistence & Event Store (RT-006) | Implementation produced — SUPERSEDED FOR ACCEPTANCE BY RT-006-C1 |
 | Persistence & Event Store (RT-006-C1) | Runtime architecture — GUARDIAN ACCEPTED |
 | Mission Runtime Coordinator (RT-007) | GUARDIAN ACCEPTED — Published baseline |
-| Inspector | Architecture baseline accepted (RT-008A) — Factual reconciliation complete (RT-008A-R1) — Guardian review pending — Implementation NOT STARTED, NOT AUTHORIZED |
+| Inspector | Architecture baseline accepted (RT-008A) — Factual reconciliation complete (RT-008A-R1) — GUARDIAN ACCEPTED — Locked — Implementation NOT STARTED, NOT AUTHORIZED |
 
 ### Publication State
 
@@ -685,7 +685,7 @@ Persistence & Event Store (RT-006)
 Mission Runtime Coordinator (RT-007)
    Lifecycle, state/transition coordination, artifact/evidence flow,
    contradiction handling, authority waiting, replay/recovery coordination
-          ◄──────────── YOU ARE HERE (RT-007 GUARDIAN ACCEPTED — Repository Baseline Locked; RT-008A-R1 COMPLETE — Guardian Review Pending)
+          ◄──────────── YOU ARE HERE (RT-007 GUARDIAN ACCEPTED — Repository Baseline Locked; RT-008A-R1 GUARDIAN ACCEPTED — Locked)
          │
          ▼
 Inspector (RT-008A)
@@ -720,6 +720,16 @@ R-Think Runtime v1
 | Inspector Backend API | RT-008B | NOT STARTED — NOT AUTHORIZED |
 | Mission Validation | — | Not started |
 | Runtime v1 | — | Not started |
+
+---
+
+## Governance
+
+### Report Policy
+
+- **Every distinct task or mission ID requires a dedicated report.** Appending a parent mission report does not satisfy the report obligation for a new task or mission ID unless the Human Architect explicitly defines the work as continuation of the exact same mission ID.
+- **A gitignored report remains mandatory as local governance evidence.** Being excluded from version control does not remove the reporting obligation. Reports must exist locally and be inspected before a task is considered complete.
+- **The Three-Artifact Law (README + TRACKER + Report) is absolute.** No exception exists for acceptance tasks, documentation tasks, finalization tasks, publication gates, local commits, or no-code missions.
 
 ---
 

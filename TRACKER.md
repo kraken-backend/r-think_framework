@@ -1,7 +1,7 @@
 # R-Think Runtime — TRACKER
 
 **Tracker Created At:** Historical exact time not recorded
-**Last Updated At:** 2026-07-20T13:00:00+07:00
+**Last Updated At:** 2026-07-20T14:31:00+07:00
 **Project:** R-Think Runtime
 **Controlled Blueprint:** RTHINK-BP-001 v1.0
 **Owner:** Hendri RH — Bro Kraken
@@ -30,7 +30,7 @@
 | Operating System | Windows 10 (NT 10.0.26200.0) |
 | Node.js | v22.23.1 |
 | npm | 10.9.8 |
-| Git | Initialized, 14 commits on `main` (after RT-007 publication) |
+| Git | Initialized, 15 commits on `main` (commit `587992c` on top of RT-007 baseline `1aa0921`) |
 | Branch | main |
 | Remote | origin → https://github.com/kraken-backend/r-think_framework.git |
 
@@ -77,8 +77,8 @@ Inspector (RT-008A)
         │
         ▼
 Inspector Factual Reconciliation (RT-008A-R1)
-  Blueprint Verification, Capability Audit, ReadModel Boundary — COMPLETE — Guardian Review Pending
-        ◄──────────── YOU ARE HERE (RT-008A-R1 COMPLETE — Guardian Review Pending)
+  Blueprint Verification, Capability Audit, ReadModel Boundary — GUARDIAN ACCEPTED — Locked
+        ◄──────────── YOU ARE HERE (RT-008A-R1 GUARDIAN ACCEPTED — Locked)
         │
         ▼
 Inspector Backend API (RT-008B)
@@ -113,15 +113,15 @@ R-Think Runtime v1
 
 | Dimension | Value |
 |-----------|-------|
-| Local HEAD | `1aa0921` |
+| Local HEAD | `587992c` |
 | Remote origin/main | `1aa0921` |
-| Ahead / Behind | 0 ahead, 0 behind |
+| Ahead / Behind | 1 ahead, 0 behind |
 | Branch | main |
-| Commits on main | 14 (published commits `f18f31c` + `b266541` + `6687146` + RT-007 publication commit `1aa0921` on top of `68f1e24`) |
+| Commits on main | 15 (commit `587992c` on top of RT-007 baseline `1aa0921` + published commits `f18f31c` + `b266541` + `6687146` + `68f1e24`) |
 
-**Baseline:** RT-007 Guardian-accepted baseline — locked as official repository state.
+**Baseline:** Last published commit `1aa0921` (RT-007 baseline). Local HEAD `587992c` is 1 ahead — NOT PUBLISHED.
 
-**Current:** Working tree has README.md + TRACKER.md modified (documentation only — RT-008A-R1 reconciliation).
+**Current:** README.md + TRACKER.md need correction reconciliation (RT-008A-R1-FINAL-C1). Working tree modified for tracked files.
 
 ### Runtime State
 
@@ -135,7 +135,7 @@ R-Think Runtime v1
 | Persistence & Event Store (RT-006) | Implementation produced — SUPERSEDED FOR ACCEPTANCE BY RT-006-C1 |
 | Persistence & Event Store (RT-006-C1) | Runtime architecture — GUARDIAN ACCEPTED (published) |
 | Mission Runtime Coordinator (RT-007) | GUARDIAN ACCEPTED — Published baseline |
-| Inspector | Architecture baseline accepted (RT-008A) — Factual reconciliation complete (RT-008A-R1) — Guardian review pending — Implementation NOT STARTED, NOT AUTHORIZED |
+| Inspector | Architecture baseline accepted (RT-008A) — Factual reconciliation GUARDIAN ACCEPTED — Locked (RT-008A-R1) — Implementation NOT STARTED, NOT AUTHORIZED |
 
 ### Publication State
 
@@ -651,6 +651,41 @@ RT-008B — Inspector Backend API — NOT STARTED, NOT AUTHORIZED
 | Validation | ✅ ALL PASS (typecheck, 1007/1007 tests, build, audit, git diff --check, documentation searches) |
 | Report | `docs/reports/20260720_1245_RTHINK-RT-008A-R1_Inspector-Architecture-Enhancement-and-Factual-Reconciliation.md` |
 
+### RTHINK-RT-008A-R1-FINAL — Guardian Acceptance, Documentation Lock, and Controlled Publication
+
+| Field | Value |
+|-------|-------|
+| Mission ID | RTHINK-RT-008A-R1-FINAL |
+| Parent | RTHINK-RT-008A-R1 |
+| Title | Guardian Acceptance, Documentation Lock, and Controlled Publication |
+| Level | L0 — Publication Gate |
+| Status | **INVALID COMPLETION RECORD — DEDICATED REPORT MISSING — CORRECTED BY RTHINK-RT-008A-R1-FINAL-C1** |
+| Historical Commit | `587992cb460c772c58849ec22038431ed8391912` |
+| Violation | Three-Artifact Law — dedicated report not created; parent report was appended instead |
+| Root Cause | Guardian prompt defectively instructed executor to append existing parent report |
+| Preservation | Commit `587992c` preserved — not deleted, amended, rebased, reset, squashed, or rewritten |
+| Report | **MISSING** — correction report at `docs/reports/20260720_1431_RTHINK-RT-008A-R1-FINAL-C1_Mandatory-Report-Restoration-and-Post-Commit-Reconciliation.md` |
+
+### RTHINK-RT-008A-R1-FINAL-C1 — Mandatory Report Restoration and Post-Commit Reconciliation
+
+| Field | Value |
+|-------|-------|
+| Mission ID | RTHINK-RT-008A-R1-FINAL-C1 |
+| Parent | RTHINK-RT-008A-R1-FINAL |
+| Title | Mandatory Report Restoration and Post-Commit Reconciliation |
+| Level | L2 — Significant / Governance and Repository-State Correction |
+| Mode | LOCAL ONLY — NO PUSH |
+| Status before commit | CORRECTION COMPLETE — LOCAL COMMIT PENDING |
+| Status after commit | COMPLETE — LOCAL COMMIT CREATED — NOT PUSHED |
+| Corrective Commit | HEAD after completion — see git log |
+| Three-Artifact Law | RESTORED — dedicated C1 report created |
+| Guardian Error | RECORDED — prompt defect documented |
+| Files Changed | README.md, TRACKER.md |
+| Source/Runtime/Test Changes | NONE |
+| RT-008A-R1 Status | GUARDIAN ACCEPTED — Locked (preserved) |
+| RT-008B Status | NOT STARTED — NOT AUTHORIZED (preserved) |
+| Report | `docs/reports/20260720_1431_RTHINK-RT-008A-R1-FINAL-C1_Mandatory-Report-Restoration-and-Post-Commit-Reconciliation.md` |
+
 ---
 
 
@@ -756,6 +791,7 @@ RT-008B — Inspector Backend API — NOT STARTED, NOT AUTHORIZED
 12. RTHINK-GIT-002-C1 authorized exactly one commit and three files, but executor created a second commit `d7e7486` containing TRACKER.md and a new evidence file. History preserved; corrected by RTHINK-GIT-002-C2.
 13. RT-003 commit `68f1e24` created but cannot be pushed — publication was **NOT AUTHORIZED** at that time (no auth failure; withheld pending Human Architect authorization). RT-005 + RT-005-C1 + RT-006 remain uncommitted local working-tree changes on top.
 14. RT-006-C1 report and tracker (created 2026-07-17T22:29:34+07:00) stated "NOT AUTHORIZED — local only" for RT-006-C1. The Human Architect later performed direct publication (push, commits `f18f31c` + `b266541`, HEAD = `b266541`, working tree clean). This is not a rollback or executor violation; the state was reconciled by RT-006-C2 and reclassified as AUTHORIZED BY DIRECT HUMAN ARCHITECT ACTION.
+15. RTHINK-RT-008A-R1-FINAL Guardian prompt was defective — instructed executor to append existing parent report instead of creating a dedicated report for a distinct mission ID, violating the Three-Artifact Law. Commit `587992c` preserved as historical evidence; corrected by RTHINK-RT-008A-R1-FINAL-C1.
 
 ---
 
@@ -771,6 +807,7 @@ RT-008B — Inspector Backend API — NOT STARTED, NOT AUTHORIZED
 | tsconfig unauthorized change | REVERTED to "node" (RT-001-R2) |
 | GitHub publication | Publication completed and verified (commits `f18f31c` + `b266541`, AUTHORIZED BY DIRECT HUMAN ARCHITECT ACTION). Further publication remains unauthorized. |
 | RT-007 terminology drift (Execution Orchestrator) | RESOLVED by RT-007 implementation — now MissionRuntimeCoordinator; GUARDIAN ACCEPTED |
+| Finalization missions may bypass reporting when prompts incorrectly treat existing parent reports as sufficient | MITIGATED — permanent rule added to README and TRACKER governance wording: "Every distinct task or mission ID requires a dedicated report, regardless of gitignore or code-change status" |
 
 ---
 
@@ -814,6 +851,7 @@ RT-008B — Inspector Backend API — NOT STARTED, NOT AUTHORIZED
 - **RT-006-C2-R2-F2 Report:** `docs/reports/20260720_0745_RTHINK-RT-006-C2-R2-F2_Final-Guardian-Reconciliation.md`
 - **RT-008A Report:** `docs/reports/20260720_1217_RTHINK-RT-008A_Inspector-Architecture-Blueprint.md`
 - **RT-008A-R1 Report:** `docs/reports/20260720_1245_RTHINK-RT-008A-R1_Inspector-Architecture-Enhancement-and-Factual-Reconciliation.md`
+- **RT-008A-R1-FINAL-C1 Report:** `docs/reports/20260720_1431_RTHINK-RT-008A-R1-FINAL-C1_Mandatory-Report-Restoration-and-Post-Commit-Reconciliation.md`
 
 ---
 
