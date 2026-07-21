@@ -1,6 +1,6 @@
 {
   "name": "rthink-runtime",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "R-Think Runtime — Cognitive Reasoning Algorithm, Protocol, Runtime, and Evidence-Governed Execution System",
   "type": "module",
   "license": "AGPL-3.0-only",
@@ -21,7 +21,11 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "inspector:dev": "cd inspector-ui && npm run dev",
+    "inspector:build": "cd inspector-ui && npm run build",
+    "inspector:test": "cd inspector-ui && npm test",
+    "inspector:start": "node --import tsx src/inspector/server.ts"
   },
   "dependencies": {
     "zod": "3.25.67"

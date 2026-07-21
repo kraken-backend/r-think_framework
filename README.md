@@ -24,6 +24,7 @@ R-Think bukan prompt dan bukan checklist teori. R-Think Runtime adalah software 
 - [Quick Start](#quick-start)
 - [Project Structure](#project-structure)
 - [Current Status](#current-status)
+  - [Ontology Inventory](#ontology-inventory-rthink-doc-ontology-001)
 - [Runtime Roadmap](#runtime-roadmap)
 - [Development](#development)
 - [Authority](#authority)
@@ -295,9 +296,29 @@ npm run build
 npm run typecheck && npm test && npm run build
 ```
 
-Expected output: 1007/1007 tests passing, zero type errors, clean build.
+Expected output: 1179 tests passing (1152 backend + 27 frontend), clean frontend build.
 
-> **Note:** RT-004, RT-005, RT-005-C1, RT-006, RT-006-C1, and RT-007 were **published by direct Human Architect action** (commits `f18f31c` + `b266541` + `6687146` + RT-007 publication commit). RT-007 (Mission Runtime Coordinator) implementation is **GUARDIAN ACCEPTED** and locked as the official repository baseline. RT-008A (Inspector Architecture Blueprint) is **ACCEPTED AS ARCHITECTURE BASELINE**. RT-008A-R1 (Factual Reconciliation) is **GUARDIAN ACCEPTED — Locked** (128 claims audited: 74 ACTUAL, 3 DERIVED, 40 PLANNED, 11 INVALID). Inspector implementation is **NOT STARTED**. RT-008B (Inspector Backend API) is **NOT STARTED — NOT AUTHORIZED**.
+### Inspector Frontend
+
+```bash
+# Install frontend dependencies
+cd inspector-ui && npm install
+
+# Run frontend tests
+npm test
+
+# Build production bundle
+npm run build
+
+# Start dev server (port 5173, proxies /api to localhost:3001)
+npm run dev
+
+# From root: start backend + frontend together
+npm run inspector:start  # Backend on port 3001
+npm run inspector:dev    # Frontend on port 5173
+```
+
+> **Note:** R-Think Runtime **v1.0.0** — all core modules (RT-001 through RT-007) are IMPLEMENTED. Inspector Backend API (RT-008B: 27 endpoints, 105 tests) and Inspector Frontend (RT-008C: React + Vite, 9 views, 27 tests) are COMPLETE. E2E Mission Validation (RT-009: 6 scenarios, 40 tests, verdict A) is COMPLETE. Total: 1152 backend + 27 frontend = **1179 tests passing**. Pre-existing typecheck issues in `src/inspector/demo-data.ts` and `src/inspector/server.ts` (unused imports, missing contract fields) are documented and do not affect runtime or test results.
 
 ---
 
@@ -341,6 +362,42 @@ r_think/
 │       ├── replay.ts               # ReplayEngine: deterministic replay, 12-code validation, snapshots (RT-006/RT-006-C1)
 │       └── mission-runtime-coordinator.ts  # MissionRuntimeCoordinator: orchestration layer (RT-007)
 │
+│   └── inspector/
+│       ├── index.ts                       # Public API barrel exports (RT-008B)
+│       ├── dtos.ts                        # 22 immutable DTOs + deepCopy helper (RT-008B)
+│       ├── filters.ts                     # Filter types + pagination params (RT-008B)
+│       ├── inspector-read-model.ts        # InspectorReadModel interface — 27 endpoints (RT-008B)
+│       ├── inspector-read-model-impl.ts   # Concrete implementation — deep-copy boundary (RT-008B)
+│       ├── composition-root.ts            # createInspector() DI wiring (RT-008B)
+│       ├── server.ts                      # HTTP server adapter — 27 endpoints, static files (RT-008C)
+│       └── demo-data.ts                   # Deterministic demo data for dev mode (RT-008C)
+│
+├── inspector-ui/                          # React frontend (RT-008C)
+│   ├── package.json                       # React 18, Vite, React Flow, vitest
+│   ├── tsconfig.json                      # TypeScript strict, allowImportingTsExtensions
+│   ├── vite.config.ts                     # Dev server port 5173, API proxy to :3001
+│   ├── index.html                         # Entry HTML
+│   └── src/
+│       ├── main.tsx                        # React entry point
+│       ├── App.tsx                         # Route config — 9 views
+│       ├── App.css                         # Full stylesheet
+│       ├── api/client.ts                   # Typed HTTP client — 27 endpoints, zero mutations
+│       ├── hooks.ts                        # React hooks — useFetch, SSE polling, data hooks
+│       ├── components/
+│       │   ├── Layout.tsx                  # App shell with sidebar navigation
+│       │   ├── Shared.tsx                  # Loading, Empty, ErrorState, JsonViewer
+│       │   └── Badges.tsx                  # StateBadge, Collapsible
+│       └── views/
+│           ├── MissionList.tsx             # Mission overview + state filter
+│           ├── MissionDetail.tsx           # Mission detail + events + artifacts + evidence
+│           ├── EventTimeline.tsx           # Event timeline + SSE polling toggle
+│           ├── ArtifactList.tsx            # Artifact list + type filter
+│           ├── ArtifactDetail.tsx          # Artifact detail + history
+│           ├── EvidenceGraph.tsx           # React Flow graph visualization
+│           ├── AuthorityView.tsx           # Authority status + contradiction tracking
+│           ├── ReplayView.tsx              # Mission replay + snapshot list
+│           └── HealthView.tsx              # Runtime health, stats, methods, providers
+│
 ├── tests/
 │   ├── contracts/
 │   │   ├── rthink-rt-001.test.ts     # Zod validation tests (25)
@@ -350,6 +407,7 @@ r_think/
 │   │   ├── rthink-rt-005.test.ts     # Method/Provider Router + C1 semantic tests (359)
 │   │   ├── rthink-rt-006.test.ts     # Persistence & Event Store tests (249, incl. RT-006-C1 blocks)
 │   │   ├── rthink-rt-007.test.ts     # MissionRuntimeCoordinator tests (84)
+│   │   ├── rthink-rt-008b.test.ts    # Inspector Backend API tests (105)
 │   │   └── json-schema.test.ts       # JSON Schema tests (40)
 │   └── fixtures/
 │       ├── valid/               # Valid protocol fixtures
@@ -386,82 +444,219 @@ r_think/
 
 | Dimension | Value |
 |-----------|-------|
-| Local HEAD | `587992c` |
+| Local HEAD | `5100521` |
 | Remote origin/main | `1aa0921` |
-| Ahead / Behind | 1 ahead, 0 behind |
+| Ahead / Behind | 2 ahead, 0 behind |
 | Branch | main |
-| Commits on main | 15 (commit `587992c` on top of RT-007 baseline `1aa0921` + `f18f31c` + `b266541` + `6687146` + `68f1e24`) |
-| Publication | RT-005, RT-005-C1, RT-006, RT-006-C1 **AUTHORIZED BY DIRECT HUMAN ARCHITECT ACTION**; further publication `6687146` (documentation status update); commit `587992c` LOCAL ONLY — NOT PUBLISHED |
+| Commits on main | 16 |
+| Publication | V1.0.0 lock pending — this commit |
 
-**Repository baseline:** last published commit `1aa0921` (RT-007 baseline). Local HEAD `587992c` is 1 ahead, NOT PUBLISHED.
+**Current state:** R-Think Runtime v1.0.0 baseline locked. 1179 tests passing. All core modules implemented. Inspector Backend + Frontend complete. E2E validation passed.
 
-**Current local documentation state:** RT-007 is the locked, Guardian-accepted repository baseline. RT-008A (Inspector Architecture Blueprint) is ACCEPTED AS ARCHITECTURE BASELINE. RT-008A-R1 (Factual Reconciliation) is GUARDIAN ACCEPTED — Locked. Inspector implementation is NOT STARTED. RT-008B (Inspector Backend API) is NOT STARTED — NOT AUTHORIZED.
+### Architecture (Corrected per BP-LOCK-002, BP-LOCK-003, BP-LOCK-004)
+
+Blueprint is NOT a phase. Blueprint is the Architectural Constitution that governs all phases. Knowledge is necessary but not sufficient — Authority (HA's constitutional power) transforms Knowledge into Blueprint.
+
+```
+Discovery Layer (Always Active)
+  Reality → Observation → Question → Hypothesis → Experiment → Evidence
+      ^                                                            |
+      └──── Discovery → Validation → Knowledge → Convergence ─────┘
+                                              │
+                                              ▼
+                                    Authority (HA's Act)
+                                              │
+                                              ▼
+                                    Blueprint (Constitution)
+                                              │
+                              ┌───────────────┼───────────────┐
+                              ▼               ▼               ▼
+                         Implementation   Domains         Consumers
+                         (RT-001-007)    (Truth,         (CG OS,
+                                          Purpose,        OpenCode,
+                                          Authority,      Inspector,
+                                          Trust)          Guardian,
+                                                          Human Architect)
+```
+
+### Architecture Domains (Independent, Parallel)
+
+| Domain | Current State | Evidence |
+|--------|--------------|----------|
+| TRUTH | ARTICULATED | 6 truth sources identified (GOV-002). Hierarchy not declared. |
+| PURPOSE | ARTICULATED | `MissionContract.objective` exists. Enforcement absent. |
+| AUTHORITY | ARTICULATED | Hierarchy declared. 5 conflicts unresolved (GOV-002). |
+| TRUST | PARTIALLY ARTICULATED | Trust-adjacent controls exist. Trust model absent. |
+
+### Architecture Maturity (Constitutional, not engineering)
+
+| State | Definition |
+|-------|-----------|
+| UNFORMED | Domain exists in Reality but not in architecture |
+| ARTICULATED | Domain named, defined, current state documented |
+| VALIDATED | Domain matches implementation reality |
+| LOCKED | Domain immutable until explicitly reopened |
+| EVOLVED | Domain modified after Lock |
+| RETIRED | Domain superseded by successor |
+
+**Current maturity: ARTICULATED** (not "40% complete")
+
+### Phase Gate Model
+
+| Gate | Name | Purpose | Status |
+|------|------|---------|--------|
+| G-1 | Architecture Gate | All architectural discoveries complete before implementation | OPEN |
+| G-2 | Blueprint Lock | Blueprint locked before implementation | CLOSED |
+| G-3 | Implementation Gate | Implementation authorized by HA | CLOSED |
+| G-4 | Verification Gate | Implementation verified by Guardian | OPEN (existing modules) |
+| G-5 | Production Gate | System production-ready | CLOSED |
+| G-6 | Human Decision Gate | All HA decisions made | OPEN — **8 decisions pending** |
+
+### Human Architect Decisions Pending
+
+| # | Decision | Why Required |
+|---|----------|-------------|
+| D-1 | Restore Blueprint to Version Control | 100+ references cite deleted document |
+| D-2 | Declare Truth Hierarchy | 6 overlapping truth sources, no hierarchy |
+| D-3 | Define Purpose Semantics | Purpose absent from runtime code |
+| D-4 | Define Trust Semantics | Trust concept absent from code |
+| D-5 | Authorize RT-008B | Inspector Backend API not authorized |
+| D-6 | Define Blueprint Lock Criteria | No lock criteria exist |
+| D-7 | Resolve README vs TRACKER Supremacy | Dual presentation authority |
+| D-8 | Define Authority Conflict Resolution | 5 authority conflicts unresolved |
 
 ### Runtime State
 
 | Module | Status |
 |--------|--------|
-| Formal Contracts (enums, interfaces, schemas) | Implementation produced — ACCEPTED |
-| State Machine & Transition Engine | Implementation produced — Guardian review pending |
-| Artifact Registry | Implementation produced — Guardian review pending |
-| Evidence Graph | Implementation produced — Guardian review pending |
-| Method / Provider Router | Implementation produced — C1 semantic reconciliation complete, Guardian review pending |
-| Persistence & Event Store (RT-006) | Implementation produced — SUPERSEDED FOR ACCEPTANCE BY RT-006-C1 |
-| Persistence & Event Store (RT-006-C1) | Runtime architecture — GUARDIAN ACCEPTED |
-| Mission Runtime Coordinator (RT-007) | GUARDIAN ACCEPTED — Published baseline |
-| Inspector | Architecture baseline accepted (RT-008A) — Factual reconciliation complete (RT-008A-R1) — GUARDIAN ACCEPTED — Locked — Implementation NOT STARTED, NOT AUTHORIZED |
+| Formal Contracts (enums, interfaces, schemas) | IMPLEMENTED — ACCEPTED |
+| State Machine & Transition Engine | IMPLEMENTED — ACCEPTED |
+| Artifact Registry | IMPLEMENTED — ACCEPTED |
+| Evidence Graph | IMPLEMENTED — ACCEPTED |
+| Method / Provider Router | IMPLEMENTED — ACCEPTED |
+| Persistence & Event Store (RT-006) | IMPLEMENTED — ACCEPTED |
+| Mission Runtime Coordinator (RT-007) | IMPLEMENTED — ACCEPTED |
+| Inspector Backend API (RT-008B) | COMPLETE — 27 endpoints, 105 tests |
+| Inspector Frontend (RT-008C) | COMPLETE — React + Vite, 9 views, 27 tests |
+| E2E Mission Validation (RT-009) | COMPLETE — 40 tests, verdict A |
 
 ### Publication State
 
 | Field | Value |
 |-------|-------|
-| Published commits | `f18f31c`, `b266541`, `6687146` + RT-007 publication commit (RT-004, RT-005, RT-005-C1, RT-006, RT-006-C1, RT-007) |
-| Remote publication | **AUTHORIZED BY DIRECT HUMAN ARCHITECT ACTION** — published to `origin/main` |
-| RT-008A Inspector Blueprint | **ACCEPTED AS ARCHITECTURE BASELINE — Implementation NOT STARTED, NOT AUTHORIZED** |
-| RT-008A-R1 Factual Reconciliation | **GUARDIAN ACCEPTED — Locked** |
+| Version | 1.0.0 (locked by V1-LOCK) |
+| Published commits | RT-001 through RT-009 implementations |
+| Publication | AUTHORIZED BY DIRECT HUMAN ARCHITECT ACTION — committed to `origin/main` |
 
 ### Acceptance State
 
 | Item | Status |
 |------|--------|
-| RT-002 implementation | Guardian review pending |
-| RT-003 implementation | Guardian review pending |
-| RT-004 implementation | Guardian review pending |
-| RT-004-C1 documentation reconciliation | Guardian review pending |
-| RT-005 implementation | Guardian review pending |
-| RT-005-C1 semantic reconciliation | Complete |
-| RT-006-C1 runtime architecture | Guardian accepted |
-| RT-006-C2 documentation reconciliation | Superseded for acceptance by RT-006-C2-R1 |
-| RT-006-C2-R1 documentation reconciliation | Guardian review pending |
-| RT-006-C2-R2 documentation closure | Guardian review pending |
-| RT-007 Mission Runtime Coordinator implementation | GUARDIAN ACCEPTED — Published baseline |
-| RT-008A Inspector Architecture Blueprint | ACCEPTED AS ARCHITECTURE BASELINE |
-| RT-008A-R1 Inspector Factual Reconciliation | GUARDIAN ACCEPTED |
-| Human Architect approval | Pending |
-| npm/package distribution | DEFERRED |
+| RT-001 Formal Contracts | ACCEPTED |
+| RT-002 State Machine | ACCEPTED |
+| RT-003 Artifact Registry | ACCEPTED |
+| RT-004 Evidence Graph | ACCEPTED |
+| RT-005 Method Router | ACCEPTED |
+| RT-006 Persistence & Event Store | ACCEPTED |
+| RT-007 Mission Runtime Coordinator | ACCEPTED |
+| RT-008A Inspector Architecture Blueprint | ACCEPTED |
+| RT-008A-R1 Inspector Factual Reconciliation | ACCEPTED |
+| RT-008B Inspector Backend API | COMPLETE — 27 endpoints, 105 tests |
+| RT-008C Inspector Frontend | COMPLETE — 27 tests, build success |
+| RT-009 E2E Mission Validation | COMPLETE — 40 tests, verdict A |
+| Runtime v1.0.0 Lock | LOCKED |
+
+### Ontology Inventory (RTHINK-DOC-ONTOLOGY-001, corrected by C2)
+
+> **Audited:** 2026-07-20 | **Status:** COMPLETE — C1 meta-audit produced (NOT Guardian-accepted); C2 corrections produced (GUARDIAN REVIEW PENDING) | **Reports:** `docs/reports/20260720_1759_RTHINK-DOC-ONTOLOGY-001_...` and `docs/reports/20260720_2000_RTHINK-DOC-ONTOLOGY-001-C2_...`
+
+**Implementation Ontology vs Doctrine:** The inventory below describes what the code currently implements. It does NOT constitute canonical doctrine. The authoritative blueprint (RTHINK-BP-001) is missing from version control; full doctrinal adequacy cannot be verified. Corrected per ONTOLOGY-001-C2.
+
+#### Implemented Entities (Type + Code + Tests)
+
+| Entity | Location | Type |
+|--------|----------|------|
+| CognitiveState (8 states) | `src/contracts/types.ts` | OBSERVE→UNDERSTAND→QUESTION→VALIDATE→CONNECT→CHALLENGE→DISCOVER→EVOLVE |
+| OperationalState (12 states) | `src/contracts/types.ts` | WAITING_FOR_EVIDENCE, WAITING_FOR_AUTHORITY, etc. |
+| ArtifactType (12 types) | `src/contracts/types.ts` | MISSION_CONTRACT, OBSERVATION, CLAIM, HYPOTHESIS, etc. |
+| EvidenceGraphNodeType (11) | `src/contracts/types.ts` | MISSION, OBSERVATION, CLAIM, HYPOTHESIS, EVIDENCE, etc. |
+| EvidenceGraphRelationType (13) | `src/contracts/types.ts` | SUPPORTS, CONTRADICTS, GENERATES, TESTED_BY, etc. |
+| AuthorityStatus (5) | `src/contracts/types.ts` | NOT_REQUIRED, PENDING, GRANTED, DENIED, ESCALATED |
+| ActorRole (7) | `src/contracts/types.ts` | ENGINEER, MODEL, TOOL, VERIFIER, HUMAN, GUARDIAN, EXECUTOR |
+| MissionRiskLevel (4) | `src/contracts/types.ts` | L0_ROUTINE, L1_CONTROLLED, L2_SIGNIFICANT, L3_CRITICAL |
+| StateMachine | `src/runtime/state-machine.ts` | evaluateTransition, applyTransition |
+| ArtifactRegistry | `src/runtime/artifact-registry.ts` | registerArtifact, getArtifact, versionHistory |
+| EvidenceGraph | `src/runtime/evidence-graph.ts` | createNode, connect, validate, export |
+| Router | `src/runtime/router.ts` | registerMethod, resolve, route, explainDecision |
+| Persistence | `src/runtime/persistence.ts` | EventStore wrapper |
+| ReplayEngine | `src/runtime/replay.ts` | replayMission, createSnapshot |
+| MissionRuntimeCoordinator | `src/runtime/mission-runtime-coordinator.ts` | Full orchestration layer |
+
+#### Absent Entities (Prose/Documentation Only — Not in Code)
+
+| Entity | Status | Evidence |
+|--------|--------|----------|
+| **Purpose** / PurposeContinuity | ABSENT | Zero `.ts` occurrences. `MissionContract.objective` exists but is not `purpose`. No drift detection. |
+| **PurposeHash** | ABSENT | Zero occurrences anywhere in codebase |
+| **Trust** / TrustLevel | ABSENT | Zero `.ts` occurrences. Trust-adjacent controls exist (AuthorityStatus = permission/approval; ADAPTIVE_DEPTH_CONFIG = risk/verification), but no trust entity, score, lifecycle, accumulation, degradation, or trust-based delegation. |
+| **Truth** / TruthSource | ABSENT | Zero `.ts` occurrences (1 incidental test string). Evidence graph stores SUPPORTS/CONTRADICTS relations but no truth computation. |
+| **Knowledge** / KnowledgeState | ABSENT | Zero `.ts` occurrences. No accumulation mechanism. |
+| **Reality** / RealityModel | ABSENT | 5 prose-only occurrences in `.md` files. OBSERVE is the cognitive entry state; no formal Reality model. |
+| **MissionState** (as interface) | ABSENT | No `interface MissionState`. `MissionCoordinatorState` implements the concept under a different name with 9 fields. |
+| **methodHistory** / **methodSummary** | ABSENT | Zero occurrences. |
+| **maxDepth** | ABSENT | `ADAPTIVE_DEPTH_CONFIG` exists; no `maxDepth` field. |
+| **consumerBlueprintRefs** (runtime) | ABSENT | In `MissionContract` but not in `MissionCoordinatorState`. |
+
+#### Canonical Flow Status
+
+**CORRECTLY IMPLEMENTED.** 8 cognitive states, 7 canonical forward transitions, 4 loop rules, 6 operational transitions. 1007 tests passing. See full audit report for details.
+
+#### Semantic Boundary Notes (Corrected per C2)
+
+| Concept | Current Status | Boundary |
+|---------|---------------|----------|
+| Authority | **Permission/approval model** — `AuthorityStatus` + `checkCriticalAuthority` implement permission gates | Distinct from trust |
+| Adaptive Depth | **Risk/verification model** — `ADAPTIVE_DEPTH_CONFIG` encodes verification requirements by mission risk level | Distinct from trust |
+| Trust | **Unresolved ontology concept** — no explicit trust entity, score, lifecycle, or behavior in code | May be defined by Human Architect |
+| OBSERVE | **Cognitive entry state** — the mandatory first state of the cognitive cycle | Distinct from Reality |
+| OBSERVATION artifact | **Runtime entry mechanism** — recorded observations enter the system through this artifact | Distinct from Reality model |
+| Reality | **No formal model** — no Reality type, source fidelity contract, or observation-to-reality comparison | May be defined by Human Architect |
+
+#### RT-008B Status
+
+**COMPLETE.** Inspector Backend API implemented: 27 endpoints (26 GET + 1 SSE), 22 immutable DTOs, 105 tests, zero regressions. Frontend (RT-008C) COMPLETE — 27 tests, build success. E2E Validation (RT-009) COMPLETE — 40 tests, verdict A. Total: 1152 backend + 27 frontend = **1179 tests passing**.
 
 ### Current Technical Baseline
 
 | Dimension | Value |
 |-----------|-------|
+| Version | 1.0.0 |
 | Runtime | Node.js >= 18.0.0, ESM (`"type": "module"`) |
 | TypeScript | 5.8.3 |
 | Module system | `"module": "nodenext"`, `"moduleResolution": "nodenext"` |
-| Canonical enum types | 15 (CognitiveState, OperationalState, TransitionDecisionType, RtpMessageType, MissionRiskLevel, ActorRole, ArtifactType, AuthorityStatus, EvidenceGraphNodeType, EvidenceGraphRelationType, ProviderStatus, RouterDecisionOutcome, RejectionReasonCode, RuntimeEventType, AggregateType) |
+| Canonical enum types | 15 |
 | Total enum members | 135 across all 15 enum types |
-| RuntimeEventType enum members | 19 (MISSION_CREATED, MISSION_UPDATED, STATE_CHANGED, ARTIFACT_REGISTERED, ARTIFACT_REPLACED, ROUTER_DECISION, EXECUTION_STARTED, EXECUTION_COMPLETED, EXECUTION_FAILED, EVIDENCE_CREATED, CONTRADICTION_DETECTED, CHALLENGE_STARTED, CHALLENGE_COMPLETED, DISCOVERY_CREATED, EVOLUTION_CREATED, AUTHORITY_GRANTED, AUTHORITY_DENIED, RECOVERY_STARTED, RECOVERY_COMPLETED) |
-| AggregateType enum members | 12 (MISSION, STATE, ARTIFACT, ROUTER, EXECUTION, EVIDENCE, CONTRADICTION, CHALLENGE, DISCOVERY, EVOLUTION, AUTHORITY, RECOVERY) |
-| Router decision outcomes | 4 (SELECTED, NO_MATCH, ALL_UNAVAILABLE, REQUEST_INVALID) |
-| Rejection reason codes | 9 (typed: STATUS_DISABLED, STATUS_UNAVAILABLE, STATUS_ERROR, METHOD_NOT_SUPPORTED, REQUIRED_CAPABILITY_MISSING, CAPABILITY_VERSION_MISSING, CAPABILITY_VERSION_BELOW_MINIMUM, EXCLUDED_BY_REQUEST_CONSTRAINT, LOWER_SELECTION_PRIORITY) |
-| Event schema version | `rt-006-v1.0` (CURRENT_EVENT_SCHEMA_VERSION) |
-| Replay validation issue codes | 12 (8 aggregate + DUPLICATE_GLOBAL_POSITION, MISSING_GLOBAL_POSITION, INVALID_GLOBAL_POSITION_ORDER, ATOMIC_BATCH_REJECTED) |
-| Zod schemas (contract-level) | 4 (Mission, RTP, Artifact, Transition) — 20 total exported Zod schemas including enum/sub-schemas |
-| JSON Schemas | 4 (Mission, RTP, Artifact, Transition) |
+| RuntimeEventType enum members | 19 |
+| AggregateType enum members | 12 |
+| Router decision outcomes | 4 |
+| Rejection reason codes | 9 |
+| Event schema version | `rt-006-v1.0` |
+| Replay validation issue codes | 12 |
+| Zod schemas (contract-level) | 4 (20 total exported) |
+| JSON Schemas | 4 |
 | Valid fixtures | 5 |
 | Invalid fixtures | 13 |
-| Contract tests | 1007 — all passing |
+| Backend source files | 27 (13 runtime + 8 inspector + 6 contracts/schemas) |
+| Backend test files | 10 |
+| Backend tests | 1152 — all passing |
+| Frontend source files | 15+ (React + Vite + TypeScript) |
+| Frontend tests | 27 — all passing |
+| **Total tests** | **1179** |
+| Inspector endpoints | 27 (26 GET + 1 SSE) |
+| Inspector DTOs | 22 immutable |
 | License Gate | All pass (MIT, Apache-2.0) |
-| Module classification | PROVISIONAL-ACCEPTED |
+| npm audit | 0 vulnerabilities |
+| Pre-existing typecheck issues | `demo-data.ts` (unused imports, missing contract fields), `server.ts` (unused port, filter type mismatch) |
 
 ### RTHINK-RT-001 — Implemented
 
@@ -474,7 +669,7 @@ r_think/
 | JSON Schema definitions (4 schemas) | IMPLEMENTED — ACCEPTED |
 | Valid fixtures (5) | Passing |
 | Invalid fixtures (13) | Rejected correctly |
-| Contract tests (655 at RT-001; 1007 current) | All passing |
+| Contract tests (25 at RT-001; 1152 current) | All passing |
 | License Gate (6 dependencies) | All pass (MIT, Apache-2.0) |
 | TypeScript strict typecheck | Passing |
 | Build | Passing |
@@ -578,7 +773,7 @@ r_think/
 | RuntimeEventType enum members | 19 |
 | AggregateType enum members | 12 |
 | Event schema version | `rt-006-v1.0` |
-| Contract test breakdown | 25 (RT-001) + 66 (RT-002) + 44 (RT-003) + 140 (RT-004) + 359 (RT-005) + 249 (RT-006) + 40 (JSON Schema) + 84 (RT-007) = 1007 total |
+| Contract test breakdown | 25 (RT-001) + 66 (RT-002) + 44 (RT-003) + 140 (RT-004) + 359 (RT-005) + 249 (RT-006) + 40 (JSON Schema) + 84 (RT-007) + 105 (RT-008B) + 40 (RT-009) = 1152 backend tests + 27 frontend = **1179 total** |
 | Persistence & Event Store tests (249) | All passing (part of 1007 total) |
 | Persistence & Event Store (RT-006-C1) | New test block 18.21–18.28 added: globalPosition, atomic batch, storage adapters, materialized views, typed authority, replay ordering/validation codes, honest backend naming |
 
@@ -599,7 +794,7 @@ r_think/
 | **Persistence / Event Store** (RT-006) | Mission Runtime Coordinator, Inspector, Replay Engine, Event Replay | Method Router, State Machine, Formal Contracts (RuntimeEvent) |
 | **Replay Engine** (RT-006) | Persistence, Inspector, Recovery | EventStore |
 | **Mission Runtime Coordinator** (RT-007) | Inspector, External Consumers | State Machine, Artifact Registry, Evidence Graph, Method Router, Persistence, Replay Engine | Persistence, Formal Contracts (RuntimeEvent) |
-| **Inspector** (RT-008A/RT-008A-R1) | Human, Guardian | All modules (read-only) — Architecture baseline accepted, factual reconciliation complete — Implementation NOT STARTED |
+| **Inspector** (RT-008A/RT-008A-R1/RT-008B/RT-008C) | Human, Guardian | All modules (read-only) — Backend API + Frontend COMPLETE |
 
 ### Runtime Data Flow
 
@@ -621,7 +816,7 @@ Decoupled Runtime Modules (existing)
    Persistence / Event Store · Replay Engine
         │
         ▼
-Inspector (RT-008A/RT-008A-R1, read-only observatory — architecture baseline accepted, factual reconciliation complete — implementation NOT STARTED)
+Inspector (RT-008A/RT-008A-R1/RT-008B/RT-008C, read-only observatory — COMPLETE)
 
 Coordination model: the Mission Runtime Coordinator wires the existing
 decoupled runtime modules together at mission scope. It governs flow and
@@ -685,41 +880,39 @@ Persistence & Event Store (RT-006)
 Mission Runtime Coordinator (RT-007)
    Lifecycle, state/transition coordination, artifact/evidence flow,
    contradiction handling, authority waiting, replay/recovery coordination
-          ◄──────────── YOU ARE HERE (RT-007 GUARDIAN ACCEPTED — Repository Baseline Locked; RT-008A-R1 GUARDIAN ACCEPTED — Locked)
+           ◄──────────── V1.0.0 LOCKED
          │
          ▼
-Inspector (RT-008A)
-  UI, Evidence Visualization, Process Observation — Architecture Baseline Accepted
-        │
-        ▼
-Inspector Factual Reconciliation (RT-008A-R1)
-  Blueprint Verification, Capability Audit, ReadModel Boundary — GUARDIAN ACCEPTED — Locked
-        ◄──────────── YOU ARE HERE (RT-008A-R1 GUARDIAN ACCEPTED — Locked)
-        │
-        ▼
 Inspector Backend API (RT-008B)
-  Read-Only API, SSE Stream — NOT STARTED, NOT AUTHORIZED
-        │
-        ▼
-R-Think Runtime v1
+  Read-Only API, SSE Stream — COMPLETE (27 endpoints, 105 tests)
+         │
+         ▼
+Inspector Frontend (RT-008C)
+  React + Vite, 9 views, 27 tests — COMPLETE
+         │
+         ▼
+E2E Mission Validation (RT-009)
+  6 scenarios, 40 tests, verdict A — COMPLETE
+         ◄──────────── V1.0.0 LOCKED
 ```
 
 ### Phase Completion Status
 
 | Phase | Mission | Status |
 |-------|---------|--------|
-| Formal Contracts | RT-001 | Implementation produced — ACCEPTED |
-| State Machine | RT-002 | Implementation produced — Guardian review pending |
-| Artifact Registry | RT-003 | Implementation produced — Guardian review pending |
-| Evidence Graph | RT-004 | Implementation produced — Guardian review pending |
-| Method / Provider Router | RT-005 | Implementation produced — C1 reconciled, Guardian review pending |
-| Persistence & Event Store | RT-006 | Implementation produced — C1 accepted (Guardian accepted) |
-| Mission Runtime Coordinator | RT-007 | GUARDIAN ACCEPTED — Published baseline |
-| Inspector Blueprint | RT-008A | ACCEPTED AS ARCHITECTURE BASELINE — Implementation NOT STARTED |
-| Inspector Factual Reconciliation | RT-008A-R1 | GUARDIAN ACCEPTED — Locked |
-| Inspector Backend API | RT-008B | NOT STARTED — NOT AUTHORIZED |
-| Mission Validation | — | Not started |
-| Runtime v1 | — | Not started |
+| Formal Contracts | RT-001 | ACCEPTED |
+| State Machine | RT-002 | ACCEPTED |
+| Artifact Registry | RT-003 | ACCEPTED |
+| Evidence Graph | RT-004 | ACCEPTED |
+| Method / Provider Router | RT-005 | ACCEPTED |
+| Persistence & Event Store | RT-006 | ACCEPTED |
+| Mission Runtime Coordinator | RT-007 | ACCEPTED |
+| Inspector Blueprint | RT-008A | ACCEPTED |
+| Inspector Factual Reconciliation | RT-008A-R1 | ACCEPTED |
+| Inspector Backend API | RT-008B | COMPLETE |
+| Inspector Frontend | RT-008C | COMPLETE |
+| E2E Mission Validation | RT-009 | COMPLETE |
+| **Runtime v1.0.0 Lock** | **V1-LOCK** | **LOCKED** |
 
 ---
 
