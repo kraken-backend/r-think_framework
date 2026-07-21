@@ -9,7 +9,6 @@
 // Uses real Runtime classes to create a minimal valid state.
 // Clearly labeled as DEMO — never presented as live data.
 
-import { EventStore } from "../runtime/event-store.js";
 import { Persistence } from "../runtime/persistence.js";
 import { ReplayEngine } from "../runtime/replay.js";
 import { ArtifactRegistry } from "../runtime/artifact-registry.js";
@@ -20,19 +19,11 @@ import type {
   InspectorCompositionInput,
 } from "./composition-root.js";
 import type {
-  RuntimeHealth,
-  RuntimeStatistics,
   MissionSummary,
-  MissionDetail,
   EventSummary,
   ArtifactSummary,
-  EvidenceGraphSnapshot,
   MethodSummary,
   ProviderSummary,
-  AuthorityDetail,
-  ContradictionsDetail,
-  ReplaySnapshot,
-  SnapshotSummary,
 } from "./dtos.js";
 
 // ─── Demo Mission Contract ──────────────────────────────────────────────────
@@ -46,7 +37,14 @@ const DEMO_MISSION_CONTRACT = {
     "Evidence graph displays nodes and edges",
     "Events timeline shows chronological history",
   ],
-  scope: "Inspector frontend development and validation",
+  allowedScope: { description: "Inspector frontend development" },
+  explicitNonScope: [],
+  authority: {},
+  verification: [],
+  evidenceRequirements: [],
+  failureProtocol: [],
+  escalationConditions: [],
+  guardianApproval: false,
   consumerBlueprintRefs: [],
 };
 
@@ -81,7 +79,8 @@ function createDemoRuntime(): InspectorCompositionInput {
   coordinator.initializeMission();
 
   // Register artifacts
-  const observationId = coordinator.registerArtifact({
+  coordinator.registerArtifact({
+    rtpVersion: "1.0",
     artifactId: `ART-OBS-001`,
     artifactType: "OBSERVATION",
     missionId: DEMO_MISSION_ID,
@@ -90,14 +89,16 @@ function createDemoRuntime(): InspectorCompositionInput {
     createdAt: new Date().toISOString(),
     actor: { id: "ENGINEER-01", role: "ENGINEER" },
     state: "OBSERVE",
+    consumerBlueprintRefs: [],
     sourceRefs: [
-      { type: "USER_INPUT" as const, uri: "demo://observation", label: "Demo observation" },
+      { type: "USER_INPUT", uri: "demo://observation" },
     ],
     payload: { content: "Initial observation of system state", category: "discovery" },
     evidenceRefs: [],
   });
 
-  const claimId = coordinator.registerArtifact({
+  coordinator.registerArtifact({
+    rtpVersion: "1.0",
     artifactId: `ART-CLAIM-001`,
     artifactType: "CLAIM",
     missionId: DEMO_MISSION_ID,
@@ -106,14 +107,16 @@ function createDemoRuntime(): InspectorCompositionInput {
     createdAt: new Date().toISOString(),
     actor: { id: "ENGINEER-01", role: "ENGINEER" },
     state: "UNDERSTAND",
+    consumerBlueprintRefs: [],
     sourceRefs: [
-      { type: "ARTIFACT_REFERENCE" as const, uri: `artifact://ART-OBS-001`, label: "Based on observation" },
+      { type: "ARTIFACT_REFERENCE", uri: "artifact://ART-OBS-001" },
     ],
     payload: { hypothesis: "System can observe and understand mission state", strength: "strong" },
     evidenceRefs: [],
   });
 
-  const hypothesisId = coordinator.registerArtifact({
+  coordinator.registerArtifact({
+    rtpVersion: "1.0",
     artifactId: `ART-HYP-001`,
     artifactType: "HYPOTHESIS",
     missionId: DEMO_MISSION_ID,
@@ -122,8 +125,9 @@ function createDemoRuntime(): InspectorCompositionInput {
     createdAt: new Date().toISOString(),
     actor: { id: "ENGINEER-01", role: "ENGINEER" },
     state: "QUESTION",
+    consumerBlueprintRefs: [],
     sourceRefs: [
-      { type: "ARTIFACT_REFERENCE" as const, uri: `artifact://ART-CLAIM-001`, label: "Based on claim" },
+      { type: "ARTIFACT_REFERENCE", uri: "artifact://ART-CLAIM-001" },
     ],
     payload: { prediction: "Inspector will render all views correctly", testable: true },
     evidenceRefs: [],
@@ -134,51 +138,41 @@ function createDemoRuntime(): InspectorCompositionInput {
     nodeId: "EVD-NODE-001",
     nodeType: "OBSERVATION",
     missionId: DEMO_MISSION_ID,
-    timestamp: new Date().toISOString(),
-    data: { content: "System state observation" },
-    version: 1,
+    metadata: { content: "System state observation" },
   });
 
   evidenceGraph.createNode({
     nodeId: "EVD-NODE-002",
     nodeType: "CLAIM",
     missionId: DEMO_MISSION_ID,
-    timestamp: new Date().toISOString(),
-    data: { statement: "Inspector can observe mission state" },
-    version: 1,
+    metadata: { statement: "Inspector can observe mission state" },
   });
 
   evidenceGraph.createNode({
     nodeId: "EVD-NODE-003",
     nodeType: "HYPOTHESIS",
     missionId: DEMO_MISSION_ID,
-    timestamp: new Date().toISOString(),
-    data: { prediction: "All Inspector views will render" },
-    version: 1,
+    metadata: { prediction: "All Inspector views will render" },
   });
 
   evidenceGraph.createNode({
     nodeId: "EVD-NODE-004",
     nodeType: "EVIDENCE",
     missionId: DEMO_MISSION_ID,
-    timestamp: new Date().toISOString(),
-    data: { source: "demo", content: "Test execution results" },
-    version: 1,
+    metadata: { source: "demo", content: "Test execution results" },
   });
 
   evidenceGraph.createNode({
     nodeId: "EVD-NODE-005",
     nodeType: "DECISION",
     missionId: DEMO_MISSION_ID,
-    timestamp: new Date().toISOString(),
-    data: { decision: "Proceed with Inspector implementation" },
-    version: 1,
+    metadata: { decision: "Proceed with Inspector implementation" },
   });
 
-  evidenceGraph.connect("EVD-NODE-001", "EVD-NODE-002", "OBSERVED_AS");
-  evidenceGraph.connect("EVD-NODE-002", "EVD-NODE-003", "GENERATES");
-  evidenceGraph.connect("EVD-NODE-003", "EVD-NODE-004", "TESTED_BY");
-  evidenceGraph.connect("EVD-NODE-004", "EVD-NODE-005", "SUPPORTS");
+  evidenceGraph.connect({ fromNodeId: "EVD-NODE-001", toNodeId: "EVD-NODE-002", relationType: "OBSERVED_AS" });
+  evidenceGraph.connect({ fromNodeId: "EVD-NODE-002", toNodeId: "EVD-NODE-003", relationType: "GENERATES" });
+  evidenceGraph.connect({ fromNodeId: "EVD-NODE-003", toNodeId: "EVD-NODE-004", relationType: "TESTED_BY" });
+  evidenceGraph.connect({ fromNodeId: "EVD-NODE-004", toNodeId: "EVD-NODE-005", relationType: "SUPPORTS" });
 
   // Register methods
   router.registerMethod({

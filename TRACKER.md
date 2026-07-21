@@ -14,9 +14,9 @@
 
 | Field | Value |
 |-------|-------|
-| **LAST COMPLETED** | V1-LOCK — Runtime v1.0.0 baseline locked |
-| **CURRENT** | Runtime v1.0.0 — 1179 tests passing, all modules complete |
-| **NEXT** | V1.0.0 committed, pushed, tagged |
+| **LAST COMPLETED** | V1-LOCK-C1 — Runtime v1.0.0 validation integrity restored |
+| **CURRENT** | Runtime v1.0.0 — 1179 tests passing, all gates PASS, validation integrity confirmed |
+| **NEXT** | Awaiting HA Decisions (D-1 through D-8) and Truth Hierarchy declaration |
 | **FINAL DESTINATION** | R-Think Runtime v1.0.0 — operational baseline |
 
 ---
@@ -51,10 +51,10 @@ RTHINK-BP-001
       │     RT-009
       │
       └── V1 Lock
-            V1-LOCK ◄── YOU ARE HERE
+            V1-LOCK ◄── V1-LOCK-C1 COMPLETED
 ```
 
-**V1.0.0 locked.** 1179 tests (1152 backend + 27 frontend). All core modules implemented. Inspector Backend + Frontend complete. E2E validation passed (40 tests, verdict A).
+**V1.0.0 locked.** 1179 tests (1152 backend + 27 frontend). All core modules implemented. Inspector Backend + Frontend complete. E2E validation passed (40 tests, verdict A). V1-LOCK-C1 restored validation integrity — typecheck clean, root build passes, inspector smoke test passes, flaky tests fixed.
 
 ### Phase Inputs / Outputs / Consumers
 
@@ -87,7 +87,7 @@ RTHINK-BP-001
 | Branch | main |
 | Commits on main | 16 |
 
-**Current:** V1.0.0 lock in progress. 1179 tests passing. All modules complete.
+**Current:** V1.0.0 locked with validation integrity restored (V1-LOCK-C1). 1179 tests passing. All gates PASS.
 
 ### Runtime State
 
@@ -103,7 +103,7 @@ RTHINK-BP-001
 | Inspector Backend API (RT-008B) | COMPLETE — 27 endpoints, 105 tests |
 | Inspector Frontend (RT-008C) | COMPLETE — 27 tests, build success |
 | E2E Mission Validation (RT-009) | COMPLETE — 40 tests, verdict A |
-| **Runtime v1.0.0 Lock** | **LOCKED** |
+| **Runtime v1.0.0 Lock** | **LOCKED — V1-LOCK-C1 integrity restored** |
 
 ### Publication State
 
@@ -111,7 +111,7 @@ RTHINK-BP-001
 |-------|-------|
 | Version | 1.0.0 |
 | Published commits | RT-001 through RT-009 implementations |
-| Publication | AUTHORIZED BY DIRECT HUMAN ARCHITECT ACTION — committed to `origin/main` |
+| Publication | AUTHORIZED BY DIRECT HUMAN ARCHITECT ACTION — committed to `origin/main`, V1-LOCK-C1 integrity restored |
 
 ### Acceptance State
 
@@ -129,7 +129,7 @@ RTHINK-BP-001
 | RT-008B Inspector Backend API | COMPLETE — 27 endpoints, 105 tests |
 | RT-008C Inspector Frontend | COMPLETE — 27 tests, build success |
 | RT-009 E2E Mission Validation | COMPLETE — 40 tests, verdict A |
-| Runtime v1.0.0 Lock | LOCKED |
+| Runtime v1.0.0 Lock | LOCKED — V1-LOCK-C1 integrity restored |
 
 ---
 
@@ -979,7 +979,11 @@ RT-009 — E2E Mission Validation — AUTHORIZED, PROCEED IMMEDIATELY
 | Frontend build | ✅ PASS (393 kB JS, 24 kB CSS) |
 | npm audit | ✅ 0 vulnerabilities |
 | License Gate | ✅ ALL PASS (MIT, Apache-2.0) |
-| Pre-existing typecheck issues | ⚠️ `demo-data.ts`, `server.ts` — documented, no runtime impact |
+| Typecheck | ✅ CLEAN (27 errors → 0, V1-LOCK-C1 restored) |
+| Root build (tsc) | ✅ PASS (was failing, V1-LOCK-C1 restored) |
+| Inspector smoke test (health endpoint) | ✅ PASS (tsx dependency + entrypoint added, V1-LOCK-C1) |
+| Flaky tests | ✅ 0 FLAKY (getHealth/getStatistics timestamp race fixed, V1-LOCK-C1) |
+| License Gate | ✅ ALL PASS (MIT, Apache-2.0) |
 
 ---
 

@@ -18,6 +18,8 @@ import { fileURLToPath } from "node:url";
 import type { InspectorReadModel } from "./inspector-read-model.js";
 import type { InspectorCompositionInput } from "./composition-root.js";
 import { createInspector } from "./composition-root.js";
+import type { RuntimeState } from "../contracts/types.js";
+import { getDemoRuntime } from "./demo-data.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -73,7 +75,7 @@ function handleRequest(
     // ─── Mission Endpoints (10 GET) ──────────────────────────────────────
     if (pathname === "/api/missions" && req.method === "GET") {
       const filters = params["state"]
-        ? { state: params["state"] }
+        ? { state: params["state"] as RuntimeState }
         : undefined;
       const pagination = {
         page: params["page"] ? Number(params["page"]) : undefined,
@@ -366,7 +368,7 @@ export interface InspectorServerOptions {
 export function createInspectorServer(
   options: InspectorServerOptions
 ): http.Server {
-  const { port = 3001, inspector, distPath } = options;
+  const { inspector, distPath } = options;
 
   const server = http.createServer((req, res) => {
     // API routes first
@@ -407,5 +409,17 @@ export async function startInspectorServer(
       }
       resolve(server);
     });
+  });
+}
+
+// ─── Direct Execution Entrypoint ────────────────────────────────────────────
+// Enables `node --import tsx src/inspector/server.ts` to start the server.
+
+const _isMainModule = process.argv[1]?.includes("server.ts") ?? false;
+if (_isMainModule) {
+  const input = getDemoRuntime();
+  startInspectorServer(input).catch((err: unknown) => {
+    console.error("Failed to start Inspector Server:", err);
+    process.exit(1);
   });
 }

@@ -318,7 +318,7 @@ npm run inspector:start  # Backend on port 3001
 npm run inspector:dev    # Frontend on port 5173
 ```
 
-> **Note:** R-Think Runtime **v1.0.0** — all core modules (RT-001 through RT-007) are IMPLEMENTED. Inspector Backend API (RT-008B: 27 endpoints, 105 tests) and Inspector Frontend (RT-008C: React + Vite, 9 views, 27 tests) are COMPLETE. E2E Mission Validation (RT-009: 6 scenarios, 40 tests, verdict A) is COMPLETE. Total: 1152 backend + 27 frontend = **1179 tests passing**. Pre-existing typecheck issues in `src/inspector/demo-data.ts` and `src/inspector/server.ts` (unused imports, missing contract fields) are documented and do not affect runtime or test results.
+> **Note:** R-Think Runtime **v1.0.0** — all core modules (RT-001 through RT-007) are IMPLEMENTED. Inspector Backend API (RT-008B: 27 endpoints, 105 tests) and Inspector Frontend (RT-008C: React + Vite, 9 views, 27 tests) are COMPLETE. E2E Mission Validation (RT-009: 6 scenarios, 40 tests, verdict A) is COMPLETE. Total: 1152 backend + 27 frontend = **1179 tests passing**. Validation integrity restored by V1-LOCK-C1 — typecheck, root build, inspector smoke test, and flaky tests all resolved.
 
 ---
 
@@ -451,7 +451,7 @@ r_think/
 | Commits on main | 16 |
 | Publication | V1.0.0 lock pending — this commit |
 
-**Current state:** R-Think Runtime v1.0.0 baseline locked. 1179 tests passing. All core modules implemented. Inspector Backend + Frontend complete. E2E validation passed.
+**Current state:** R-Think Runtime v1.0.0 baseline locked. Validation integrity restored by V1-LOCK-C1. 1179 tests passing. All core modules implemented. Inspector Backend + Frontend complete. E2E validation passed.
 
 ### Architecture (Corrected per BP-LOCK-002, BP-LOCK-003, BP-LOCK-004)
 
@@ -546,7 +546,7 @@ Discovery Layer (Always Active)
 |-------|-------|
 | Version | 1.0.0 (locked by V1-LOCK) |
 | Published commits | RT-001 through RT-009 implementations |
-| Publication | AUTHORIZED BY DIRECT HUMAN ARCHITECT ACTION — committed to `origin/main` |
+| Publication | AUTHORIZED BY DIRECT HUMAN ARCHITECT ACTION — committed to `origin/main`, V1-LOCK-C1 integrity restored |
 
 ### Acceptance State
 
@@ -564,7 +564,7 @@ Discovery Layer (Always Active)
 | RT-008B Inspector Backend API | COMPLETE — 27 endpoints, 105 tests |
 | RT-008C Inspector Frontend | COMPLETE — 27 tests, build success |
 | RT-009 E2E Mission Validation | COMPLETE — 40 tests, verdict A |
-| Runtime v1.0.0 Lock | LOCKED |
+| Runtime v1.0.0 Lock | LOCKED — V1-LOCK-C1 integrity restored |
 
 ### Ontology Inventory (RTHINK-DOC-ONTOLOGY-001, corrected by C2)
 
@@ -624,7 +624,7 @@ Discovery Layer (Always Active)
 
 #### RT-008B Status
 
-**COMPLETE.** Inspector Backend API implemented: 27 endpoints (26 GET + 1 SSE), 22 immutable DTOs, 105 tests, zero regressions. Frontend (RT-008C) COMPLETE — 27 tests, build success. E2E Validation (RT-009) COMPLETE — 40 tests, verdict A. Total: 1152 backend + 27 frontend = **1179 tests passing**.
+**COMPLETE.** Inspector Backend API implemented: 27 endpoints (26 GET + 1 SSE), 22 immutable DTOs, 105 tests, zero regressions. Frontend (RT-008C) COMPLETE — 27 tests, build success. E2E Validation (RT-009) COMPLETE — 40 tests, verdict A. Total: 1152 backend + 27 frontend = **1179 tests passing**. Validation integrity restored by V1-LOCK-C1.
 
 ### Current Technical Baseline
 
@@ -912,7 +912,7 @@ E2E Mission Validation (RT-009)
 | Inspector Backend API | RT-008B | COMPLETE |
 | Inspector Frontend | RT-008C | COMPLETE |
 | E2E Mission Validation | RT-009 | COMPLETE |
-| **Runtime v1.0.0 Lock** | **V1-LOCK** | **LOCKED** |
+| **Runtime v1.0.0 Lock** | **V1-LOCK** | **LOCKED — V1-LOCK-C1 integrity restored** |
 
 ---
 

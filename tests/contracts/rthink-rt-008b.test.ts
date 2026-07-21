@@ -11,7 +11,7 @@
 //   2. Zero-mutation — proves Inspector cannot modify Runtime state
 //   3. Endpoint contract — verifies all 26 GET + 1 SSE endpoints exist and respond
 
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import {
   CognitiveState,
   RuntimeEventType,
@@ -350,17 +350,27 @@ describe("RT-008B: Deep-Copy Boundary", () => {
   });
 
   it("getHealth returns deep copy", () => {
-    const h1 = inspector.getHealth();
-    const h2 = inspector.getHealth();
-    expect(h1).toEqual(h2);
-    expect(h1).not.toBe(h2);
+    vi.useFakeTimers();
+    try {
+      const h1 = inspector.getHealth();
+      const h2 = inspector.getHealth();
+      expect(h1).toEqual(h2);
+      expect(h1).not.toBe(h2);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it("getStatistics returns deep copy", () => {
-    const s1 = inspector.getStatistics();
-    const s2 = inspector.getStatistics();
-    expect(s1).toEqual(s2);
-    expect(s1).not.toBe(s2);
+    vi.useFakeTimers();
+    try {
+      const s1 = inspector.getStatistics();
+      const s2 = inspector.getStatistics();
+      expect(s1).toEqual(s2);
+      expect(s1).not.toBe(s2);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it("listSnapshots returns deep copies", () => {
